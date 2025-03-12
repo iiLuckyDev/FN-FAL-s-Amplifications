@@ -17,9 +17,9 @@ public class RegisterMaterialGeneratorUpgrades {
                 FNAmpItems.FN_MAT_GEN_UPGRADES_REPAIR_ITEM,
                 FnAssemblyStation.RECIPE_TYPE,
                 new ItemStack[]{
-                        SlimefunItems.BRONZE_INGOT, null, SlimefunItems.ALUMINUM_INGOT,
+                        SlimefunItems.BRONZE_INGOT.item(), null, SlimefunItems.ALUMINUM_INGOT.item(),
                         null, new ItemStack(Material.DIAMOND_PICKAXE), null,
-                        SlimefunItems.STEEL_INGOT, null, SlimefunItems.BRASS_INGOT}
+                        SlimefunItems.STEEL_INGOT.item(), null, SlimefunItems.BRASS_INGOT.item()}
         ).register(instance);
 
         new FastProduce(
@@ -27,9 +27,9 @@ public class RegisterMaterialGeneratorUpgrades {
                 FNAmpItems.FN_MAT_GEN_UPGRADES_FAST_PRODUCE,
                 FnAssemblyStation.RECIPE_TYPE,
                 new ItemStack[]{
-                        new ItemStack(Material.DIAMOND_SHOVEL), SlimefunItems.DURALUMIN_INGOT, new ItemStack(Material.DIAMOND_SHOVEL),
-                        SlimefunItems.HARDENED_METAL_INGOT, null, SlimefunItems.HARDENED_METAL_INGOT,
-                        new ItemStack(Material.DIAMOND_PICKAXE), SlimefunItems.BILLON_INGOT, new ItemStack(Material.DIAMOND_PICKAXE)}
+                        new ItemStack(Material.DIAMOND_SHOVEL), SlimefunItems.DURALUMIN_INGOT.item(), new ItemStack(Material.DIAMOND_SHOVEL),
+                        SlimefunItems.HARDENED_METAL_INGOT.item(), null, SlimefunItems.HARDENED_METAL_INGOT.item(),
+                        new ItemStack(Material.DIAMOND_PICKAXE), SlimefunItems.BILLON_INGOT.item(), new ItemStack(Material.DIAMOND_PICKAXE)}
         ).register(instance);
     }
 }

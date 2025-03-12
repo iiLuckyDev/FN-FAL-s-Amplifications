@@ -32,7 +32,7 @@ public class GuardianTask extends BukkitRunnable {
 
     @Override
     public void run() {
-        if(getZombie().getTarget() == null) {
+        if (getZombie().getTarget() == null) {
             Vector vec = getPlayer().getLocation().getDirection();
             Vector finalVec;
 
@@ -48,7 +48,7 @@ public class GuardianTask extends BukkitRunnable {
             getZombie().teleport(getPlayer().getLocation().add(finalVec));
         }
 
-        if(getZombie().isDead() || !getPlayer().isOnline() || getPlayer().getEquipment().getChestplate() == null){
+        if (getZombie().isDead() || !getPlayer().isOnline() || getPlayer().getEquipment().getChestplate() == null){
             getZombie().remove();
 
             this.cancel();
@@ -79,11 +79,11 @@ public class GuardianTask extends BukkitRunnable {
         getZombie().setPersistent(false);
         getZombie().setRemoveWhenFarAway(true);
 
-        if(event.getDamager().getPersistentDataContainer().has(Keys.GUARDIAN_KEY, PersistentDataType.STRING)){
+        if (event.getDamager().getPersistentDataContainer().has(Keys.GUARDIAN_KEY, PersistentDataType.STRING)) {
             getZombie().setTarget(Bukkit.getPlayer(event.getDamager().getPersistentDataContainer().get(Keys.GUARDIAN_KEY, PersistentDataType.STRING)));
         } else {
             getZombie().setTarget(event.getDamager() instanceof Projectile ?
-                    (LivingEntity) ((Projectile) event.getDamager()).getShooter() : (LivingEntity) event.getDamager());
+                (LivingEntity) ((Projectile) event.getDamager()).getShooter() : (LivingEntity) event.getDamager());
         }
     }
 

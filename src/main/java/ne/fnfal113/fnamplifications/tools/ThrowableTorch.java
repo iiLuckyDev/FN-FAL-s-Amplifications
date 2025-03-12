@@ -163,7 +163,7 @@ public class ThrowableTorch extends SlimefunItem {
             blockHitRelative.setType(Material.TORCH);
         }
 
-        Bukkit.getScheduler().runTaskLater(FNAmplifications.getInstance(), () -> BlockStorage.store(blockHitRelative, FNAmpItems.FN_THROWABLE_TORCH), 2L);
+        Bukkit.getScheduler().runTaskLater(FNAmplifications.getInstance(), () -> BlockStorage.store(blockHitRelative, FNAmpItems.FN_THROWABLE_TORCH.item()), 2L);
     }
 
     public boolean blockNameContains(Block blockHit, String name){

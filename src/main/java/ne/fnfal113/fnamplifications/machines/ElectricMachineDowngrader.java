@@ -67,12 +67,12 @@ public class ElectricMachineDowngrader extends CMachine implements RecipeDisplay
                     processor.updateProgressBar(inv, 22, currentOperation);
                     currentOperation.addProgress(1);
                 } else {
-                    inv.replaceExistingItem(22, new CustomItemStack(Material.BLACK_STAINED_GLASS_PANE, " "));
+                    inv.replaceExistingItem(22, CustomItemStack.create(Material.BLACK_STAINED_GLASS_PANE, " "));
 
                     for (ItemStack output : currentOperation.getResults()) {
                         if (ThreadLocalRandom.current().nextInt(100) < 25 && inv.hasViewer()) {
                             inv.pushItem(output.clone(), getOutputSlots());
-                            inv.pushItem(new CustomItemStack(FNAmpItems.FN_METAL_SCRAPS.clone(), 1), getOutputSlots());
+                            inv.pushItem(CustomItemStack.create(FNAmpItems.FN_METAL_SCRAPS.item(), 1), getOutputSlots());
                         }
                         else{
                             inv.pushItem(output.clone(), getOutputSlots());
@@ -93,50 +93,50 @@ public class ElectricMachineDowngrader extends CMachine implements RecipeDisplay
 
     @Override
     protected void registerDefaultRecipes() {
-        registerRecipe(20, new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_GOLD_PAN_3, 1)},
-                new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_GOLD_PAN_2, 1)});
-        registerRecipe(20, new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_GOLD_PAN_2, 1)},
-                new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_GOLD_PAN, 1)});
-        registerRecipe(20, new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_SMELTERY_2, 1)},
-                new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_SMELTERY, 1)});
-        registerRecipe(20, new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_INGOT_FACTORY_3, 1)},
-                new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_INGOT_FACTORY_2, 1)});
-        registerRecipe(20, new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_INGOT_FACTORY_2, 1)},
-                new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_INGOT_FACTORY, 1)});
-        registerRecipe(20, new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_DUST_WASHER_3, 1)},
-                new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_DUST_WASHER_2, 1)});
-        registerRecipe(20, new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_DUST_WASHER_2, 1)},
-                new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_DUST_WASHER, 1)});
-        registerRecipe(20, new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_ORE_GRINDER_3, 1)},
-                new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_ORE_GRINDER_2, 1)});
-        registerRecipe(20, new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_ORE_GRINDER_2, 1)},
-                new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_ORE_GRINDER, 1)});
-        registerRecipe(20, new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_FURNACE_3, 1)},
-                new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_FURNACE_2, 1)});
-        registerRecipe(20, new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_FURNACE_2, 1)},
-                new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_FURNACE, 1)});
-        registerRecipe(20, new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.HEATED_PRESSURE_CHAMBER_2, 1)},
-                new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.HEATED_PRESSURE_CHAMBER, 1)});
-        registerRecipe(20, new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIFIED_CRUCIBLE_3, 1)},
-                new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIFIED_CRUCIBLE_2, 1)});
-        registerRecipe(20, new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIFIED_CRUCIBLE_2, 1)},
-                new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIFIED_CRUCIBLE, 1)});
-        registerRecipe(20, new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.CARBON_PRESS_3, 1)},
-                new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.CARBON_PRESS_2, 1)});
-        registerRecipe(20, new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.CARBON_PRESS_2, 1)},
-                new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.CARBON_PRESS, 1)});
-        registerRecipe(20, new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.FREEZER_3, 1)},
-                new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.FREEZER_2, 1)});
-        registerRecipe(20, new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.FREEZER_2, 1)},
-                new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.FREEZER, 1)});
-        registerRecipe(20, new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.FOOD_FABRICATOR_2, 1)},
-                new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.FOOD_FABRICATOR, 1)});
-        registerRecipe(20, new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.LAVA_GENERATOR_2, 1)},
-                new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.LAVA_GENERATOR, 1)});
-        registerRecipe(20, new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.COAL_GENERATOR_2, 1)},
-                new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.COAL_GENERATOR, 1)});
-        registerRecipe(20, new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_PRESS_2, 1)},
-                new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_PRESS, 1)});
+        registerRecipe(20, new ItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_GOLD_PAN_3, 1).item()},
+                new ItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_GOLD_PAN_2, 1).item()});
+        registerRecipe(20, new ItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_GOLD_PAN_2, 1).item()},
+                new ItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_GOLD_PAN, 1).item()});
+        registerRecipe(20, new ItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_SMELTERY_2, 1).item()},
+                new ItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_SMELTERY, 1).item()});
+        registerRecipe(20, new ItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_INGOT_FACTORY_3, 1).item()},
+                new ItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_INGOT_FACTORY_2, 1).item()});
+        registerRecipe(20, new ItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_INGOT_FACTORY_2, 1).item()},
+                new ItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_INGOT_FACTORY, 1).item()});
+        registerRecipe(20, new ItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_DUST_WASHER_3, 1).item()},
+                new ItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_DUST_WASHER_2, 1).item()});
+        registerRecipe(20, new ItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_DUST_WASHER_2, 1).item()},
+                new ItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_DUST_WASHER, 1).item()});
+        registerRecipe(20, new ItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_ORE_GRINDER_3, 1).item()},
+                new ItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_ORE_GRINDER_2, 1).item()});
+        registerRecipe(20, new ItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_ORE_GRINDER_2, 1).item()},
+                new ItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_ORE_GRINDER, 1).item()});
+        registerRecipe(20, new ItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_FURNACE_3, 1).item()},
+                new ItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_FURNACE_2, 1).item()});
+        registerRecipe(20, new ItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_FURNACE_2, 1).item()},
+                new ItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_FURNACE, 1).item()});
+        registerRecipe(20, new ItemStack[]{new SlimefunItemStack(SlimefunItems.HEATED_PRESSURE_CHAMBER_2, 1).item()},
+                new ItemStack[]{new SlimefunItemStack(SlimefunItems.HEATED_PRESSURE_CHAMBER, 1).item()});
+        registerRecipe(20, new ItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIFIED_CRUCIBLE_3, 1).item()},
+                new ItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIFIED_CRUCIBLE_2, 1).item()});
+        registerRecipe(20, new ItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIFIED_CRUCIBLE_2, 1).item()},
+                new ItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIFIED_CRUCIBLE, 1).item()});
+        registerRecipe(20, new ItemStack[]{new SlimefunItemStack(SlimefunItems.CARBON_PRESS_3, 1).item()},
+                new ItemStack[]{new SlimefunItemStack(SlimefunItems.CARBON_PRESS_2, 1).item()});
+        registerRecipe(20, new ItemStack[]{new SlimefunItemStack(SlimefunItems.CARBON_PRESS_2, 1).item()},
+                new ItemStack[]{new SlimefunItemStack(SlimefunItems.CARBON_PRESS, 1).item()});
+        registerRecipe(20, new ItemStack[]{new SlimefunItemStack(SlimefunItems.FREEZER_3, 1).item()},
+                new ItemStack[]{new SlimefunItemStack(SlimefunItems.FREEZER_2, 1).item()});
+        registerRecipe(20, new ItemStack[]{new SlimefunItemStack(SlimefunItems.FREEZER_2, 1).item()},
+                new ItemStack[]{new SlimefunItemStack(SlimefunItems.FREEZER, 1).item()});
+        registerRecipe(20, new ItemStack[]{new SlimefunItemStack(SlimefunItems.FOOD_FABRICATOR_2, 1).item()},
+                new ItemStack[]{new SlimefunItemStack(SlimefunItems.FOOD_FABRICATOR, 1).item()});
+        registerRecipe(20, new ItemStack[]{new SlimefunItemStack(SlimefunItems.LAVA_GENERATOR_2, 1).item()},
+                new ItemStack[]{new SlimefunItemStack(SlimefunItems.LAVA_GENERATOR, 1).item()});
+        registerRecipe(20, new ItemStack[]{new SlimefunItemStack(SlimefunItems.COAL_GENERATOR_2, 1).item()},
+                new ItemStack[]{new SlimefunItemStack(SlimefunItems.COAL_GENERATOR, 1).item()});
+        registerRecipe(20, new ItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_PRESS_2, 1).item()},
+                new ItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRIC_PRESS, 1).item()});
     }
 
     @Nonnull
@@ -147,6 +147,6 @@ public class ElectricMachineDowngrader extends CMachine implements RecipeDisplay
 
     @Override
     public ItemStack getProgressBar() {
-        return new SlimefunItemStack(FNAmpItems.DOWNGRADER_PART, 1);
+        return new SlimefunItemStack(FNAmpItems.DOWNGRADER_PART, 1).item();
     }
 }

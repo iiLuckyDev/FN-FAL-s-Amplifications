@@ -95,7 +95,7 @@ public class FnGemDowngrader extends MultiBlockMachine {
         for(int i : slot) {
             if(i == 4) continue;
 
-            if(!SlimefunUtils.isItemSimilar(inv.getContents()[i], FNAmpItems.FN_GEM_FINE_JASPER_CRAFTING, true, false)) {
+            if(!SlimefunUtils.isItemSimilar(inv.getContents()[i], FNAmpItems.FN_GEM_FINE_JASPER_CRAFTING.item(), true, false)) {
                 return false;
             }
         }

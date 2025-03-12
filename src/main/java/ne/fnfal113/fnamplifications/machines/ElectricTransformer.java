@@ -36,10 +36,10 @@ public class ElectricTransformer extends AContainer implements RecipeDisplayItem
         for (MachineRecipe recipe : recipes) {
             displayRecipes.add(recipe.getInput()[0]);
             displayRecipes.add(recipe.getInput()[1]);
-            displayRecipes.add(new CustomItemStack(Material.PINK_STAINED_GLASS_PANE, "&eIndicator", "&fArrow below point towards the output of 2 vertical inputs"));
+            displayRecipes.add(CustomItemStack.create(Material.PINK_STAINED_GLASS_PANE, "&eIndicator", "&fArrow below point towards the output of 2 vertical inputs"));
             displayRecipes.add(PlayerHead.getItemStack(PlayerSkin.fromHashCode(
                     "682ad1b9cb4dd21259c0d75aa315ff389c3cef752be3949338164bac84a96e")));
-            displayRecipes.add(new CustomItemStack(Material.PINK_STAINED_GLASS_PANE, "&eIndicator", "&fNext item beside this glass is", "&fa 2 input recipe vertical 1 output horizontal"));
+            displayRecipes.add(CustomItemStack.create(Material.PINK_STAINED_GLASS_PANE, "&eIndicator", "&fNext item beside this glass is", "&fa 2 input recipe vertical 1 output horizontal"));
             displayRecipes.add(recipe.getOutput()[0]);
         }
 
@@ -60,9 +60,10 @@ public class ElectricTransformer extends AContainer implements RecipeDisplayItem
         registerRecipe(8, new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.ELECTRO_MAGNET, 3),
                         new SlimefunItemStack(SlimefunItems.BRONZE_INGOT, 4)},
                 new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.CARGO_CONNECTOR_NODE, 4)});
-        registerRecipe(8, new ItemStack[]{new SlimefunItemStack(SlimefunItems.CARGO_CONNECTOR_NODE, 1),
-                        new ItemStack(Material.HOPPER, 2)},
-                new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.CARGO_INPUT_NODE, 2)});
+
+        registerRecipe(8, new ItemStack[]{new ItemStack(SlimefunItems.CARGO_CONNECTOR_NODE.item()), new ItemStack(Material.HOPPER, 2)},
+                new ItemStack[]{new SlimefunItemStack(SlimefunItems.CARGO_INPUT_NODE, 2).item()});
+
         registerRecipe(8, new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.CARGO_OUTPUT_NODE, 1),
                         new SlimefunItemStack(SlimefunItems.CARGO_MOTOR, 2)},
                 new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.CARGO_OUTPUT_NODE_2, 1)});
@@ -82,6 +83,6 @@ public class ElectricTransformer extends AContainer implements RecipeDisplayItem
 
     @Override
     public ItemStack getProgressBar() {
-        return new SlimefunItemStack(FNAmpItems.MACHINE_PART, 1);
+        return new SlimefunItemStack(FNAmpItems.MACHINE_PART, 1).item();
     }
 }

@@ -45,9 +45,9 @@ public class ElectricCompressor extends AContainer implements RecipeDisplayItem 
         registerRecipe(16, new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.STEEL_INGOT, 8)},
                 new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.STEEL_PLATE, 1)});
         registerRecipe(16, new ItemStack[]{new ItemStack(Material.COAL_BLOCK, 11)},
-                new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.CARBON, 12)});
+                new ItemStack[]{new SlimefunItemStack(SlimefunItems.CARBON, 12).item()});
         registerRecipe(16, new ItemStack[]{new ItemStack(Material.COAL, 8)},
-                new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.CARBON, 1)});
+                new ItemStack[]{new SlimefunItemStack(SlimefunItems.CARBON, 1).item()});
         registerRecipe(16, new ItemStack[]{new ItemStack(Material.CHARCOAL, 4)},
                 new ItemStack[]{new ItemStack(Material.COAL, 1)});
         registerRecipe(16, new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.SMALL_URANIUM, 4)},
@@ -66,6 +66,6 @@ public class ElectricCompressor extends AContainer implements RecipeDisplayItem 
 
     @Override
     public ItemStack getProgressBar() {
-        return new SlimefunItemStack(FNAmpItems.COMPRESSOR_PART, 1);
+        return new SlimefunItemStack(FNAmpItems.COMPRESSOR_PART, 1).item();
     }
 }

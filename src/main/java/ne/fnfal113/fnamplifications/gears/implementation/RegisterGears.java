@@ -21,27 +21,27 @@ public class RegisterGears {
 
     public static void setup(SlimefunAddon instance){
         new FnBoots(FNAmpItems.FN_GEARS, FNAmpItems.FN_GEAR_BOOTS, FnAssemblyStation.RECIPE_TYPE, new ItemStack[]{
-                new SlimefunItemStack(SlimefunItems.REINFORCED_PLATE, 5), new ItemStack(Material.IRON_BOOTS), new SlimefunItemStack(SlimefunItems.REINFORCED_PLATE, 5),
-                SlimefunItems.ENCHANTMENT_RUNE, INGOT.clone(), SlimefunItems.ENCHANTMENT_RUNE,
-                new SlimefunItemStack(SlimefunItems.REINFORCED_ALLOY_INGOT, 6), new ItemStack(Material.DIAMOND_BOOTS), new SlimefunItemStack(SlimefunItems.REINFORCED_ALLOY_INGOT, 6)})
+                new SlimefunItemStack(SlimefunItems.REINFORCED_PLATE, 5).item(), new ItemStack(Material.IRON_BOOTS), new SlimefunItemStack(SlimefunItems.REINFORCED_PLATE, 5).item(),
+                SlimefunItems.ENCHANTMENT_RUNE.item(), INGOT.clone(), SlimefunItems.ENCHANTMENT_RUNE.item(),
+                new SlimefunItemStack(SlimefunItems.REINFORCED_ALLOY_INGOT, 6).item(), new ItemStack(Material.DIAMOND_BOOTS), new SlimefunItemStack(SlimefunItems.REINFORCED_ALLOY_INGOT, 6).item()})
                 .register(instance);
 
         new FnChestPlate(FNAmpItems.FN_GEARS, FNAmpItems.FN_GEAR_CHESTPLATE, FnAssemblyStation.RECIPE_TYPE, new ItemStack[]{
-                new SlimefunItemStack(SlimefunItems.REINFORCED_PLATE, 2), new ItemStack(Material.IRON_CHESTPLATE), new SlimefunItemStack(SlimefunItems.REINFORCED_PLATE, 2),
-                SlimefunItems.ENCHANTMENT_RUNE, INGOT.clone(), SlimefunItems.ENCHANTMENT_RUNE,
-                new SlimefunItemStack(SlimefunItems.REINFORCED_ALLOY_INGOT, 4), new ItemStack(Material.DIAMOND_CHESTPLATE), new SlimefunItemStack(SlimefunItems.REINFORCED_ALLOY_INGOT, 4)})
+                new SlimefunItemStack(SlimefunItems.REINFORCED_PLATE, 2).item(), new ItemStack(Material.IRON_CHESTPLATE), new SlimefunItemStack(SlimefunItems.REINFORCED_PLATE, 2).item(),
+                SlimefunItems.ENCHANTMENT_RUNE.item(), INGOT.clone(), SlimefunItems.ENCHANTMENT_RUNE.item(),
+                new SlimefunItemStack(SlimefunItems.REINFORCED_ALLOY_INGOT, 4).item(), new ItemStack(Material.DIAMOND_CHESTPLATE), new SlimefunItemStack(SlimefunItems.REINFORCED_ALLOY_INGOT, 4).item()})
                 .register(instance);
 
         new FnHelmet(FNAmpItems.FN_GEARS, FNAmpItems.FN_GEAR_HELMET, FnAssemblyStation.RECIPE_TYPE, new ItemStack[]{
-                new SlimefunItemStack(SlimefunItems.REINFORCED_PLATE, 4), new ItemStack(Material.IRON_HELMET), new SlimefunItemStack(SlimefunItems.REINFORCED_PLATE, 4),
-                SlimefunItems.ENCHANTMENT_RUNE, INGOT.clone(), SlimefunItems.ENCHANTMENT_RUNE,
-                new SlimefunItemStack(SlimefunItems.REINFORCED_ALLOY_INGOT, 6), new ItemStack(Material.DIAMOND_HELMET), new SlimefunItemStack(SlimefunItems.REINFORCED_ALLOY_INGOT, 6)})
+                new SlimefunItemStack(SlimefunItems.REINFORCED_PLATE, 4).item(), new ItemStack(Material.IRON_HELMET), new SlimefunItemStack(SlimefunItems.REINFORCED_PLATE, 4).item(),
+                SlimefunItems.ENCHANTMENT_RUNE.item(), INGOT.clone(), SlimefunItems.ENCHANTMENT_RUNE.item(),
+                new SlimefunItemStack(SlimefunItems.REINFORCED_ALLOY_INGOT, 6).item(), new ItemStack(Material.DIAMOND_HELMET), new SlimefunItemStack(SlimefunItems.REINFORCED_ALLOY_INGOT, 6).item()})
                 .register(instance);
 
         new FnLeggings(FNAmpItems.FN_GEARS, FNAmpItems.FN_GEAR_LEGGINGS, FnAssemblyStation.RECIPE_TYPE, new ItemStack[]{
-                new SlimefunItemStack(SlimefunItems.REINFORCED_PLATE, 2), new ItemStack(Material.IRON_LEGGINGS), new SlimefunItemStack(SlimefunItems.REINFORCED_PLATE, 2),
-                SlimefunItems.ENCHANTMENT_RUNE, INGOT.clone(), SlimefunItems.ENCHANTMENT_RUNE,
-                new SlimefunItemStack(SlimefunItems.REINFORCED_ALLOY_INGOT, 3), new ItemStack(Material.DIAMOND_LEGGINGS), new SlimefunItemStack(SlimefunItems.REINFORCED_ALLOY_INGOT, 3)})
+                new SlimefunItemStack(SlimefunItems.REINFORCED_PLATE, 2).item(), new ItemStack(Material.IRON_LEGGINGS), new SlimefunItemStack(SlimefunItems.REINFORCED_PLATE, 2).item(),
+                SlimefunItems.ENCHANTMENT_RUNE.item(), INGOT.clone(), SlimefunItems.ENCHANTMENT_RUNE.item(),
+                new SlimefunItemStack(SlimefunItems.REINFORCED_ALLOY_INGOT, 3).item(), new ItemStack(Material.DIAMOND_LEGGINGS), new SlimefunItemStack(SlimefunItems.REINFORCED_ALLOY_INGOT, 3).item()})
                 .register(instance);
     }
 }

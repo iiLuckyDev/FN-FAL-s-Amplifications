@@ -36,11 +36,11 @@ public class StaffOfAirStrider extends AbstractStaff {
         
         ItemStack item = player.getInventory().getItemInMainHand();
 
-        if(taskMap.get(player.getUniqueId()) != null) {
+        if (taskMap.get(player.getUniqueId()) != null) {
             Utils.sendMessage("Air strider is not yet expired!", player);
             
             return;
-        } else if(hasPermissionToCast(item.getItemMeta().getDisplayName(), player, player.getLocation())) {
+        } else if (hasPermissionToCast(item.getItemMeta().getDisplayName(), player, player.getLocation())) {
             Utils.sendMessage("You can now walk on air for 10 seconds", player);
             
             playerCooldowMap.put(player.getUniqueId(), System.currentTimeMillis());
@@ -57,16 +57,16 @@ public class StaffOfAirStrider extends AbstractStaff {
         Bukkit.getScheduler().runTaskTimer(FNAmplifications.getInstance(), task -> {
             Long timer = Utils.cooldownHelper(playerCooldowMap.get(player.getUniqueId()));
 
-            if(timer >= 7) {
-                Utils.sendMessage("Air strider will expire in" + (12 - timer) + " seconds!", player);
+            if (timer >= 7) {
+                Utils.sendMessage("Air strider will expire in " + (12 - timer) + " seconds!", player);
             }
 
-            if(timer >= 12 || !player.isOnline()) {
+            if (timer >= 12 || !player.isOnline()) {
                 Utils.sendMessage("Air Strider has expired!", player);
 
                 playerCooldowMap.remove(player.getUniqueId());
 
-                taskMap.get(player.getUniqueId()).setDone(true);;
+                taskMap.get(player.getUniqueId()).setDone(true);
                 taskMap.remove(player.getUniqueId());
                 
                 task.cancel();

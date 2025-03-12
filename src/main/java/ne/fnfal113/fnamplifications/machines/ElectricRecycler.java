@@ -89,6 +89,6 @@ public class ElectricRecycler extends AContainer implements RecipeDisplayItem {
 
     @Override
     public ItemStack getProgressBar() {
-        return new SlimefunItemStack(FNAmpItems.RECYCLER_PART, 1);
+        return new SlimefunItemStack(FNAmpItems.RECYCLER_PART, 1).item();
     }
 }

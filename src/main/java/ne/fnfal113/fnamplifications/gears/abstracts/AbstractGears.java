@@ -44,10 +44,10 @@ public abstract class AbstractGears extends SlimefunItem {
 
     private final ConfigManager configManager = FNAmplifications.getInstance().getConfigManager();
 
-    public AbstractGears(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe,
+    public AbstractGears(ItemGroup itemGroup, SlimefunItemStack sfItemStack, RecipeType recipeType, ItemStack[] recipe,
                          NamespacedKey defaultUsageKey, NamespacedKey defaultUsageKey2, NamespacedKey defaultUsageKey3,
                          int startingProgress, int incrementingProgress, int maxLevel, int maxAttributes, EquipmentSlot equipmentSlot) {
-        super(itemGroup, item, recipeType, recipe);
+        super(itemGroup, sfItemStack, recipeType, recipe);
 
         initializeSettings(maxLevel, maxAttributes);
         this.defaultUsageKey = defaultUsageKey; //
@@ -58,7 +58,7 @@ public abstract class AbstractGears extends SlimefunItem {
         this.maxLevel = getConfigManager().getCustomConfig("fn-gear-level-settings").getInt(this.getId() + "." + "max-level");
         this.maxAttributes = getConfigManager().getCustomConfig("fn-gear-level-settings").getInt(this.getId() + "." + "max-attributes");
         this.equipmentSlot = equipmentSlot;
-        this.gearTask = new GearTask(getDefaultUsageKey(), getDefaultUsageKey2(), getDefaultUsageKey3(), item, startingProgress, incrementingProgress, getMaxLevel());
+        this.gearTask = new GearTask(getDefaultUsageKey(), getDefaultUsageKey2(), getDefaultUsageKey3(), sfItemStack.item(), startingProgress, incrementingProgress, getMaxLevel());
     }
 
     public void initializeSettings(int maxLevel, int maxAttributes) {

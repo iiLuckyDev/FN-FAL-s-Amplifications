@@ -30,7 +30,6 @@ import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.Tag;
 import org.bukkit.World;
@@ -61,40 +60,40 @@ public class ElectricBlockBreaker extends SlimefunItem implements InventoryBlock
     public static final int ON_OFF = 8;
     private static final ItemStack VERSIONED_AMETHYST;
 
-    private static final CustomItemStack NOT_OPERATING = new CustomItemStack(Material.ORANGE_STAINED_GLASS_PANE,
+    private static final ItemStack NOT_OPERATING = CustomItemStack.create(Material.ORANGE_STAINED_GLASS_PANE,
         "&cNot Operating...",
         "&ePlace a block facing the dispenser!"
     );
 
-    private static final CustomItemStack NO_POWER = new CustomItemStack(Material.RED_STAINED_GLASS_PANE,
+    private static final ItemStack NO_POWER = CustomItemStack.create(Material.RED_STAINED_GLASS_PANE,
         "&cNo Power!",
         "&ePower it up first!"
     );
 
-    private static final CustomItemStack NOT_RUNNING = new CustomItemStack(Material.YELLOW_STAINED_GLASS_PANE,
+    private static final ItemStack NOT_RUNNING = CustomItemStack.create(Material.YELLOW_STAINED_GLASS_PANE,
         "&cNot Running",
         "&eToggle it on first"
     );
 
-    private static final CustomItemStack BREAK_BLOCK_NATURALLY = new CustomItemStack(Material.PINK_STAINED_GLASS_PANE,
+    private static final ItemStack BREAK_BLOCK_NATURALLY = CustomItemStack.create(Material.PINK_STAINED_GLASS_PANE,
         "&d&lMode:",
         "&eBreak block naturally (No Silk Touch)",
         "Click to change"
     );
 
-    private static final CustomItemStack DROP_BLOCK_NATURALLY = new CustomItemStack(Material.CYAN_STAINED_GLASS_PANE,
+    private static final ItemStack DROP_BLOCK_NATURALLY = CustomItemStack.create(Material.CYAN_STAINED_GLASS_PANE,
         "&d&lMode:",
         "&eDrop block naturally (Silk Touch)",
         "Click to change"
     );
 
-    private static final CustomItemStack TOGGLED_ON = new CustomItemStack(Material.BLUE_STAINED_GLASS_PANE,
+    private static final ItemStack TOGGLED_ON = CustomItemStack.create(Material.BLUE_STAINED_GLASS_PANE,
         "&d&lToggle:",
         "&eEnabled (Running)",
         "Click to change"
     );
 
-    private static final CustomItemStack TOGGLED_OFF = new CustomItemStack(Material.WHITE_STAINED_GLASS_PANE,
+    private static final ItemStack TOGGLED_OFF = CustomItemStack.create(Material.WHITE_STAINED_GLASS_PANE,
         "&d&lToggle:",
         "&eDisabled (Not Running)",
         "Click to change"
@@ -264,7 +263,7 @@ public class ElectricBlockBreaker extends SlimefunItem implements InventoryBlock
                     int progress = cache.progress;
 
                     if (invMenu.hasViewer()) {
-                        invMenu.replaceExistingItem(4, new CustomItemStack(Material.GREEN_STAINED_GLASS_PANE, "&aOperating!",
+                        invMenu.replaceExistingItem(4, CustomItemStack.create(Material.GREEN_STAINED_GLASS_PANE, "&aOperating!",
                             "", "&bRate: " + this.rate + " ticks per Block", "&2Breaking block at rate: " + progress
                             + "/" + this.rate));
                     }

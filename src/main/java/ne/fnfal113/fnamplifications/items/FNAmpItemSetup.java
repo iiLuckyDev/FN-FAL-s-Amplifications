@@ -55,13 +55,13 @@ public final class FNAmpItemSetup {
         new FnScrapRecycler().register(FNAmplifications.getInstance());
         new FnMagicAltar().register(FNAmplifications.getInstance());
 
-        if(plugin.getConfig().getBoolean("Enable-Machineries", true)){
+        if (plugin.getConfig().getBoolean("Enable-Machineries", true)) {
             RegisterMachines.setup(sfPlugin);
 
             plugin.getServer().getPluginManager().registerEvents(new JukeBoxClickListener(), plugin);
         }
 
-        if(plugin.getConfig().getBoolean("Enable-Gems", true)){
+        if (plugin.getConfig().getBoolean("Enable-Gems", true)) {
             RegisterGems.setup(sfPlugin);
 
             new FnGemAltar().register(FNAmplifications.getInstance());
@@ -72,40 +72,40 @@ public final class FNAmpItemSetup {
             plugin.getServer().getPluginManager().registerEvents(new GemUnbinderListener(), plugin);
         }
 
-        if(plugin.getConfig().getBoolean("Enable-Gears", true)){
+        if (plugin.getConfig().getBoolean("Enable-Gears", true)) {
             RegisterGears.setup(sfPlugin);
 
             plugin.getServer().getPluginManager().registerEvents(new GearListener(), plugin);
         }
 
-        if(plugin.getConfig().getBoolean("Enable-Mystery-Sticks", true)){
+        if (plugin.getConfig().getBoolean("Enable-Mystery-Sticks", true)) {
             RegisterSticks.setup(sfPlugin);
 
             new FnMysteryStickAltar().register(FNAmplifications.getInstance());
             plugin.getServer().getPluginManager().registerEvents(new MysteryStickListener(), plugin);
         }
 
-        if(plugin.getConfig().getBoolean("Enable-Solar-Generators", true)){
+        if (plugin.getConfig().getBoolean("Enable-Solar-Generators", true)) {
             RegisterPowerGenerators.setupSolarGen(sfPlugin);
         }
 
-        if(plugin.getConfig().getBoolean("Enable-PowerXpansion", true)){
+        if (plugin.getConfig().getBoolean("Enable-PowerXpansion", true)) {
             RegisterPowerGenerators.setupPowerX(sfPlugin);
         }
 
-        if(plugin.getConfig().getBoolean("Enable-Staffs", true)){
+        if (plugin.getConfig().getBoolean("Enable-Staffs", true)) {
             RegisterStaffs.setup(sfPlugin);
 
             plugin.getServer().getPluginManager().registerEvents(new StaffListener(), plugin);
         }
 
-        if(plugin.getConfig().getBoolean("Enable-Quivers", true)){
+        if (plugin.getConfig().getBoolean("Enable-Quivers", true)) {
             RegisterQuiver.setup(sfPlugin);    
             
             plugin.getServer().getPluginManager().registerEvents(new QuiverListener(), plugin);
         }
 
-        if(plugin.getConfig().getBoolean("Enable-Misc", true)){
+        if (plugin.getConfig().getBoolean("Enable-Misc", true)) {
             RegisterTools.setup(sfPlugin);
 
             plugin.getServer().getPluginManager().registerEvents(new HoeListener(), plugin);
@@ -115,7 +115,7 @@ public final class FNAmpItemSetup {
             plugin.getServer().getPluginManager().registerEvents(new ThrowableItemListener(), plugin);
         }
         
-        if(plugin.getConfig().getBoolean("Enable-Material-Generators", true)){
+        if (plugin.getConfig().getBoolean("Enable-Material-Generators", true)) {
             RegisterMaterialGenerators.setup(sfPlugin);
             RegisterMaterialGeneratorUpgrades.setup(sfPlugin);      
 
