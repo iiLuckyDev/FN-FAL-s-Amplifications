@@ -3,7 +3,7 @@ name: Deploy to maven builds repo
 on:
   push:
     branches:
-      - main
+      - Experimental/1.21.x
   workflow_dispatch:
 
 jobs:
