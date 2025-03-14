@@ -50,7 +50,7 @@ public final class FNAmplifications extends JavaPlugin implements SlimefunAddon 
         registerCommands();
         getServer().getScheduler().runTaskTimerAsynchronously(this, new ArmorEquipRunnable(), 0L, getConfig().getInt("armor-update-period") * 20L);
 
-        if(getConfig().getBoolean("auto-update", true) && getDescription().getVersion().startsWith("Unoffical-Experimental")) {
+        if(getConfig().getBoolean("auto-update", true) && getDescription().getVersion().startsWith("Experimental - ")) {
             new BlobBuildUpdater(this, getFile(), "FNAmplifications", "Experimental").start();
         }
     }
