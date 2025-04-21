@@ -84,8 +84,8 @@ public class StickTask {
         convertToWeapon(itemStack, meta, material, player);
     }
 
-    public void convertToWeapon(ItemStack itemStack, ItemMeta meta ,Material material, Player player) {
-        if(itemStack.getType() == material) {
+    public void convertToWeapon(ItemStack itemStack, ItemMeta meta, Material material, Player player) {
+        if (itemStack.getType() == material) {
             return;
         } 
         

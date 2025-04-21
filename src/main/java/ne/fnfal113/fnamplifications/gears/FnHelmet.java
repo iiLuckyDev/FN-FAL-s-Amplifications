@@ -11,8 +11,8 @@ import org.bukkit.inventory.ItemStack;
 public class FnHelmet extends AbstractGears {
 
     public FnHelmet(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
-        super(itemGroup, item, recipeType, recipe, Keys.FN_GEAR_HELMET, Keys.FN_GEAR_HELMET_LEVEL, Keys.FN_GEAR_HELMET_FINAL,
-                20, 100, 30, 3, EquipmentSlot.HEAD);
+        super(itemGroup, item, recipeType, recipe, Keys.FN_GEAR_HELMET, Keys.FN_GEAR_HELMET_CURRENT_LEVEL, Keys.FN_GEAR_HELMET_MAX_LEVEL,
+            20, 100, 30, 3, EquipmentSlot.HEAD);
     }
 
 }

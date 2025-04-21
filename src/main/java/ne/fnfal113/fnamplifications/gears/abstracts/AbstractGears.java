@@ -24,11 +24,11 @@ import java.util.UUID;
 
 public abstract class AbstractGears extends SlimefunItem {
 
-    private final NamespacedKey defaultUsageKey;
+    private final NamespacedKey currentXpValueKey;
 
-    private final NamespacedKey defaultUsageKey2;
+    private final NamespacedKey currentArmorLevelKey;
 
-    private final NamespacedKey defaultUsageKey3;
+    private final NamespacedKey nextLevelXpValueKey;
 
     private final int startingProgress;
 
@@ -42,23 +42,34 @@ public abstract class AbstractGears extends SlimefunItem {
 
     private final GearTask gearTask;
 
-    private final ConfigManager configManager = FNAmplifications.getInstance().getConfigManager();
+    private final ConfigManager configManager = FNAmplifications.getConfigManager();
 
     public AbstractGears(ItemGroup itemGroup, SlimefunItemStack sfItemStack, RecipeType recipeType, ItemStack[] recipe,
-                         NamespacedKey defaultUsageKey, NamespacedKey defaultUsageKey2, NamespacedKey defaultUsageKey3,
-                         int startingProgress, int incrementingProgress, int maxLevel, int maxAttributes, EquipmentSlot equipmentSlot) {
+        NamespacedKey currentXpValueKey, NamespacedKey currentArmorlevelKey, NamespacedKey nextLevelXpValueKey,
+        int startingProgress, int incrementingProgress, int maxLevel, int maxAttributes, EquipmentSlot equipmentSlot) 
+    {
         super(itemGroup, sfItemStack, recipeType, recipe);
 
         initializeSettings(maxLevel, maxAttributes);
-        this.defaultUsageKey = defaultUsageKey; //
-        this.defaultUsageKey2 = defaultUsageKey2; // current armor level pdc key
-        this.defaultUsageKey3 = defaultUsageKey3; // max level pdc key
+
+        this.currentXpValueKey = currentXpValueKey;
+        this.currentArmorLevelKey = currentArmorlevelKey;
+        this.nextLevelXpValueKey = nextLevelXpValueKey;
         this.startingProgress = startingProgress;
         this.incrementingProgress = incrementingProgress;
         this.maxLevel = getConfigManager().getCustomConfig("fn-gear-level-settings").getInt(this.getId() + "." + "max-level");
         this.maxAttributes = getConfigManager().getCustomConfig("fn-gear-level-settings").getInt(this.getId() + "." + "max-attributes");
         this.equipmentSlot = equipmentSlot;
-        this.gearTask = new GearTask(getDefaultUsageKey(), getDefaultUsageKey2(), getDefaultUsageKey3(), sfItemStack.item(), startingProgress, incrementingProgress, getMaxLevel());
+        this.gearTask = new GearTask(
+            currentXpValueKey, 
+            currentArmorlevelKey, 
+            nextLevelXpValueKey, 
+            (ItemStack) Utils.getField(SlimefunItem.class, "itemStackTemplate", this),  
+            startingProgress, 
+            incrementingProgress, 
+            maxLevel
+        );
+    
     }
 
     public void initializeSettings(int maxLevel, int maxAttributes) {
@@ -72,7 +83,7 @@ public abstract class AbstractGears extends SlimefunItem {
 
             JsonObject jsonObject = getConfigManager().loadJson(this.getId().toLowerCase() + "_default_ench");
 
-            for(int i = 1; i <= Math.max(configMaxLevel, maxLevel); i++) {
+            for (int i = 1; i <= Math.max(configMaxLevel, maxLevel); i++) {
                 String levelSection = this.getId() + "." + "level-" + i;
 
                 initializeEnchants(levelSection, i, jsonObject);
@@ -84,7 +95,11 @@ public abstract class AbstractGears extends SlimefunItem {
 
             setUnbreakable();
         } catch (NullPointerException | IllegalArgumentException e) {
-            FNAmplifications.getInstance().getLogger().info("An error has occurred upon initializing gear config settings! Please report on github with logs!");
+            FNAmplifications.getInstance()
+                .getLogger()
+                .info("An error has occurred upon initializing FN Gear config settings! Please report on github with error logs!");
+            
+            
             e.printStackTrace();
         }
     }
@@ -97,12 +112,25 @@ public abstract class AbstractGears extends SlimefunItem {
             // initialize default enchant and levels under the default max level from the json resource stream
             if(jsonObject.has("level-" + i) && jsonObject.getAsJsonObject("level-" + i).has(settingEnchant)
                     && jsonObject.getAsJsonObject("level-" + i).has(settingEnchantLevel)) {
-                getConfigManager().initializeConfig(levelSection, settingEnchant, jsonObject.getAsJsonObject("level-" + i).get(settingEnchant).getAsString(), "fn-gear-level-settings");
-                getConfigManager().initializeConfig(levelSection, settingEnchantLevel, jsonObject.getAsJsonObject("level-" + i).get(settingEnchantLevel).getAsInt(), "fn-gear-level-settings");
+                getConfigManager().initializeConfig(
+                    levelSection, 
+                    settingEnchant, 
+                    jsonObject.getAsJsonObject("level-" + i).get(settingEnchant).getAsString(), 
+                    "fn-gear-level-settings"
+                );
+                
+                getConfigManager().initializeConfig(
+                    levelSection, 
+                    settingEnchantLevel, 
+                    jsonObject.getAsJsonObject("level-" + i).get(settingEnchantLevel).getAsInt(), 
+                    "fn-gear-level-settings"
+                );
             }
 
         } catch (NullPointerException | IllegalArgumentException e) {
-            FNAmplifications.getInstance().getLogger().info("An error has occurred upon initializing gear enchants setting! Please report on github with logs!");
+            FNAmplifications.getInstance()
+                .getLogger()
+                .info("An error has occurred upon initializing FN Gear enchants setting! Please report on github with errors logs!");
             
             e.printStackTrace();
         }
@@ -118,39 +146,70 @@ public abstract class AbstractGears extends SlimefunItem {
                 // initialize default attribute and values from parsed json resource stream under the default max level
                 if (jsonObject.has("level-" + i) && jsonObject.getAsJsonObject("level-" + i).has("attributes")
                         && jsonObject.getAsJsonObject("level-" + i).getAsJsonObject("attributes").has("attribute-" + x)) {
-                    getConfigManager().initializeConfig(attributeSection, settingAttribute, jsonObject.getAsJsonObject("level-" + i).getAsJsonObject("attributes").get("attribute-" + x).getAsJsonObject().get(settingAttribute).getAsString(), "fn-gear-level-settings");
-                    getConfigManager().initializeConfig(attributeSection, settingAttributeValue, jsonObject.getAsJsonObject("level-" + i).getAsJsonObject("attributes").get("attribute-" + x).getAsJsonObject().get(settingAttributeValue).getAsDouble(), "fn-gear-level-settings");
+                    getConfigManager().initializeConfig(
+                        attributeSection, 
+                        settingAttribute, 
+                        jsonObject.getAsJsonObject("level-" + i)
+                            .getAsJsonObject("attributes")
+                            .get("attribute-" + x)
+                            .getAsJsonObject()
+                            .get(settingAttribute)
+                            .getAsString(), 
+                        "fn-gear-level-settings"
+                    );
+
+                    getConfigManager().initializeConfig(
+                        attributeSection, 
+                        settingAttributeValue, 
+                        jsonObject.getAsJsonObject("level-" + i)
+                            .getAsJsonObject("attributes")
+                            .get("attribute-" + x)
+                            .getAsJsonObject()
+                            .get(settingAttributeValue)
+                            .getAsDouble(), 
+                        "fn-gear-level-settings"
+                    );
                 }
             }
-        } catch (NullPointerException | IllegalArgumentException e){
-            FNAmplifications.getInstance().getLogger().info("An error has occurred upon initializing gear bonus attributes setting! Please report on github with logs!");
+        } catch (NullPointerException | IllegalArgumentException e) {
+            FNAmplifications.getInstance()
+                .getLogger()
+                .info("An error has occurred upon initializing gear bonus attributes setting! Please report on github with logs!");
             
             e.printStackTrace();
         }
     }
 
+    public void initializePdc() {
+
+    }
+
     public final void setUnbreakable() {
-        ItemMeta meta = this.getItem().getItemMeta();
-        meta.setUnbreakable(getConfigManager().getCustomConfig("fn-gear-unbreakable-settings").getBoolean(this.getId() + "." + "unbreakable"));
+        ItemMeta meta = ((ItemStack) Utils.getField(SlimefunItem.class, "itemStackTemplate", this)).getItemMeta();
+        
+        meta.setUnbreakable(
+            getConfigManager()
+                .getCustomConfig("fn-gear-unbreakable-settings")
+                .getBoolean(this.getId() + "." + "unbreakable")
+        );
 
         this.getItem().setItemMeta(meta);
     }
 
     public void onHit(EntityDamageByEntityEvent event, ItemStack armour) {
-        if(!(event.getEntity() instanceof Player)){
+        if (! (event.getEntity() instanceof Player)) {
             return;
         }
 
         Player p = ((Player) event.getEntity()).getPlayer();
 
-        if(p == null){
+        if (p == null) {
             return;
         }
 
-        if(gearTask.onHit(event, p, armour)){
-            upgradeArmor(armour, armour.getItemMeta().getPersistentDataContainer().getOrDefault(getDefaultUsageKey2(), PersistentDataType.INTEGER, 0), p, getEquipmentSlot());
+        if (gearTask.onHit(event, p, armour)) {
+            upgradeArmor(armour, armour.getItemMeta().getPersistentDataContainer().getOrDefault(getCurrentArmorLevelKey(), PersistentDataType.INTEGER, 0), p, getEquipmentSlot());
         }
-
     }
 
     /**
@@ -172,8 +231,9 @@ public abstract class AbstractGears extends SlimefunItem {
                     meta.addEnchant(EnchantmentWrapper.getByKey(NamespacedKey.minecraft(enchant)), enchantLevel, true);
                 }
             }
-        } catch (NullPointerException | IllegalArgumentException e){
+        } catch (NullPointerException | IllegalArgumentException e) {
             p.sendMessage(Utils.colorTranslator("&cAn error has occurred upon adding new armor enchants, please ask the admin to check the console for errors and report it on github"));
+            
             e.printStackTrace();
         }
 
@@ -189,18 +249,22 @@ public abstract class AbstractGears extends SlimefunItem {
                             meta.removeAttributeModifier(Attribute.valueOf(attribute));
                         }
 
-                        meta.addAttributeModifier(Attribute.valueOf(attribute), new AttributeModifier(
+                        meta.addAttributeModifier(
+                            Attribute.valueOf(attribute), 
+                            new AttributeModifier(
                                 UUID.randomUUID(),
                                 "generic." + attribute.toLowerCase() + "." + armor.getType().toString().toLowerCase(),
                                 attributeValue,
-                                AttributeModifier.Operation.ADD_NUMBER, slot));
+                                AttributeModifier.Operation.ADD_NUMBER, slot
+                            )
+                        );
                     }
 
                 }
 
-                p.sendMessage(Utils.colorTranslator("&6FN Gear attributes has been increased!"));
-            } catch (NullPointerException | IllegalArgumentException e){
-                p.sendMessage(Utils.colorTranslator("&cAn error has occurred upon adding bonus armor attributes, please ask the admin to check the console for errors and report it on github"));
+                p.sendMessage(Utils.colorTranslator("&6FN Gear attributes has been upgraded!"));
+            } catch (NullPointerException | IllegalArgumentException e) {
+                p.sendMessage(Utils.colorTranslator("&cAn error has occurred when adding FN Gear armor attributes. Please configure FN Gear attributes properly."));
                 
                 e.printStackTrace();
             }
@@ -225,16 +289,16 @@ public abstract class AbstractGears extends SlimefunItem {
         return false;
     }
 
-    public NamespacedKey getDefaultUsageKey() {
-        return defaultUsageKey;
+    public NamespacedKey getCurrentXpValueKey() {
+        return currentXpValueKey;
     }
 
-    public NamespacedKey getDefaultUsageKey2() {
-        return defaultUsageKey2;
+    public NamespacedKey getCurrentArmorLevelKey() {
+        return currentArmorLevelKey;
     }
 
-    public NamespacedKey getDefaultUsageKey3() {
-        return defaultUsageKey3;
+    public NamespacedKey getNextLevelXpValueKey() {
+        return nextLevelXpValueKey;
     }
 
     public int getStartingProgress() {

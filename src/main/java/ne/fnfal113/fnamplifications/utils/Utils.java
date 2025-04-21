@@ -11,6 +11,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.EulerAngle;
 
 import javax.annotation.Nonnull;
+
+import java.lang.reflect.Field;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.List;
@@ -73,19 +75,23 @@ public class Utils {
      * @param tier the current gem tier
      * @param fileName the filename of the config for retrieving the value
      */
-    public static void setGemTierLore(ItemStack itemStack, String configSection, String configSectionSetting, String stringToReplace, String color, String suffix, int tier, String fileName) {
+    public static void setGemTierLore(ItemStack itemStack, String configSection, String configSectionSetting, 
+        String stringToReplace, String color, String suffix, int tier, String fileName) 
+    {
         ItemMeta meta = itemStack.getItemMeta();
         List<String> lore = meta.getLore();
 
         for(int i = 0; i < lore.size(); i++) {
-            if(lore.get(i).contains(Utils.colorTranslator(color + stringToReplace))){
+            if(lore.get(i).contains(Utils.colorTranslator(color + stringToReplace))) {
                 String line = lore.get(i).replace(Utils.colorTranslator(color + stringToReplace),
-                        Utils.colorTranslator(color + (FNAmplifications.getInstance().getConfigManager().getCustomConfig(fileName).getInt(configSection + "." + configSectionSetting) / tier--) + suffix));
-                lore.set(i, line);
+                    Utils.colorTranslator(color + (FNAmplifications.getConfigManager().getCustomConfig(fileName).getInt(configSection + "." + configSectionSetting) / tier--) + suffix));
+                
+                    lore.set(i, line);
             }
         }
 
         meta.setLore(lore);
+
         itemStack.setItemMeta(meta);
     }
 
@@ -99,19 +105,23 @@ public class Utils {
      * @param suffix the end string of the config value (units, percent, etc)
      * @param fileName the filename of the config for retrieving the value
      */
-    public static void setLoreByConfigValue(@Nonnull ItemStack itemStack, String configSection, String configSectionSetting, String stringToReplace, String color, String suffix, String fileName){
+    public static void setLoreByConfigValue(@Nonnull ItemStack itemStack, String configSection, String configSectionSetting, 
+        String stringToReplace, String color, String suffix, String fileName) 
+    {
         ItemMeta meta = itemStack.getItemMeta();
         List<String> lore = meta.getLore();
 
-        for(int i = 0; i < lore.size(); i++){
-            if(lore.get(i).contains(Utils.colorTranslator(color + stringToReplace))){
+        for (int i = 0; i < lore.size(); i++) {
+            if (lore.get(i).contains(Utils.colorTranslator(color + stringToReplace))) {
                 String line = lore.get(i).replace(Utils.colorTranslator(color + stringToReplace),
-                        Utils.colorTranslator(color + FNAmplifications.getInstance().getConfigManager().getCustomConfig(fileName).get(configSection + "." + configSectionSetting) + suffix));
+                    Utils.colorTranslator(color + FNAmplifications.getConfigManager().getCustomConfig(fileName).get(configSection + "." + configSectionSetting) + suffix));
+                
                 lore.set(i, line);
             }
         }
 
         meta.setLore(lore);
+
         itemStack.setItemMeta(meta);
     }
 
@@ -125,20 +135,51 @@ public class Utils {
      * @param color2 color formatting for the value and suffix
      * @param suffix the end string of the pdc value (units, percent, etc)
      */
-    public static void setLoreByPdc(ItemStack itemStack, ItemMeta meta, String value, String prefix, String color, String color2, String suffix){
+    public static void setLoreByPdc(ItemStack itemStack, ItemMeta meta, String value, String prefix, String color, String color2, String suffix) {
         List<String> lore = meta.getLore();
-        for(int i = 0; i < lore.size(); i++){
-            if(lore.get(i).contains(Utils.colorTranslator(color + prefix))){
+        for (int i = 0; i < lore.size(); i++) {
+            if (lore.get(i).contains(Utils.colorTranslator(color + prefix))){
                 lore.set(i, Utils.colorTranslator(color + prefix + color2 + value + suffix));
             }
         }
 
         meta.setLore(lore);
+
         itemStack.setItemMeta(meta);
     }
 
-    public static Long cooldownHelper(Long timeInMs){
+    public static Long cooldownHelper(Long timeInMs) {
         return (long) Math.floor((System.currentTimeMillis() - timeInMs) / 1000);
+    }
+
+    public static void setField(Class<?> clazz, String fieldName, Object instance, Object value) {
+        Field field;
+
+        try {
+            field = clazz.getDeclaredField(fieldName);
+
+            field.setAccessible(true);
+
+            field.set(instance, value);
+        } catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static Object getField(Class<?> clazz, String fieldName, Object instance) {
+        Field field;
+
+        try {
+            field = clazz.getDeclaredField(fieldName);
+
+            field.setAccessible(true);
+
+            return field.get(instance);
+        } catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
+            e.printStackTrace();
+
+            return null;
+        }
     }
 
 }

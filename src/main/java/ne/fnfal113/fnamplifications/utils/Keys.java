@@ -34,20 +34,20 @@ public class Keys {
     // FN Gears
     // Helmet
     public static  final NamespacedKey FN_GEAR_HELMET = createKey("helmet");
-    public static  final NamespacedKey FN_GEAR_HELMET_LEVEL = createKey("helmetlevel");
-    public static  final NamespacedKey FN_GEAR_HELMET_FINAL = createKey("helmetfinal");
+    public static  final NamespacedKey FN_GEAR_HELMET_CURRENT_LEVEL = createKey("helmetlevel");
+    public static  final NamespacedKey FN_GEAR_HELMET_MAX_LEVEL = createKey("helmetfinal");
     // Chestplate
     public static final NamespacedKey FN_GEAR_CHEST = createKey("armor");
-    public static final NamespacedKey FN_GEAR_CHEST_LEVEL = createKey("armorlevel");
-    public static final NamespacedKey FN_GEAR_CHEST_FINAL = createKey("armorfinal");
+    public static final NamespacedKey FN_GEAR_CHEST_CURRENT_LEVEL = createKey("armorlevel");
+    public static final NamespacedKey FN_GEAR_CHEST_MAX_LEVEL = createKey("armorfinal");
     // Leggings
     public static final NamespacedKey FN_GEAR_LEGGINGS = createKey("leggings");
-    public static final NamespacedKey FN_GEAR_LEGGINGS_LEVEL = createKey("leggingslevel");
-    public static final NamespacedKey FN_GEAR_LEGGINGS_FINAL = createKey("leggingsfinal");
+    public static final NamespacedKey FN_GEAR_LEGGINGS_CURRENT_LEVEL = createKey("leggingslevel");
+    public static final NamespacedKey FN_GEAR_LEGGINGS_MAX_LEVEL = createKey("leggingsfinal");
     // Boots
     public static final NamespacedKey FN_GEAR_BOOTS = createKey("boots");
-    public static final NamespacedKey FN_GEAR_BOOTS_LEVEL = createKey("bootslevel");
-    public static final NamespacedKey FN_GEAR_BOOTS_FINAL = createKey("boostfinal");
+    public static final NamespacedKey FN_GEAR_BOOTS_CURRENT_LEVEL = createKey("bootslevel");
+    public static final NamespacedKey FN_GEAR_BOOTS_MAX_LEVEL = createKey("boostfinal");
 
     // Mystery Sticks
     public static final NamespacedKey STICK_1_EXP_LEVELS = createKey("stick_1_exp_levels_consumed");

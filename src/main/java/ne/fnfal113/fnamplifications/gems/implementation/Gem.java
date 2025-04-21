@@ -45,10 +45,12 @@ public class Gem {
 
     public void startSocket() {
         ItemMeta meta = getItemStackToSocket().getItemMeta();
+        
         PersistentDataContainer pdc = meta.getPersistentDataContainer();
+        
         int itemGemAmount = checkGemAmount(pdc, getItemStackToSocket());
 
-        if(itemGemAmount < 5) { // gem amount must be below 5
+        if (itemGemAmount < 5) { // gem amount must be below 5
             if(!isSameGem(getItemStackToSocket())) { // check if the gem being added already exist
                 ItemStack cursorGemItem = getPlayer().getItemOnCursor();
 
@@ -75,6 +77,7 @@ public class Gem {
 
     public void socketGemToItemStack(ItemMeta meta, PersistentDataContainer pdc, int itemGemAmount) {
         String gemSlimefunItemname = getSlimefunGemItem().getItemName();
+        
         List<String> lore = meta.hasLore() ? lore = meta.getLore() : new ArrayList<>();
         
         // add the lore when adding a gem for the first time
@@ -88,7 +91,7 @@ public class Gem {
         } else { 
             // append the new added gem to existing lore
             for (int i = 0; i < lore.size(); i++) {
-                if(lore.get(i).startsWith(Utils.colorTranslator("&6◤◤◤◤◤◤| &d&lGems &c|◥◥◥◥◥◥"))){
+                if (lore.get(i).startsWith(Utils.colorTranslator("&6◤◤◤◤◤◤| &d&lGems &c|◥◥◥◥◥◥"))) {
                     lore.add(i + 1, ChatColor.RED + "◬ " + gemSlimefunItemname);
                 }
             }
@@ -126,9 +129,10 @@ public class Gem {
      */
     public boolean isSameGem(ItemStack itemStackToSocket) {
         ItemMeta meta = itemStackToSocket.getItemMeta();
+        
         PersistentDataContainer itemPdc = meta.getPersistentDataContainer();
 
-        if(itemPdc.isEmpty()) return false;
+        if (itemPdc.isEmpty()) return false;
 
         return itemPdc.has(getSlimefunGemItemIDKey(), PersistentDataType.STRING);
     }

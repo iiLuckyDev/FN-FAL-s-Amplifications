@@ -18,44 +18,55 @@ import io.github.thebusybiscuit.slimefun4.utils.LoreBuilder;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 
 import ne.fnfal113.fnamplifications.FNAmplifications;
+import ne.fnfal113.fnamplifications.config.ConfigManager;
 import ne.fnfal113.fnamplifications.utils.Utils;
 
 public class CustomSolarGen extends SlimefunItem implements EnergyNetProvider {
 
-    private final int dayEnergy;
-    private final int nightEnergy;
-    private final int capacity;
+    private final ConfigManager configManager = FNAmplifications.getConfigManager();
 
-    public CustomSolarGen(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, int dayEnergy, int nightEnergy, int capacity) {
+    public CustomSolarGen(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, int dayEnergy, int capacity) {
         super(itemGroup, item, recipeType, recipe);
-        this.dayEnergy = dayEnergy;
-        this.nightEnergy = nightEnergy;
-        this.capacity = capacity;
-
+        
         setConfigValues(dayEnergy, capacity);
-        setLore(this.getItem());
+
+        // Update SlimefunItem Itemstack through reflections since
+        // #getItem or #item method returns a cloned delegate Itemstack
+        setLore((ItemStack) Utils.getField(SlimefunItem.class, "itemStackTemplate", this));
     }
 
-    public void setLore(ItemStack itemStack){
+    public void setLore(ItemStack itemStack) {
         ItemMeta meta = itemStack.getItemMeta();
+        
         List<String> lore = meta.getLore();
-        lore.add(Utils.colorTranslator(LoreBuilder.powerBuffer(FNAmplifications.getInstance().getConfigManager().getCustomConfig("solar-generator-settings").getInt(this.getId() + "." + "capacity"))));
-        lore.add(Utils.colorTranslator(LoreBuilder.powerPerSecond(FNAmplifications.getInstance().getConfigManager().getCustomConfig("solar-generator-settings").getInt(this.getId() + "." + "dayEnergy"))));
+        
+        lore.add(Utils.colorTranslator(
+            LoreBuilder.powerBuffer(this.configManager.getCustomConfig("solar-generator-settings").getInt(this.getId() + "." + "capacity")))
+        );
+        
+        lore.add(Utils.colorTranslator(
+            LoreBuilder.powerPerSecond(this.configManager.getCustomConfig("solar-generator-settings").getInt(this.getId() + "." + "dayEnergy")))
+        );
+        
         meta.setLore(lore);
+        
         itemStack.setItemMeta(meta);
     }
 
     public void setConfigValues(int dayEnergy, int capacity) {
-        FNAmplifications.getInstance().getConfigManager().initializeConfig(this.getId(),"dayEnergy", dayEnergy, "solar-generator-settings");
-        FNAmplifications.getInstance().getConfigManager().initializeConfig(this.getId(), "capacity", capacity, "solar-generator-settings");
+        this.configManager.initializeConfig(this.getId(),"dayEnergy", dayEnergy, "solar-generator-settings");
+        
+        this.configManager.initializeConfig(this.getId(), "capacity", capacity, "solar-generator-settings");
     }
 
     public int getDayEnergy() {
-        return FNAmplifications.getInstance().getConfigManager().getCustomConfig("solar-generator-settings").getInt(this.getId() + "." + "dayEnergy");
+        return this.configManager
+            .getCustomConfig("solar-generator-settings").getInt(this.getId() + "." + "dayEnergy");
     }
 
     public int getCapacity() {
-        return FNAmplifications.getInstance().getConfigManager().getCustomConfig("solar-generator-settings").getInt(this.getId() + "." + "capacity");
+        return this.configManager
+            .getCustomConfig("solar-generator-settings").getInt(this.getId() + "." + "capacity");
     }
 
     public int getNightEnergy() {
@@ -85,12 +96,15 @@ public class CustomSolarGen extends SlimefunItem implements EnergyNetProvider {
 
     private boolean isDaytime(World world) {
         long time = world.getTime();
+        
         return !world.hasStorm() && !world.isThundering() && (time < 12300L || time > 23850L);
     }
 
     public void preRegister() {
         super.preRegister();
+        
         BlockUseHandler handler = PlayerRightClickEvent::cancel;
+        
         this.addItemHandler(handler);
     }
 }

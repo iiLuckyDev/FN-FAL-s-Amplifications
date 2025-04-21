@@ -30,25 +30,38 @@ public abstract class AbstractStaff extends SlimefunItem {
 
         this.defaultUsageKey = identifer;
         this.staffTask = new StaffTask(getDefaultUsageKey(), this.getId());
+        
         setConfigValues(maxUses, this.getItem().getType().toString());
+        
         setMaterial();
-        Utils.setLoreByConfigValue(this.getItem(), this.getId(), "max-uses", "left", "&e", " left", "staffs-settings");
+        
+        Utils.setLoreByConfigValue(
+            (ItemStack) Utils.getField(SlimefunItem.class, "itemStackTemplate", this),
+            this.getId(), 
+            "max-uses", 
+            "left", 
+            "&e", 
+            " left", 
+            "staffs-settings"
+        );
     }
 
-    public void setMaterial(){
-        Material matchMaterial = Material.matchMaterial(FNAmplifications.getInstance().getConfigManager().getCustomConfig("staffs-settings").getString(this.getId() + "." + "staff-material").toUpperCase());
+    public void setMaterial() {
+        Material matchMaterial = Material.matchMaterial(FNAmplifications.getConfigManager().getCustomConfig("staffs-settings").getString(this.getId() + "." + "staff-material").toUpperCase());
 
-        if(matchMaterial != null){
+        if (matchMaterial != null) {
             this.getItem().setType(matchMaterial);
         } else {
             FNAmplifications.getInstance().getLogger().log(Level.INFO, "Invalid Material ID for " + this.getId() + (". Using BLAZE_ROD as default material."));
         }
     }
 
-    public boolean hasPermissionToCast(String staffName, Player player, Location location){
+    public boolean hasPermissionToCast(String staffName, Player player, Location location) {
         if (Slimefun.getProtectionManager().hasPermission(
-                Bukkit.getOfflinePlayer(player.getUniqueId()), location,
-                Interaction.INTERACT_BLOCK)) {
+            Bukkit.getOfflinePlayer(player.getUniqueId()), 
+            location,
+            Interaction.INTERACT_BLOCK)) 
+        {
             return true;
         }
 
@@ -62,8 +75,8 @@ public abstract class AbstractStaff extends SlimefunItem {
      */
     public void setConfigValues(int maxUses, String material) {
         try {
-            FNAmplifications.getInstance().getConfigManager().initializeConfig(this.getId(), "max-uses", maxUses, "staffs-settings");
-            FNAmplifications.getInstance().getConfigManager().initializeConfig(this.getId(), "staff-material", material, "staffs-settings");
+            FNAmplifications.getConfigManager().initializeConfig(this.getId(), "max-uses", maxUses, "staffs-settings");
+            FNAmplifications.getConfigManager().initializeConfig(this.getId(), "staff-material", material, "staffs-settings");
         } catch (Exception e) {
             e.printStackTrace();
         }

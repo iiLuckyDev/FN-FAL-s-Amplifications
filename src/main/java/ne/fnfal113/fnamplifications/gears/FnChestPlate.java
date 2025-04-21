@@ -13,8 +13,8 @@ import org.bukkit.inventory.ItemStack;
 public class FnChestPlate extends AbstractGears {
 
     public FnChestPlate(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
-        super(itemGroup, item, recipeType, recipe, Keys.FN_GEAR_CHEST, Keys.FN_GEAR_CHEST_LEVEL, Keys.FN_GEAR_CHEST_FINAL,
-                30, 120, 25, 3, EquipmentSlot.CHEST);
+        super(itemGroup, item, recipeType, recipe, Keys.FN_GEAR_CHEST, Keys.FN_GEAR_CHEST_CURRENT_LEVEL, Keys.FN_GEAR_CHEST_MAX_LEVEL,
+            30, 120, 25, 3, EquipmentSlot.CHEST);
     }
 
 }

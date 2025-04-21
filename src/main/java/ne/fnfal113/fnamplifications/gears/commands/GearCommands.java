@@ -36,9 +36,9 @@ public class GearCommands implements TabExecutor {
                         AbstractGears gear = (AbstractGears) item;
 
                         player.sendMessage(Utils.colorTranslator(item.getItemName() + ": &e" +
-                                pdc.get(gear.getDefaultUsageKey(), PersistentDataType.INTEGER)) +
+                                pdc.get(gear.getCurrentXpValueKey(), PersistentDataType.INTEGER)) +
                                 "/" +
-                                pdc.get(gear.getDefaultUsageKey3(), PersistentDataType.INTEGER));
+                                pdc.getOrDefault(gear.getNextLevelXpValueKey(), PersistentDataType.INTEGER, gear.getStartingProgress()));
                     }
                 }
             }
@@ -46,7 +46,7 @@ public class GearCommands implements TabExecutor {
             Player player = (Player) sender;
 
             if (args[0].equalsIgnoreCase("levelupgears")) {
-                if(!player.hasPermission("fngear.levelupgears")){
+                if (! player.hasPermission("fngear.levelupgears")) {
                     Utils.sendMessage("Access denied! missing permission node: fngear.levelupgears", player);
 
                     return true;
@@ -62,15 +62,15 @@ public class GearCommands implements TabExecutor {
                         if(item instanceof AbstractGears) {
                             AbstractGears fnGear = (AbstractGears) item;
                             
-                            int armorLevel = progress.getOrDefault(fnGear.getDefaultUsageKey2(), PersistentDataType.INTEGER, 0);
-                            int maxReq = progress.getOrDefault(fnGear.getDefaultUsageKey3(), PersistentDataType.INTEGER, fnGear.getStartingProgress());
+                            int armorLevel = progress.getOrDefault(fnGear.getCurrentArmorLevelKey(), PersistentDataType.INTEGER, 0);
+                            int maxReq = progress.getOrDefault(fnGear.getNextLevelXpValueKey(), PersistentDataType.INTEGER, fnGear.getStartingProgress());
 
                             fnGear.getGearTask().levelUpArmour(armorLevel, maxReq, maxReq, itemStack, meta, progress, lore, player);
                             
                             Utils.sendMessage("&6Successfully leveled up " + fnGear.getItemName() + " &6to " +
-                                progress.get(fnGear.getDefaultUsageKey2(), PersistentDataType.INTEGER), player);
+                                progress.get(fnGear.getCurrentArmorLevelKey(), PersistentDataType.INTEGER), player);
 
-                            fnGear.upgradeArmor(itemStack, progress.getOrDefault(fnGear.getDefaultUsageKey2(), PersistentDataType.INTEGER, 0), player, fnGear.getEquipmentSlot());
+                            fnGear.upgradeArmor(itemStack, progress.getOrDefault(fnGear.getCurrentArmorLevelKey(), PersistentDataType.INTEGER, 0), player, fnGear.getEquipmentSlot());
                         }
                     }
                 }

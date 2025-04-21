@@ -8,6 +8,7 @@ import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.protection.Interaction;
 
 import ne.fnfal113.fnamplifications.FNAmplifications;
+import ne.fnfal113.fnamplifications.config.ConfigManager;
 import ne.fnfal113.fnamplifications.gems.implementation.Gem;
 import ne.fnfal113.fnamplifications.gems.implementation.GemKeysEnum;
 import ne.fnfal113.fnamplifications.utils.Keys;
@@ -22,6 +23,8 @@ public abstract class AbstractGem extends SlimefunItem {
 
     private int chance;
 
+    private final ConfigManager configManager = FNAmplifications.getConfigManager();
+
     public AbstractGem(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         this(itemGroup, item, recipeType, recipe, 0);
     }
@@ -32,19 +35,28 @@ public abstract class AbstractGem extends SlimefunItem {
         super(itemGroup, item, recipeType, recipe);
 
         initializeSettings(defaultChance);
+
         GemKeysEnum.GEM_KEYS.getGemKeyList().add(Keys.createKey(this.getId().toLowerCase()));
     }
 
     public void initializeSettings(int defaultChance) {
         // only gem with default chance above 0 but must also implement gem upgrade interface
-        if(defaultChance != 0) { 
+        if (defaultChance != 0) { 
             setConfigChanceValues(defaultChance);
+            
             setConfigWorldSettings();
 
-            Utils.setGemTierLore(this.getItem(), this.getId(),
-                "chance", "%", "&e", "%", 4, "gem-settings");
+            Utils.setGemTierLore(
+                (ItemStack) Utils.getField(SlimefunItem.class, "itemStackTemplate", this), 
+                this.getId(),
+                "chance", 
+                "%", 
+                "&e", 
+                "%", 
+                4, 
+                "gem-settings");
             
-            this.chance = FNAmplifications.getInstance().getConfigManager().getCustomConfig("gem-settings").getInt(this.getId() + "." + "chance");
+            this.chance = this.configManager.getCustomConfig("gem-settings").getInt(this.getId() + "." + "chance");
         } else {
             setConfigWorldSettings();
         }
@@ -56,7 +68,7 @@ public abstract class AbstractGem extends SlimefunItem {
      */
     public void setConfigChanceValues(int chance) {
         try {
-            FNAmplifications.getInstance().getConfigManager().initializeConfig(this.getId(), "chance", chance, "gem-settings");
+            this.configManager.initializeConfig(this.getId(), "chance", chance, "gem-settings");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -68,7 +80,7 @@ public abstract class AbstractGem extends SlimefunItem {
     public void setConfigWorldSettings() {
         try {
             for (World world: Bukkit.getWorlds()) {
-                FNAmplifications.getInstance().getConfigManager().initializeConfig(this.getId() + "." + "world-settings", world.getName() + "_enable", true, "gem-settings");
+                this.configManager.initializeConfig(this.getId() + "." + "world-settings", world.getName() + "_enable", true, "gem-settings");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -81,7 +93,7 @@ public abstract class AbstractGem extends SlimefunItem {
      * @return true if gem is enabled in the current world
      */
     public boolean isEnabledInCurrentWorld(String worldName) {
-        return FNAmplifications.getInstance().getConfigManager().getCustomConfig("gem-settings").getBoolean(this.getId() + "." + "world-settings" + "." + worldName + "_enable");
+        return this.configManager.getCustomConfig("gem-settings").getBoolean(this.getId() + "." + "world-settings" + "." + worldName + "_enable");
     }
 
     /**

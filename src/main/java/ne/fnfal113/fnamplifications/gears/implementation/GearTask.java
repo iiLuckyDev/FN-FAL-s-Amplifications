@@ -21,11 +21,11 @@ import java.util.UUID;
 
 public class GearTask {
 
-    private final NamespacedKey storageKey;
+    private final NamespacedKey currentXpValueKey;
 
-    private final NamespacedKey storageKey2;
+    private final NamespacedKey currentArmorLevelKey;
 
-    private final NamespacedKey storageKey3;
+    private final NamespacedKey nextLevelXpKey;
 
     private final int startingProgress;
 
@@ -37,38 +37,43 @@ public class GearTask {
 
     private final List<UUID> uuidList = new ArrayList<>();
 
-    public GearTask(NamespacedKey key1, NamespacedKey key2, NamespacedKey key3, ItemStack item, int startingProgress, int incrementProgress, int maxLevel) {
-        this.storageKey = key1;
-        this.storageKey2 = key2;
-        this.storageKey3 = key3;
+    public GearTask(NamespacedKey currentXpValueKey, NamespacedKey currentArmorLevelKey, NamespacedKey nextLevelXpValueKey, 
+        ItemStack item, int startingProgress, int incrementProgress, int maxLevel) 
+    {
+        this.currentXpValueKey = currentXpValueKey;
+        this.currentArmorLevelKey = currentArmorLevelKey;
+        this.nextLevelXpKey = nextLevelXpValueKey;
         this.itemStack = item;
         this.startingProgress = startingProgress;
         this.incrementProgress = incrementProgress;
         this.maxLevel = maxLevel;
     }
 
-    public String getProgressBar(int current, int max, int totalBars, char symbol, ChatColor completedColor,
-        ChatColor notCompletedColor) {
-        float percent = (float) current / max; // divide the current progress to the max value to get the percent
-        int progressBars = (int) (totalBars * percent); // multiply the percent value to total progress bars to get current bar amount
+    public String getProgressBar(int current, int max, int totalBars, char symbol, 
+        ChatColor completedColor, ChatColor notCompletedColor) 
+    {
+        // divide the current progress to the max value to get the percent
+        float percent = (float) current / max; 
+        // multiply the percent value to total progress bars to get current bar amount
+        int progressBars = (int) (totalBars * percent); 
 
         // repeat the progress bar icon with the initial value
         // then get the difference between the initial value and total progress bars to get not completed bars
         return Strings.repeat("" + completedColor + symbol, progressBars)
-                + Strings.repeat("" + notCompletedColor + symbol, totalBars - progressBars);
+            + Strings.repeat("" + notCompletedColor + symbol, totalBars - progressBars);
     }
 
     public boolean onHit(EntityDamageByEntityEvent event, Player p, ItemStack item) {
         ItemMeta meta = item.getItemMeta();
         PersistentDataContainer progress = meta.getPersistentDataContainer();
 
-        int xpAmount = progress.getOrDefault(getStorageKey(), PersistentDataType.INTEGER, 0);
-        int armorLevel = progress.getOrDefault(getStorageKey2(), PersistentDataType.INTEGER, 0);
-        int maxXpReq = progress.getOrDefault(getStorageKey3(), PersistentDataType.INTEGER, getStartingProgress());
-        int xpAmountIncremented = xpAmount + 1;
+        int currentXpValue = progress.getOrDefault(getCurrentXpValueKey(), PersistentDataType.INTEGER, 0);
+        int currentArmorlevel = progress.getOrDefault(getCurrentArmorLevelKey(), PersistentDataType.INTEGER, 0);
+        int nextLevelXpValue = progress.getOrDefault(getNextLevelXpKey(), PersistentDataType.INTEGER, getStartingProgress());
+        int currentXpValueIncremented = currentXpValue + 1;
 
-        if(isMaxLevel(armorLevel)){
-            if(!uuidList.contains(p.getUniqueId())) {
+        if (isMaxLevel(currentArmorlevel)) {
+            if (! uuidList.contains(p.getUniqueId())) {
                 Utils.sendMessage(meta.getDisplayName() + " has reached max level!", p);
 
                 uuidList.add(p.getUniqueId());
@@ -77,30 +82,32 @@ public class GearTask {
             return false;
         }
 
-        progress.set(getStorageKey(), PersistentDataType.INTEGER, xpAmountIncremented);
+        progress.set(getCurrentXpValueKey(), PersistentDataType.INTEGER, currentXpValueIncremented);
 
         List<String> lore = meta.getLore();
 
-        if (xpAmountIncremented >= 0) {
-           updateArmour(armorLevel, xpAmountIncremented, maxXpReq, item, meta, lore);
+        if (currentXpValueIncremented >= 0) {
+           updateArmour(currentArmorlevel, currentXpValueIncremented, nextLevelXpValue, item, meta, lore);
         }
 
-        if (xpAmountIncremented == maxXpReq) {
-            return levelUpArmour(armorLevel, xpAmountIncremented, maxXpReq, item, meta, progress, lore, p);
+        if (currentXpValueIncremented == nextLevelXpValue) {
+            return levelUpArmour(currentArmorlevel, currentXpValueIncremented, nextLevelXpValue, item, meta, progress, lore, p);
         }
 
         return false;
     }
 
-    public void updateArmour(int armorLevel, int xpAmountIncremented, int maxXpReq, ItemStack item, ItemMeta meta, List<String> lore) {
+    public void updateArmour(int armorLevel, int currentXpValueIncremented, int nextLevelXpValue, ItemStack item, ItemMeta meta, List<String> lore) {
         lore.set(7, Utils.colorTranslator("&eLevel: ") + armorLevel);
         lore.set(8, Utils.colorTranslator("&eProgress:"));
-        lore.set(9, Utils.colorTranslator("&7[&r" + getProgressBar(xpAmountIncremented, maxXpReq, 10, '■', ChatColor.YELLOW, ChatColor.GRAY) + "&7]"));
+        lore.set(9, Utils.colorTranslator("&7[&r" + 
+            getProgressBar(currentXpValueIncremented, nextLevelXpValue, 10, '■', ChatColor.YELLOW, ChatColor.GRAY) + "&7]")
+        );
 
-        if(WeaponArmorEnum.CHESTPLATE.isTagged(getItemStack().getType()) && armorLevel == 30 && xpAmountIncremented == 1) {
+        if (WeaponArmorEnum.CHESTPLATE.isTagged(getItemStack().getType()) && armorLevel == 30 && currentXpValueIncremented == 1) {
             lore.add(10,"");
             lore.add(11, ChatColor.RED + "◬◬◬◬◬◬| " + ChatColor.LIGHT_PURPLE + ""
-                    + ChatColor.BOLD + "Effects " + ChatColor.GOLD + "|◬◬◬◬◬◬");
+                + ChatColor.BOLD + "Effects " + ChatColor.GOLD + "|◬◬◬◬◬◬");
             lore.add(12, ChatColor.GREEN + "Permanent Saturation");
         }
 
@@ -108,8 +115,10 @@ public class GearTask {
         item.setItemMeta(meta);
     }
 
-    public boolean levelUpArmour(int armorLevel, int xpAmountIncremented, int maxXpReq, ItemStack item, ItemMeta meta, PersistentDataContainer progress, List<String> lore, Player p) {
-        if(isMaxLevel(armorLevel)) {
+    public boolean levelUpArmour(int armorLevel, int currentXpValueIncremented, int nextLevelXpValue, 
+        ItemStack item, ItemMeta meta, PersistentDataContainer progress, List<String> lore, Player p) 
+    {
+        if (isMaxLevel(armorLevel)) {
             Utils.sendMessage(meta.getDisplayName() + " has reached max level!", p);
 
             return false;
@@ -118,15 +127,17 @@ public class GearTask {
         int currentArmorLevel = armorLevel + 1;
 
         // reset armor pdc xp to 0
-        progress.set(getStorageKey(), PersistentDataType.INTEGER, 0);
+        progress.set(getCurrentXpValueKey(), PersistentDataType.INTEGER, 0);
         // increase armor pdc level by 1
-        progress.set(getStorageKey2(), PersistentDataType.INTEGER, currentArmorLevel);
-        // increase armor pdc max xp requirement
-        progress.set(getStorageKey3(), PersistentDataType.INTEGER, maxXpReq + getIncrementProgress());
+        progress.set(getCurrentArmorLevelKey(), PersistentDataType.INTEGER, currentArmorLevel);
+        // increase armor pdc next level xp requirement
+        progress.set(getNextLevelXpKey(), PersistentDataType.INTEGER, nextLevelXpValue + getIncrementProgress());
 
         lore.set(7, Utils.colorTranslator("&eLevel: ") + currentArmorLevel);
         lore.set(8, Utils.colorTranslator("&eProgress:"));
-        lore.set(9, Utils.colorTranslator("&7[&r" + getProgressBar(xpAmountIncremented, maxXpReq, 10, '■', ChatColor.YELLOW, ChatColor.GRAY) + "&7]"));
+        lore.set(9, Utils.colorTranslator("&7[&r" + 
+            getProgressBar(currentXpValueIncremented, nextLevelXpValue, 10, '■', ChatColor.YELLOW, ChatColor.GRAY) + "&7]")
+        );
 
         meta.setLore(lore);
         item.setItemMeta(meta);
@@ -146,16 +157,16 @@ public class GearTask {
         p.playSound(p.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 1 , 1);
     }
 
-    public NamespacedKey getStorageKey() {
-        return storageKey;
+    public NamespacedKey getCurrentXpValueKey() {
+        return currentXpValueKey;
     }
 
-    public NamespacedKey getStorageKey2() {
-        return storageKey2;
+    public NamespacedKey getCurrentArmorLevelKey() {
+        return currentArmorLevelKey;
     }
 
-    public NamespacedKey getStorageKey3() {
-        return storageKey3;
+    public NamespacedKey getNextLevelXpKey() {
+        return nextLevelXpKey;
     }
 
     public int getStartingProgress() {

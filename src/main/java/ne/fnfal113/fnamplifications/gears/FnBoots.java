@@ -13,8 +13,8 @@ import org.bukkit.inventory.ItemStack;
 public class FnBoots extends AbstractGears {
 
     public FnBoots(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
-        super(itemGroup, item, recipeType, recipe, Keys.FN_GEAR_BOOTS, Keys.FN_GEAR_BOOTS_LEVEL, Keys.FN_GEAR_BOOTS_FINAL,
-                25, 100, 35, 4, EquipmentSlot.FEET);
+        super(itemGroup, item, recipeType, recipe, Keys.FN_GEAR_BOOTS, Keys.FN_GEAR_BOOTS_CURRENT_LEVEL, Keys.FN_GEAR_BOOTS_MAX_LEVEL,
+            25, 100, 35, 4, EquipmentSlot.FEET);
     }
 
 }

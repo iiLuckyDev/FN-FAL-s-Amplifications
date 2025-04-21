@@ -79,7 +79,7 @@ public final class FNAmplifications extends JavaPlugin implements SlimefunAddon 
         return "https://github.com/FN-FAL113/FN-FAL-s-Amplifications/issues";
     }
 
-    public ConfigManager getConfigManager() {
+    public static ConfigManager getConfigManager() {
         return instance.configManager;
     }
 

@@ -24,7 +24,7 @@ public class LadderTask {
     public LadderTask() {}
 
     private void cancelLadderPlace(Block relativeBlock, Block autoLadder) {
-        if(autoLadder.getType() == Material.AIR) {
+        if (autoLadder.getType() == Material.AIR) {
             relativeBlock.setType(Material.AIR);
         }
     }
@@ -32,13 +32,15 @@ public class LadderTask {
     public void doPlaceTask(PlayerInteractEvent event, Block clickedBlock, BlockFace blockFace) {
         AtomicReference<BlockData> ladderData = new AtomicReference<>();
 
-        if(clickedBlock.getType() == Material.AIR) return;
+        if (clickedBlock.getType() == Material.AIR) return;
 
         // We get the placed ladder block data for later use when
         // adding the other ladders to set their block data (rotation, etc)
-        Bukkit.getScheduler().runTaskLater(FNAmplifications.getInstance(), () ->
-            ladderData.set(clickedBlock.getRelative(blockFace).getBlockData())
-        , 3L);
+        Bukkit.getScheduler().runTaskLater(
+            FNAmplifications.getInstance(),
+            () -> ladderData.set(clickedBlock.getRelative(blockFace).getBlockData()),
+            3L
+        );
 
         AtomicInteger i = new AtomicInteger(0);
         AtomicBoolean shouldPlaceAbove = new AtomicBoolean(true);
@@ -51,14 +53,14 @@ public class LadderTask {
             boolean isAbovePlaceable = relativeUp.getType() != Material.AIR && relativeUp.getRelative(blockFace).getType() == Material.AIR;
             boolean isBottomPlaceable = relativeBottom.getType() != Material.AIR && relativeBottom.getRelative(blockFace).getType() == Material.AIR;
             
-            if(i.get() != 0) {
-                if(isAbovePlaceable && shouldPlaceAbove.get()) {
+            if (i.get() != 0) {
+                if (isAbovePlaceable && shouldPlaceAbove.get()) {
                     relativeUp.getRelative(blockFace).setType(Material.LADDER);
                 } else if(shouldPlaceAbove.get()) {
                     shouldPlaceAbove.set(false);
                 }
 
-                if(isBottomPlaceable && shouldPlaceBelow.get()) {
+                if (isBottomPlaceable && shouldPlaceBelow.get()) {
                     relativeBottom.getRelative(blockFace).setType(Material.LADDER);
                 } else if(shouldPlaceBelow.get()) {
                     shouldPlaceBelow.set(false);
@@ -84,7 +86,7 @@ public class LadderTask {
                 }, 3L);
             }
 
-            if(i.get() == -8) {
+            if (i.get() == -8) {
                 task.cancel();
 
                 return;
@@ -103,11 +105,11 @@ public class LadderTask {
         // remove any ladder relative (above/below) the auto ladder block
         for (int i = 0; i >= -8; i--) {
             // skip sfBlock
-            if(i != 0) {
+            if (i != 0) {
                 if (!skipRelativeBottomLadder && sfBlock.getRelative(0, i, 0).getType() == Material.LADDER) {
                     sfBlock.getRelative(0, i, 0).setType(Material.AIR);
                 } else {
-                     // skip any other relative blocks when this is fired
+                    // skip any other relative blocks when this is fired
                     skipRelativeBottomLadder = true;
                 }
 
@@ -122,9 +124,10 @@ public class LadderTask {
 
         // finally remove auto ladder block
         BlockStorage.clearBlockInfo(sfBlock);
+
         sfBlock.setType(Material.AIR);
 
-        if(player.getInventory().firstEmpty() == -1) {
+        if (player.getInventory().firstEmpty() == -1) {
             player.getWorld().dropItemNaturally(player.getLocation(), sfItem.getItem().clone());
             
             return;

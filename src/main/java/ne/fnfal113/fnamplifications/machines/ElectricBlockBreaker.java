@@ -23,6 +23,7 @@ import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
 
 import ne.fnfal113.fnamplifications.FNAmplifications;
+import ne.fnfal113.fnamplifications.config.ConfigManager;
 import ne.fnfal113.fnamplifications.utils.Utils;
 
 import org.apache.commons.lang.Validate;
@@ -51,13 +52,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
-@SuppressWarnings("deprecation")
 public class ElectricBlockBreaker extends SlimefunItem implements InventoryBlock, EnergyNetComponent {
 
     public static final Map<Location, BlockBreakerCache> CACHE_MAP = new HashMap<>();
 
-    public static final int CHANGE_MODE = 0;
-    public static final int ON_OFF = 8;
     private static final ItemStack VERSIONED_AMETHYST;
 
     private static final ItemStack NOT_OPERATING = CustomItemStack.create(Material.ORANGE_STAINED_GLASS_PANE,
@@ -99,9 +97,6 @@ public class ElectricBlockBreaker extends SlimefunItem implements InventoryBlock
         "Click to change"
     );
 
-    public static final ItemStack DUMMY_PICK = new ItemStack(Material.DIAMOND_PICKAXE);
-    public static final ItemStack DUMMY_SILK_PICK = new ItemStack(Material.DIAMOND_PICKAXE);
-
     private static final Set<Material> ILLEGAL = EnumSet.of(
         Material.BEDROCK,
         Material.END_PORTAL_FRAME,
@@ -109,6 +104,14 @@ public class ElectricBlockBreaker extends SlimefunItem implements InventoryBlock
         Material.BARRIER,
         Material.END_GATEWAY
     );
+
+    public static final int CHANGE_MODE_UI_INDEX = 0;
+    public static final int ON_OFF_UI_INDEX = 8;
+
+    public static final ItemStack DUMMY_PICK = new ItemStack(Material.DIAMOND_PICKAXE);
+    public static final ItemStack DUMMY_SILK_PICK = new ItemStack(Material.DIAMOND_PICKAXE);
+
+    private final ConfigManager configManager = FNAmplifications.getConfigManager();
 
     static {
         // Amethyst
@@ -120,7 +123,9 @@ public class ElectricBlockBreaker extends SlimefunItem implements InventoryBlock
 
         // Silk
         ItemMeta meta = DUMMY_SILK_PICK.getItemMeta();
+        
         meta.addEnchant(Enchantment.SILK_TOUCH, 1, true);
+        
         DUMMY_SILK_PICK.setItemMeta(meta);
 
         // Illegal Materials
@@ -137,9 +142,20 @@ public class ElectricBlockBreaker extends SlimefunItem implements InventoryBlock
     public ElectricBlockBreaker(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, int tickRate) {
         super(itemGroup, item, recipeType, recipe);
 
-        FNAmplifications.getInstance().getConfigManager().initializeConfig(this.getId(), "tickrate", tickRate, "block-breaker-tickrate");
-        setRate();
-        Utils.setLoreByConfigValue(this.getItem(), this.getId(), "tickrate", "ticks", "&e", " ticks", "block-breaker-tickrate");
+        this.configManager.initializeConfig(this.getId(), "tickrate", tickRate, "block-breaker-tickrate");
+        
+        this.rate = this.configManager.getCustomConfig("block-breaker-tickrate").getInt(this.getId() + "." + "tickrate");
+        
+        Utils.setLoreByConfigValue(
+            (ItemStack) Utils.getField(SlimefunItem.class, "itemStackTemplate", this), 
+            this.getId(), 
+            "tickrate", 
+            "ticks", 
+            "&e", 
+            " ticks", 
+            "block-breaker-tickrate"
+        );
+        
         addItemHandler(
             new BlockTicker() {
                 @Override
@@ -193,30 +209,38 @@ public class ElectricBlockBreaker extends SlimefunItem implements InventoryBlock
             @Override
             public void newInstance(@Nonnull BlockMenu menu, @Nonnull Block b) {
                 String breakMode = BlockStorage.getLocationInfo(b.getLocation(), "breakBlockNaturally");
+                
                 String isRunning = BlockStorage.getLocationInfo(b.getLocation(), "toggled_On");
+                
                 String owner = BlockStorage.getLocationInfo(b.getLocation(), "owner");
 
                 // Mode
                 boolean currentMode = false;
+
                 if (breakMode != null) {
                     currentMode = Boolean.parseBoolean(breakMode);
                 }
 
-                menu.replaceExistingItem(CHANGE_MODE, currentMode ? BREAK_BLOCK_NATURALLY : DROP_BLOCK_NATURALLY);
-                menu.addMenuClickHandler(CHANGE_MODE, (p, slot, item, action) -> {
+                menu.replaceExistingItem(CHANGE_MODE_UI_INDEX, currentMode ? BREAK_BLOCK_NATURALLY : DROP_BLOCK_NATURALLY);
+                
+                menu.addMenuClickHandler(CHANGE_MODE_UI_INDEX, (p, slot, item, action) -> {
                     toggleMode(menu);
+
                     return false;
                 });
 
                 // isRunning
                 boolean isOn = false;
+                
                 if (isRunning != null) {
                     isOn = Boolean.parseBoolean(isRunning);
                 }
 
-                menu.replaceExistingItem(ON_OFF, isOn ? TOGGLED_ON : TOGGLED_OFF);
-                menu.addMenuClickHandler(ON_OFF, (p, slot, item, action) -> {
+                menu.replaceExistingItem(ON_OFF_UI_INDEX, isOn ? TOGGLED_ON : TOGGLED_OFF);
+                
+                menu.addMenuClickHandler(ON_OFF_UI_INDEX, (p, slot, item, action) -> {
                     toggleOnOrOff(menu);
+
                     return false;
                 });
 
@@ -227,70 +251,81 @@ public class ElectricBlockBreaker extends SlimefunItem implements InventoryBlock
                 }
 
                 BlockBreakerCache cache = new BlockBreakerCache(0, currentMode, isOn, ownerUUID);
+                
                 CACHE_MAP.put(menu.getLocation(), cache);
-
             }
         };
     }
 
     public void onTick(@Nonnull Block b) {
         BlockMenu invMenu = BlockStorage.getInventory(b);
+        
         if (!(b.getBlockData() instanceof Dispenser)) {
             return;
         }
-        Dispenser dispenser = (Dispenser) b.getBlockData();
-        Block targetBlock = b.getRelative(dispenser.getFacing());
-        World targetLocation = targetBlock.getWorld();
 
+        Dispenser dispenser = (Dispenser) b.getBlockData();
+        
+        Block targetBlock = b.getRelative(dispenser.getFacing());
+        
+        World targetLocation = targetBlock.getWorld();
 
         BlockBreakerCache cache = CACHE_MAP.get(b.getLocation());
 
-        if (getCharge(b.getLocation()) > 0) {
-            invMenu.replaceExistingItem(4, NOT_RUNNING);
-            if (cache.isOn) {
-                invMenu.replaceExistingItem(4, NOT_OPERATING);
+        if (getCharge(b.getLocation()) <= 0) {
+            return;
+        }
 
-                if (targetBlock.getType().isSolid() && !ILLEGAL.contains(targetBlock.getType()) && !(BlockStorage.hasBlockInfo(targetBlock))) {
+        invMenu.replaceExistingItem(4, NOT_RUNNING);
+            
+        if (!cache.isOn) {
+            return;
+        }
 
-                    if (!Slimefun.getProtectionManager().hasPermission(
-                        Bukkit.getOfflinePlayer(cache.owner),
-                        targetBlock,
-                        Interaction.BREAK_BLOCK)
-                    ) {
-                        return;
-                    }
+        invMenu.replaceExistingItem(4, NOT_OPERATING);
 
-                    int progress = cache.progress;
-
-                    if (invMenu.hasViewer()) {
-                        invMenu.replaceExistingItem(4, CustomItemStack.create(Material.GREEN_STAINED_GLASS_PANE, "&aOperating!",
-                            "", "&bRate: " + this.rate + " ticks per Block", "&2Breaking block at rate: " + progress
-                            + "/" + this.rate));
-                    }
-
-                    if (progress >= this.rate) {
-                        progress = 0;
-                        if (cache.breakNaturally) {
-                            targetBlock.breakNaturally(DUMMY_PICK);
-                        } else {
-                            ItemStack vanilla = new ItemStack(targetBlock.getType());
-                            if (vanilla.isSimilar(VERSIONED_AMETHYST)) {
-                                targetBlock.setType(Material.AIR);
-                            } else {
-                                targetBlock.breakNaturally(DUMMY_SILK_PICK);
-                            }
-                        }
-                        targetLocation.playSound(b.getLocation().add(0.5, 0.5, 0.5), Sound.UI_STONECUTTER_TAKE_RESULT, 1, 1);
-                        b.getWorld().spawnParticle(VersionedParticle.SMOKE, b.getLocation().add(1, 1, 1), 2, 0.1, 0.1, 0.1);
-                    } else {
-                        progress++;
-                        targetLocation.playSound(b.getLocation().add(0.5, 0.5, 0.5), Sound.BLOCK_STONE_HIT, 1, 1);
-                    }
-                    cache.progress = progress;
-                    CACHE_MAP.put(invMenu.getLocation(), cache);
-                    takeCharge(b.getLocation());
-                }
+        if (targetBlock.getType().isSolid() && ! ILLEGAL.contains(targetBlock.getType()) && !(BlockStorage.hasBlockInfo(targetBlock))) {
+            if (!Slimefun.getProtectionManager().hasPermission(Bukkit.getOfflinePlayer(cache.owner), targetBlock, Interaction.BREAK_BLOCK)) {
+                return;
             }
+
+            int progress = cache.progress;
+
+            if (invMenu.hasViewer()) {
+                invMenu.replaceExistingItem(4, CustomItemStack.create(Material.GREEN_STAINED_GLASS_PANE, "&aOperating!",
+                    "", "&bRate: " + this.rate + " ticks per Block", "&2Breaking block at rate: " + progress
+                    + "/" + this.rate));
+            }
+
+            if (progress >= this.rate) {
+                progress = 0;
+
+                if (cache.breakNaturally) {
+                    targetBlock.breakNaturally(DUMMY_PICK);
+                } else {
+                    ItemStack itemstack = new ItemStack(targetBlock.getType());
+                    
+                    if (itemstack.isSimilar(VERSIONED_AMETHYST)) {
+                        targetBlock.setType(Material.AIR);
+                    } else {
+                        targetBlock.breakNaturally(DUMMY_SILK_PICK);
+                    }
+                }
+
+                targetLocation.playSound(b.getLocation().add(0.5, 0.5, 0.5), Sound.UI_STONECUTTER_TAKE_RESULT, 1, 1);
+                
+                b.getWorld().spawnParticle(VersionedParticle.SMOKE, b.getLocation().add(1, 1, 1), 2, 0.1, 0.1, 0.1);
+            } else {
+                progress++;
+
+                targetLocation.playSound(b.getLocation().add(0.5, 0.5, 0.5), Sound.BLOCK_STONE_HIT, 1, 1);
+            }
+            
+            cache.progress = progress;
+            
+            CACHE_MAP.put(invMenu.getLocation(), cache);
+            
+            takeCharge(b.getLocation());
         }
     }
 
@@ -298,9 +333,12 @@ public class ElectricBlockBreaker extends SlimefunItem implements InventoryBlock
         final Location location = blockMenu.getLocation();
         final BlockBreakerCache cache = CACHE_MAP.get(location);
 
-        cache.breakNaturally = !cache.breakNaturally;
+        cache.breakNaturally = ! cache.breakNaturally;
+        
         BlockStorage.addBlockInfo(location, "breakBlockNaturally", String.valueOf(cache.breakNaturally));
-        blockMenu.replaceExistingItem(CHANGE_MODE, cache.breakNaturally ? BREAK_BLOCK_NATURALLY : DROP_BLOCK_NATURALLY);
+        
+        blockMenu.replaceExistingItem(CHANGE_MODE_UI_INDEX, cache.breakNaturally ? BREAK_BLOCK_NATURALLY : DROP_BLOCK_NATURALLY);
+        
         CACHE_MAP.put(location, cache);
     }
 
@@ -309,13 +347,12 @@ public class ElectricBlockBreaker extends SlimefunItem implements InventoryBlock
         final BlockBreakerCache cache = CACHE_MAP.get(location);
 
         cache.isOn = !cache.isOn;
+        
         BlockStorage.addBlockInfo(location, "toggled_On", String.valueOf(cache.isOn));
-        blockMenu.replaceExistingItem(ON_OFF, cache.isOn ? TOGGLED_ON : TOGGLED_OFF);
+        
+        blockMenu.replaceExistingItem(ON_OFF_UI_INDEX, cache.isOn ? TOGGLED_ON : TOGGLED_OFF);
+        
         CACHE_MAP.put(location, cache);
-    }
-
-    public final void setRate() {
-        this.rate = FNAmplifications.getInstance().getConfigManager().getCustomConfig("block-breaker-tickrate").getInt(this.getId() + "." + "tickrate");
     }
 
     @Nonnull
@@ -384,17 +421,17 @@ public class ElectricBlockBreaker extends SlimefunItem implements InventoryBlock
         }
     }
 
-public static class BlockBreakerCache {
-    private int progress;
-    private boolean breakNaturally;
-    private boolean isOn;
-    private final UUID owner;
+    public static class BlockBreakerCache {
+        private int progress;
+        private boolean breakNaturally;
+        private boolean isOn;
+        private final UUID owner;
 
-    public BlockBreakerCache(int progress, boolean breakNaturally, boolean isOn, @Nullable UUID owner) {
-        this.progress = progress;
-        this.breakNaturally = breakNaturally;
-        this.isOn = isOn;
-        this.owner = owner;
+        public BlockBreakerCache(int progress, boolean breakNaturally, boolean isOn, @Nullable UUID owner) {
+            this.progress = progress;
+            this.breakNaturally = breakNaturally;
+            this.isOn = isOn;
+            this.owner = owner;
+        }
     }
-}
 }

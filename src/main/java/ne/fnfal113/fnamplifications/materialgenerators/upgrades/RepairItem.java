@@ -40,11 +40,11 @@ public class RepairItem extends AbstractUpgrades {
         if(generatorCondition + addCondition > 100) {
             BlockStorage.addBlockInfo(sfBlock, "generator_status", "100");
             
-            matGen.getGeneratorCondition().put(new BlockPosition(sfBlock.getLocation()), 100);
+            matGen.getGeneratorConditionMap().put(new BlockPosition(sfBlock.getLocation()), 100);
         } else {
             BlockStorage.addBlockInfo(sfBlock.getLocation(), "generator_status", String.valueOf(generatorCondition + addCondition));
             
-            matGen.getGeneratorCondition().put(new BlockPosition(sfBlock.getLocation()), generatorCondition + addCondition);
+            matGen.getGeneratorConditionMap().put(new BlockPosition(sfBlock.getLocation()), generatorCondition + addCondition);
         }
 
         return true;

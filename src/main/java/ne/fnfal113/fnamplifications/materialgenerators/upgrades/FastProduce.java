@@ -31,7 +31,7 @@ public class FastProduce extends AbstractUpgrades {
         }
 
         // seconds * (mc ticks per second / sf ticker delay)
-        matGen.getGeneratorFastProduce().put(new BlockPosition(sfBlock.getLocation()),
+        matGen.getGeneratorFastProduceMap().put(new BlockPosition(sfBlock.getLocation()),
                 new CustomMaterialGenerator.FastProduceCache(1.75, 0, (int) (1800 * (20.0 / Slimefun.getTickerTask().getTickRate()))));
 
         BlockStorage.addBlockInfo(sfBlock.getLocation(), "fast_produce_multiplier", "1.75");

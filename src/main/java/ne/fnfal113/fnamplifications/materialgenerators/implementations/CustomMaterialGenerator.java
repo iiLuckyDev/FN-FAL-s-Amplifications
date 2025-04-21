@@ -46,11 +46,11 @@ import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
 
 public class CustomMaterialGenerator extends SlimefunItem implements InventoryBlock {
 
-    private final Map<BlockPosition, Integer> generatorProgress = new HashMap<>();
+    private final Map<BlockPosition, Integer> generatorProgressMap = new HashMap<>();
 
-    private final Map<BlockPosition, Integer> generatorCondition = new HashMap<>();
+    private final Map<BlockPosition, Integer> generatorConditionMap = new HashMap<>();
 
-    private final Map<BlockPosition, FastProduceCache> generatorFastProduce = new HashMap<>();
+    private final Map<BlockPosition, FastProduceCache> generatorFastProduceMap = new HashMap<>();
 
     private final int sfTickerDelay = Slimefun.getTickerTask().getTickRate();
 
@@ -87,8 +87,19 @@ public class CustomMaterialGenerator extends SlimefunItem implements InventoryBl
     public CustomMaterialGenerator(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, int tickRate) {
         super(itemGroup, item, recipeType, recipe);
 
-        FNAmplifications.getInstance().getConfigManager().initializeConfig(item.getItemId(), "tickrate" , tickRate, "material-gen-tickrate");
-        Utils.setLoreByConfigValue(this.getItem(), this.getId(), "tickrate", "ticks", "&6", " ticks", "material-gen-tickrate");
+        FNAmplifications.getConfigManager().initializeConfig(item.getItemId(), "tickrate" , tickRate, "material-gen-tickrate");
+        
+        // Update SlimefunItem Itemstack through reflections since
+        // #getItem or #item method returns a cloned delegate Itemstack
+        Utils.setLoreByConfigValue(     
+            (ItemStack) Utils.getField(SlimefunItem.class, "itemStackTemplate", this), 
+            this.getId(), 
+            "tickrate", 
+            "ticks", 
+            "&6", 
+            " ticks", 
+            "material-gen-tickrate"
+        );
 
         createPreset(this, getInventoryTitle(), blockMenuPreset -> {
             for (int i = 0; i < 9; i++) {
@@ -97,60 +108,65 @@ public class CustomMaterialGenerator extends SlimefunItem implements InventoryBl
             
             blockMenuPreset.addItem(4, NOT_GENERATING);
             
-            if(breakOverTime) {
+            if (breakOverTime) {
                 blockMenuPreset.addItem(0, CONDITION);
             }
         });
 
         addItemHandler(
-                new BlockPlaceHandler(false) {
-                    @Override
-                    public void onPlayerPlace(@Nonnull BlockPlaceEvent e) {
-                        if(breakOverTime) {
-                            BlockStorage.addBlockInfo(e.getBlock().getLocation(), "generator_status",
-                            "100");
-                            getGeneratorCondition().put(new BlockPosition(e.getBlock().getLocation()), 100);
-                        }
+            new BlockPlaceHandler(false) {
+                @Override
+                public void onPlayerPlace(@Nonnull BlockPlaceEvent e) {
+                    if(breakOverTime) {
+                        BlockStorage.addBlockInfo(e.getBlock().getLocation(), "generator_status",
+                        "100");
+                        getGeneratorConditionMap().put(new BlockPosition(e.getBlock().getLocation()), 100);
                     }
-                },
-                new BlockBreakHandler(false, false) {
-                    @Override
-                    @SuppressWarnings("ConstantConditions")
-                    public void onPlayerBreak(@Nonnull BlockBreakEvent e, @Nonnull ItemStack item, @Nonnull List<ItemStack> drops) {
-                        if(dropBrokenVariantOnBreak) {
-                            e.setDropItems(false);
-                            e.setCancelled(true);
+                }
+            },
+            new BlockBreakHandler(false, false) {
+                @Override
+                public void onPlayerBreak(@Nonnull BlockBreakEvent e, @Nonnull ItemStack item, @Nonnull List<ItemStack> drops) {
+                    if(dropBrokenVariantOnBreak) {
+                        e.setDropItems(false);
+                        e.setCancelled(true);
 
-                            e.getBlock().setType(Material.AIR);
-                            e.getBlock().getWorld().dropItemNaturally(e.getBlock().getLocation(),
-                                    SlimefunItem.getById(BlockStorage.getLocationInfo(e.getBlock().getLocation(), "id") + "_BROKEN").getItem());    
-                        }
-                        
-                        // remove from cache on block break
-                        getGeneratorCondition().remove(new BlockPosition(e.getBlock().getLocation()));
-                        getGeneratorProgress().remove(new BlockPosition(e.getBlock().getLocation()));
-                        getGeneratorFastProduce().remove(new BlockPosition(e.getBlock().getLocation()));
-
-                        BlockStorage.clearBlockInfo(e.getBlock().getLocation());
+                        e.getBlock().setType(Material.AIR);
+                        e.getBlock().getWorld().dropItemNaturally(
+                            e.getBlock().getLocation(),
+                            SlimefunItem.getById(BlockStorage.getLocationInfo(e.getBlock().getLocation(), "id") + "_BROKEN").getItem()
+                        );    
                     }
-                });
+                    
+                    // remove from cache on block break
+                    getGeneratorConditionMap().remove(new BlockPosition(e.getBlock().getLocation()));
+                    
+                    getGeneratorProgressMap().remove(new BlockPosition(e.getBlock().getLocation()));
+                    
+                    getGeneratorFastProduceMap().remove(new BlockPosition(e.getBlock().getLocation()));
+
+                    BlockStorage.clearBlockInfo(e.getBlock().getLocation());
+                }
+            }
+        );
     }
 
     @Override
     public void preRegister() {
         addItemHandler(
-                new BlockTicker() {
-                    @Override
-                    @ParametersAreNonnullByDefault
-                    public void tick(Block b, SlimefunItem sf, Config data) {
-                        CustomMaterialGenerator.this.tick(b);
-                    }
+            new BlockTicker() {
+                @Override
+                @ParametersAreNonnullByDefault
+                public void tick(Block b, SlimefunItem sf, Config data) {
+                    CustomMaterialGenerator.this.tick(b);
+                }
 
-                    @Override
-                    public boolean isSynchronized() {
-                        return true;
-                    }
-                });
+                @Override
+                public boolean isSynchronized() {
+                    return true;
+                }
+            }
+        );
     }
 
     public void tick(@Nonnull Block b) {
@@ -159,17 +175,17 @@ public class CustomMaterialGenerator extends SlimefunItem implements InventoryBl
         BlockPosition pos = new BlockPosition(b);
 
         // caching condition/status
-        if(breakOverTime && getGeneratorCondition().get(pos) == null) {
+        if (breakOverTime && getGeneratorConditionMap().get(pos) == null) {
             if (BlockStorage.getLocationInfo(b.getLocation(), "generator_status") != null) {
-                getGeneratorCondition().put(pos, Integer.parseInt(BlockStorage.getLocationInfo(b.getLocation(), "generator_status")));
+                getGeneratorConditionMap().put(pos, Integer.parseInt(BlockStorage.getLocationInfo(b.getLocation(), "generator_status")));
             } else { // for previously placed blocks before the new mat gen durability update
                 BlockStorage.addBlockInfo(b.getLocation(), "generator_status", "100");
-                getGeneratorCondition().put(pos, 100);
+                getGeneratorConditionMap().put(pos, 100);
             }
         }
 
         // caching fast produce
-        if(getGeneratorFastProduce().get(pos) == null) {
+        if (getGeneratorFastProduceMap().get(pos) == null) {
             FastProduceCache fastProduceCache = new FastProduceCache(0, 0, 0);
             
             if(BlockStorage.getLocationInfo(b.getLocation(), "fast_produce_multiplier") != null) {
@@ -179,28 +195,28 @@ public class CustomMaterialGenerator extends SlimefunItem implements InventoryBl
                 fastProduceCache.setMaxLifetime((int) (Integer.parseInt(BlockStorage.getLocationInfo(b.getLocation(), "fast_produce_max_lifetime")) * (20.0 / getSfTickerDelay())));
             }
 
-            getGeneratorFastProduce().put(pos, fastProduceCache);
+            getGeneratorFastProduceMap().put(pos, fastProduceCache);
         }
 
         if(targetBlock.getType() == Material.CHEST) {
             BlockState state = PaperLib.getBlockState(targetBlock, false).getState();
 
-            if(state instanceof InventoryHolder && (breakOverTime ? getGeneratorCondition().get(pos) > 0 : true)) {
+            if(state instanceof InventoryHolder && (breakOverTime ? getGeneratorConditionMap().get(pos) > 0 : true)) {
                 Inventory inv = ((InventoryHolder) state).getInventory();
                 
                 if(inv.firstEmpty() != -1) {
-                    double fastProduce = getGeneratorFastProduce().get(pos).getMultiplier() != 0 ? getGeneratorFastProduce().get(pos).getMultiplier() : 1;
-                    int progress = getGeneratorProgress().getOrDefault(pos, 0);
-                    int generatorCondition = getGeneratorCondition().getOrDefault(pos, 0);
-                    int tickRate = (int) (FNAmplifications.getInstance().getConfigManager().getCustomConfig("material-gen-tickrate").getInt(this.getId() + "." + "tickrate", 1) / fastProduce);
+                    double fastProduce = getGeneratorFastProduceMap().get(pos).getMultiplier() != 0 ? getGeneratorFastProduceMap().get(pos).getMultiplier() : 1;
+                    int progress = getGeneratorProgressMap().getOrDefault(pos, 0);
+                    int generatorCondition = getGeneratorConditionMap().getOrDefault(pos, 0);
+                    int tickRate = (int) (FNAmplifications.getConfigManager().getCustomConfig("material-gen-tickrate").getInt(this.getId() + "." + "tickrate", 1) / fastProduce);
 
                     if(invMenu.toInventory() != null && invMenu.hasViewer()) {
                         invMenu.replaceExistingItem(4, CustomItemStack.create(Material.GREEN_STAINED_GLASS_PANE, "&aGenerating Material",
                                 "", "&bMaterial: " + this.materialName,
-                                "&bDefault Rate: " + "" + ChatColor.GREEN + FNAmplifications.getInstance().getConfigManager().getCustomConfig("material-gen-tickrate").getInt(this.getId() + "." + "tickrate") + " &aticks", "",
+                                "&bDefault Rate: " + "" + ChatColor.GREEN + FNAmplifications.getConfigManager().getCustomConfig("material-gen-tickrate").getInt(this.getId() + "." + "tickrate") + " &aticks", "",
                                 "&2Progress: " + progress + "/" + tickRate, "",
-                                getGeneratorFastProduce().get(pos).getMultiplier() != 0 ? "&2Fast Produce Lifetime: " +
-                                        getGeneratorFastProduce().get(pos).getCurrentLifetime() + "/" + getGeneratorFastProduce().get(pos).getMaxLifetime() : "&2Fast Produce: &cInactive"
+                                getGeneratorFastProduceMap().get(pos).getMultiplier() != 0 ? "&2Fast Produce Lifetime: " +
+                                        getGeneratorFastProduceMap().get(pos).getCurrentLifetime() + "/" + getGeneratorFastProduceMap().get(pos).getMaxLifetime() : "&2Fast Produce: &cInactive"
                         ));
 
                         if(breakOverTime) { // update ui condition info if block breaks overtime
@@ -215,10 +231,10 @@ public class CustomMaterialGenerator extends SlimefunItem implements InventoryBl
                         progress = 0;
                         
                         // if generator condition is greater than 0, check
-                        if(breakOverTime && getGeneratorCondition().get(pos) != 0) {
+                        if(breakOverTime && getGeneratorConditionMap().get(pos) != 0) {
                             if (ThreadLocalRandom.current().nextInt(100) < 25) {
                                 BlockStorage.addBlockInfo(b.getLocation(), "generator_status", String.valueOf(generatorCondition - 1));
-                                getGeneratorCondition().put(pos, generatorCondition - 1);
+                                getGeneratorConditionMap().put(pos, generatorCondition - 1);
                             }
                         }
 
@@ -228,29 +244,30 @@ public class CustomMaterialGenerator extends SlimefunItem implements InventoryBl
                     }
 
                     // if generator has fast produce upgrade, check lifetime
-                    if(getGeneratorFastProduce().get(pos).getMultiplier() != 0) {
-                        int currentLifeTime = getGeneratorFastProduce().get(pos).getCurrentLifetime();
-                        int maxLifeTime = getGeneratorFastProduce().get(pos).getMaxLifetime();
+                    if(getGeneratorFastProduceMap().get(pos).getMultiplier() != 0) {
+                        int currentLifeTime = getGeneratorFastProduceMap().get(pos).getCurrentLifetime();
+                        int maxLifeTime = getGeneratorFastProduceMap().get(pos).getMaxLifetime();
 
                         if(currentLifeTime == maxLifeTime) {
-                            getGeneratorFastProduce().get(pos).reset();
+                            getGeneratorFastProduceMap().get(pos).reset();
 
                             BlockStorage.addBlockInfo(b.getLocation(), "fast_produce_multiplier", "0");
                             BlockStorage.addBlockInfo(b.getLocation(), "fast_produce_current_lifetime", "0");
                             BlockStorage.addBlockInfo(b.getLocation(), "fast_produce_max_lifetime", "0");
                         } else if(currentLifeTime >= 0) {
                             BlockStorage.addBlockInfo(b.getLocation(), "fast_produce_current_lifetime", String.valueOf(currentLifeTime + 1));
-                            getGeneratorFastProduce().get(pos).setCurrentLifetime(currentLifeTime + 1);
+                            getGeneratorFastProduceMap().get(pos).setCurrentLifetime(currentLifeTime + 1);
                         }
                     }
 
-                    getGeneratorProgress().put(pos, progress);
+                    getGeneratorProgressMap().put(pos, progress);
                 } else if(invMenu.toInventory() != null && invMenu.hasViewer()) { // if output chest is full
                     invMenu.replaceExistingItem(4, NOT_GENERATING_FULL);
                 }
 
             } else if(invMenu.toInventory() != null && invMenu.hasViewer()) { // if generator condition is 0 and target block is not an inventory holder
                 invMenu.replaceExistingItem(4, ChestMenuUtils.getBackground());
+                
                 if(breakOverTime) invMenu.replaceExistingItem(0, CONDITION_BROKEN);
             }
 
@@ -353,16 +370,16 @@ public class CustomMaterialGenerator extends SlimefunItem implements InventoryBl
         
     }
 
-    public Map<BlockPosition, Integer> getGeneratorProgress() {
-        return generatorProgress;
+    public Map<BlockPosition, Integer> getGeneratorProgressMap() {
+        return generatorProgressMap;
     }
 
-    public Map<BlockPosition, Integer> getGeneratorCondition() {
-        return generatorCondition;
+    public Map<BlockPosition, Integer> getGeneratorConditionMap() {
+        return generatorConditionMap;
     }
 
-    public Map<BlockPosition, FastProduceCache> getGeneratorFastProduce() {
-        return generatorFastProduce;
+    public Map<BlockPosition, FastProduceCache> getGeneratorFastProduceMap() {
+        return generatorFastProduceMap;
     }
 
     public int getSfTickerDelay() {
