@@ -1,8 +1,8 @@
 package ne.fnfal113.fnamplifications.tools.implementation;
 
-import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
+import static ne.fnfal113.fnamplifications.utils.SfCompat.item;
 
+import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import ne.fnfal113.fnamplifications.items.FNAmpItems;
 import ne.fnfal113.fnamplifications.multiblocks.FnAssemblyStation;
@@ -20,21 +20,21 @@ public class RegisterTools {
 
     public static void setup(SlimefunAddon instance) {
         new FnHoe(FNAmpItems.FN_MISC, FNAmpItems.FN_HOE_5X5, FnAssemblyStation.RECIPE_TYPE, new ItemStack[]{
-                SlimefunItems.COMMON_TALISMAN, new SlimefunItemStack(SlimefunItems.CARBON, 3), SlimefunItems.COMMON_TALISMAN,
-                new SlimefunItemStack(SlimefunItems.EARTH_RUNE, 4), new ItemStack(Material.DIAMOND_HOE), new SlimefunItemStack(SlimefunItems.EARTH_RUNE, 2),
-                new SlimefunItemStack(SlimefunItems.STEEL_INGOT, 6), new SlimefunItemStack(SlimefunItems.CARBON, 4), new SlimefunItemStack(SlimefunItems.STEEL_INGOT, 6)})
+                item(SlimefunItems.COMMON_TALISMAN), item(SlimefunItems.CARBON, 3), item(SlimefunItems.COMMON_TALISMAN),
+                item(SlimefunItems.EARTH_RUNE, 4), new ItemStack(Material.DIAMOND_HOE), item(SlimefunItems.EARTH_RUNE, 2),
+                item(SlimefunItems.STEEL_INGOT, 6), item(SlimefunItems.CARBON, 4), item(SlimefunItems.STEEL_INGOT, 6)})
                 .register(instance);
 
         new FnHoeAutoPlant(FNAmpItems.FN_MISC, FNAmpItems.FN_HOE_5X5_AUTO_PLANT, FnAssemblyStation.RECIPE_TYPE, new ItemStack[]{
-                SlimefunItems.COMMON_TALISMAN, null, SlimefunItems.COMMON_TALISMAN,
-                new SlimefunItemStack(SlimefunItems.EARTH_RUNE, 4), FNAmpItems.FN_HOE_5X5, new SlimefunItemStack(SlimefunItems.EARTH_RUNE, 4),
-                new SlimefunItemStack(SlimefunItems.REINFORCED_ALLOY_INGOT, 8), null, new SlimefunItemStack(SlimefunItems.REINFORCED_ALLOY_INGOT, 8)})
+                item(SlimefunItems.COMMON_TALISMAN), null, item(SlimefunItems.COMMON_TALISMAN),
+                item(SlimefunItems.EARTH_RUNE, 4), item(FNAmpItems.FN_HOE_5X5), item(SlimefunItems.EARTH_RUNE, 4),
+                item(SlimefunItems.REINFORCED_ALLOY_INGOT, 8), null, item(SlimefunItems.REINFORCED_ALLOY_INGOT, 8)})
                 .register(instance);
 
         new BlockRotator(FNAmpItems.FN_MISC, FNAmpItems.FN_BLOCK_ROTATOR, FnAssemblyStation.RECIPE_TYPE, new ItemStack[]{
-                SlimefunItems.CARBON, new SlimefunItemStack(SlimefunItems.COPPER_INGOT, 3), SlimefunItems.CARBON,
-                SlimefunItems.ELECTRO_MAGNET, new ItemStack(Material.COMPASS), SlimefunItems.ELECTRO_MAGNET,
-                new SlimefunItemStack(SlimefunItems.DURALUMIN_INGOT, 2), new SlimefunItemStack(SlimefunItems.COPPER_INGOT, 3), new SlimefunItemStack(SlimefunItems.DURALUMIN_INGOT, 2)})
+                item(SlimefunItems.CARBON), item(SlimefunItems.COPPER_INGOT, 3), item(SlimefunItems.CARBON),
+                item(SlimefunItems.ELECTRO_MAGNET), new ItemStack(Material.COMPASS), item(SlimefunItems.ELECTRO_MAGNET),
+                item(SlimefunItems.DURALUMIN_INGOT, 2), item(SlimefunItems.COPPER_INGOT, 3), item(SlimefunItems.DURALUMIN_INGOT, 2)})
                 .register(instance);
 
         new AutoLadder(FNAmpItems.FN_MISC, FNAmpItems.FN_AUTO_LADDER, FnAssemblyStation.RECIPE_TYPE, new ItemStack[]{
