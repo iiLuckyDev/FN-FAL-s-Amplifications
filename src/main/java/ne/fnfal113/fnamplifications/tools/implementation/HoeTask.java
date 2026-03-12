@@ -22,6 +22,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Set;
+import java.lang.reflect.Field;
 
 
 public class HoeTask {
@@ -36,8 +37,8 @@ public class HoeTask {
         }
         
         MAT.addAll(Tag.FLOWERS.getValues());
-        MAT.addAll(Tag.SMALL_FLOWERS.getValues());
-        MAT.addAll(Tag.TALL_FLOWERS.getValues());
+        MAT.addAll(getOptionalTagValues("SMALL_FLOWERS"));
+        MAT.addAll(getOptionalTagValues("TALL_FLOWERS"));
         MAT.addAll(Tag.SAPLINGS.getValues());
     }
 
@@ -142,6 +143,18 @@ public class HoeTask {
         } 
 
         return integers;
+    }
+
+    @SuppressWarnings("unchecked")
+    private static Set<Material> getOptionalTagValues(String fieldName) {
+        try {
+            Field field = Tag.class.getField(fieldName);
+            Tag<Material> tag = (Tag<Material>) field.get(null);
+
+            return tag.getValues();
+        } catch (ReflectiveOperationException | ClassCastException ignored) {
+            return Set.of();
+        }
     }
 
 }

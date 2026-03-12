@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.lang.reflect.Field;
 
 public class BlockRotatorTask {
 
@@ -65,7 +66,7 @@ public class BlockRotatorTask {
         BlockData blockData = block.getBlockData();
 
         if(player.isSneaking()) {
-            if(Tag.DOORS.isTagged(block.getType()) || Tag.TALL_FLOWERS.isTagged(block.getType()) ||
+            if(Tag.DOORS.isTagged(block.getType()) || isTaggedOptional("TALL_FLOWERS", block.getType()) ||
                     Tag.FLOWERS.isTagged(block.getType())){
                 return;
             }
@@ -181,6 +182,18 @@ public class BlockRotatorTask {
 
     public static Map<BlockFace, BlockFace> getBlockfacemap() {
         return blockFaceMap;
+    }
+
+    @SuppressWarnings("unchecked")
+    private static boolean isTaggedOptional(String fieldName, Material material) {
+        try {
+            Field field = Tag.class.getField(fieldName);
+            Tag<Material> tag = (Tag<Material>) field.get(null);
+
+            return tag.isTagged(material);
+        } catch (ReflectiveOperationException | ClassCastException ignored) {
+            return false;
+        }
     }
 
 }
