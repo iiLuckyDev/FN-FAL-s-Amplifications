@@ -1,4 +1,7 @@
-package ne.fnfal113.fnamplifications.items;
+
+import static ne.fnfal113.fnamplifications.utils.SfCompat.custom;
+import static ne.fnfal113.fnamplifications.utils.SfCompat.head;
+import static ne.fnfal113.fnamplifications.utils.SfCompat.item;
 
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.implementation.items.blocks.UnplaceableBlock;
@@ -54,3 +57,4 @@ public class FnScrapRecipes {
     }
 
 }
+

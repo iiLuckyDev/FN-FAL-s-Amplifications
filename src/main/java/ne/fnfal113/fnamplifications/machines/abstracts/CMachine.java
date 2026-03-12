@@ -1,5 +1,9 @@
 package ne.fnfal113.fnamplifications.machines.abstracts;
 
+import static ne.fnfal113.fnamplifications.utils.SfCompat.custom;
+import static ne.fnfal113.fnamplifications.utils.SfCompat.head;
+import static ne.fnfal113.fnamplifications.utils.SfCompat.item;
+
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemState;
@@ -123,14 +127,14 @@ public abstract class CMachine extends SlimefunItem implements InventoryBlock, E
         }
 
         for (int i : getInputBorder()) {
-            preset.addItem(i, new CustomItemStack(Material.PINK_STAINED_GLASS_PANE, " "), ChestMenuUtils.getEmptyClickHandler());
+            preset.addItem(i, custom(Material.PINK_STAINED_GLASS_PANE, " "), ChestMenuUtils.getEmptyClickHandler());
         }
 
         for (int i : getOutputBorder()) {
-            preset.addItem(i, new CustomItemStack(Material.GREEN_STAINED_GLASS_PANE, " "), ChestMenuUtils.getEmptyClickHandler());
+            preset.addItem(i, custom(Material.GREEN_STAINED_GLASS_PANE, " "), ChestMenuUtils.getEmptyClickHandler());
         }
 
-        preset.addItem(getProgressBarSlot(), new CustomItemStack(Material.BLACK_STAINED_GLASS_PANE, " "), ChestMenuUtils.getEmptyClickHandler());
+        preset.addItem(getProgressBarSlot(), custom(Material.BLACK_STAINED_GLASS_PANE, " "), ChestMenuUtils.getEmptyClickHandler());
 
         for (int i : getOutputSlots()) {
             preset.addMenuClickHandler(i, new ChestMenu.AdvancedMenuClickHandler() {
@@ -305,7 +309,7 @@ public abstract class CMachine extends SlimefunItem implements InventoryBlock, E
                     processor.updateProgressBar(inv, 22, currentOperation);
                     currentOperation.addProgress(1);
                 } else {
-                    inv.replaceExistingItem(22, new CustomItemStack(Material.BLACK_STAINED_GLASS_PANE, " "));
+                    inv.replaceExistingItem(22, custom(Material.BLACK_STAINED_GLASS_PANE, " "));
 
                     for (ItemStack output : currentOperation.getResults()) {
                         inv.pushItem(output.clone(), getOutputSlots());
@@ -380,3 +384,4 @@ public abstract class CMachine extends SlimefunItem implements InventoryBlock, E
         return null;
     }
 }
+

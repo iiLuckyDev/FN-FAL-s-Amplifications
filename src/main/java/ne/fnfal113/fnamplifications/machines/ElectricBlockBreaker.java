@@ -1,5 +1,9 @@
 package ne.fnfal113.fnamplifications.machines;
 
+import static ne.fnfal113.fnamplifications.utils.SfCompat.custom;
+import static ne.fnfal113.fnamplifications.utils.SfCompat.head;
+import static ne.fnfal113.fnamplifications.utils.SfCompat.item;
+
 import io.github.thebusybiscuit.slimefun4.api.MinecraftVersion;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemState;
@@ -61,40 +65,40 @@ public class ElectricBlockBreaker extends SlimefunItem implements InventoryBlock
     public static final int ON_OFF = 8;
     private static final ItemStack VERSIONED_AMETHYST;
 
-    private static final CustomItemStack NOT_OPERATING = new CustomItemStack(Material.ORANGE_STAINED_GLASS_PANE,
+    private static final CustomItemStack NOT_OPERATING = custom(Material.ORANGE_STAINED_GLASS_PANE,
         "&cNot Operating...",
         "&ePlace a block facing the dispenser!"
     );
 
-    private static final CustomItemStack NO_POWER = new CustomItemStack(Material.RED_STAINED_GLASS_PANE,
+    private static final CustomItemStack NO_POWER = custom(Material.RED_STAINED_GLASS_PANE,
         "&cNo Power!",
         "&ePower it up first!"
     );
 
-    private static final CustomItemStack NOT_RUNNING = new CustomItemStack(Material.YELLOW_STAINED_GLASS_PANE,
+    private static final CustomItemStack NOT_RUNNING = custom(Material.YELLOW_STAINED_GLASS_PANE,
         "&cNot Running",
         "&eToggle it on first"
     );
 
-    private static final CustomItemStack BREAK_BLOCK_NATURALLY = new CustomItemStack(Material.PINK_STAINED_GLASS_PANE,
+    private static final CustomItemStack BREAK_BLOCK_NATURALLY = custom(Material.PINK_STAINED_GLASS_PANE,
         "&d&lMode:",
         "&eBreak block naturally (No Silk Touch)",
         "Click to change"
     );
 
-    private static final CustomItemStack DROP_BLOCK_NATURALLY = new CustomItemStack(Material.CYAN_STAINED_GLASS_PANE,
+    private static final CustomItemStack DROP_BLOCK_NATURALLY = custom(Material.CYAN_STAINED_GLASS_PANE,
         "&d&lMode:",
         "&eDrop block naturally (Silk Touch)",
         "Click to change"
     );
 
-    private static final CustomItemStack TOGGLED_ON = new CustomItemStack(Material.BLUE_STAINED_GLASS_PANE,
+    private static final CustomItemStack TOGGLED_ON = custom(Material.BLUE_STAINED_GLASS_PANE,
         "&d&lToggle:",
         "&eEnabled (Running)",
         "Click to change"
     );
 
-    private static final CustomItemStack TOGGLED_OFF = new CustomItemStack(Material.WHITE_STAINED_GLASS_PANE,
+    private static final CustomItemStack TOGGLED_OFF = custom(Material.WHITE_STAINED_GLASS_PANE,
         "&d&lToggle:",
         "&eDisabled (Not Running)",
         "Click to change"
@@ -264,7 +268,7 @@ public class ElectricBlockBreaker extends SlimefunItem implements InventoryBlock
                     int progress = cache.progress;
 
                     if (invMenu.hasViewer()) {
-                        invMenu.replaceExistingItem(4, new CustomItemStack(Material.GREEN_STAINED_GLASS_PANE, "&aOperating!",
+                        invMenu.replaceExistingItem(4, custom(Material.GREEN_STAINED_GLASS_PANE, "&aOperating!",
                             "", "&bRate: " + this.rate + " ticks per Block", "&2Breaking block at rate: " + progress
                             + "/" + this.rate));
                     }
@@ -399,3 +403,4 @@ public static class BlockBreakerCache {
     }
 }
 }
+

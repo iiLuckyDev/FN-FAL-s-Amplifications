@@ -1,5 +1,9 @@
 package ne.fnfal113.fnamplifications.machines;
 
+import static ne.fnfal113.fnamplifications.utils.SfCompat.custom;
+import static ne.fnfal113.fnamplifications.utils.SfCompat.head;
+import static ne.fnfal113.fnamplifications.utils.SfCompat.item;
+
 import io.github.thebusybiscuit.slimefun4.api.MinecraftVersion;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
@@ -293,7 +297,7 @@ public class ElectricJukebox extends AbstractJukeBox {
                     if(jukebox.getPlaying() != Material.AIR) {
                         menu.replaceExistingItem(
                             49, 
-                            new CustomItemStack(
+                            custom(
                                 Material.PINK_STAINED_GLASS_PANE,
                                 "&d&lPlaying: " + jukebox.getPlaying().toString().replace("_", " "),
                                 "&eDuration : " + 
@@ -351,7 +355,7 @@ public class ElectricJukebox extends AbstractJukeBox {
 
     @Override
     public void changeStatus(BlockMenu invMenu){
-        invMenu.replaceExistingItem(49, new CustomItemStack(Material.MAGENTA_STAINED_GLASS_PANE,
+        invMenu.replaceExistingItem(49, custom(Material.MAGENTA_STAINED_GLASS_PANE,
                 "&dNo music disc is being played",
                 "&ePlace a music disc then click",
                 "&eplay button or left/right arrows"));
@@ -545,7 +549,7 @@ public class ElectricJukebox extends AbstractJukeBox {
         BlockStorage.addBlockInfo(menu.getLocation(), "current_Slot", String.valueOf(cache.currentSlot));
 
         menu.replaceExistingItem(cache.currentSlot, 
-            new CustomItemStack(Material.PINK_STAINED_GLASS_PANE,
+            custom(Material.PINK_STAINED_GLASS_PANE,
                 "&eNo music disc in current slot",
                 "&eplease change the slot"
             )

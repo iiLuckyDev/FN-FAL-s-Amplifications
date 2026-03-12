@@ -1,4 +1,7 @@
-package ne.fnfal113.fnamplifications.machines;
+
+import static ne.fnfal113.fnamplifications.utils.SfCompat.custom;
+import static ne.fnfal113.fnamplifications.utils.SfCompat.head;
+import static ne.fnfal113.fnamplifications.utils.SfCompat.item;
 
 import javax.annotation.Nonnull;
 
@@ -40,22 +43,22 @@ public class ElectricCompressor extends AContainer implements RecipeDisplayItem 
 
     @Override
     protected void registerDefaultRecipes() {
-        registerRecipe(16, new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.REINFORCED_ALLOY_INGOT, 8)},
-                new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.REINFORCED_PLATE, 1)});
-        registerRecipe(16, new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.STEEL_INGOT, 8)},
-                new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.STEEL_PLATE, 1)});
+        registerRecipe(16, new SlimefunItemStack[]{item(SlimefunItems.REINFORCED_ALLOY_INGOT, 8)},
+                new SlimefunItemStack[]{item(SlimefunItems.REINFORCED_PLATE, 1)});
+        registerRecipe(16, new SlimefunItemStack[]{item(SlimefunItems.STEEL_INGOT, 8)},
+                new SlimefunItemStack[]{item(SlimefunItems.STEEL_PLATE, 1)});
         registerRecipe(16, new ItemStack[]{new ItemStack(Material.COAL_BLOCK, 11)},
-                new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.CARBON, 12)});
+                new SlimefunItemStack[]{item(SlimefunItems.CARBON, 12)});
         registerRecipe(16, new ItemStack[]{new ItemStack(Material.COAL, 8)},
-                new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.CARBON, 1)});
+                new SlimefunItemStack[]{item(SlimefunItems.CARBON, 1)});
         registerRecipe(16, new ItemStack[]{new ItemStack(Material.CHARCOAL, 4)},
                 new ItemStack[]{new ItemStack(Material.COAL, 1)});
-        registerRecipe(16, new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.SMALL_URANIUM, 4)},
-                new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.URANIUM, 1)});
-        registerRecipe(16, new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.URANIUM, 64)},
-                new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.NEPTUNIUM, 1)});
-        registerRecipe(16, new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.MAGNESIUM_SALT, 8)},
-                new SlimefunItemStack[]{new SlimefunItemStack(SlimefunItems.MAGNESIUM_INGOT, 1)});
+        registerRecipe(16, new SlimefunItemStack[]{item(SlimefunItems.SMALL_URANIUM, 4)},
+                new SlimefunItemStack[]{item(SlimefunItems.URANIUM, 1)});
+        registerRecipe(16, new SlimefunItemStack[]{item(SlimefunItems.URANIUM, 64)},
+                new SlimefunItemStack[]{item(SlimefunItems.NEPTUNIUM, 1)});
+        registerRecipe(16, new SlimefunItemStack[]{item(SlimefunItems.MAGNESIUM_SALT, 8)},
+                new SlimefunItemStack[]{item(SlimefunItems.MAGNESIUM_INGOT, 1)});
     }
 
     @Nonnull
@@ -66,6 +69,7 @@ public class ElectricCompressor extends AContainer implements RecipeDisplayItem 
 
     @Override
     public ItemStack getProgressBar() {
-        return new SlimefunItemStack(FNAmpItems.COMPRESSOR_PART, 1);
+        return item(FNAmpItems.COMPRESSOR_PART, 1);
     }
 }
+

@@ -1,5 +1,9 @@
 package ne.fnfal113.fnamplifications.materialgenerators.implementations;
 
+import static ne.fnfal113.fnamplifications.utils.SfCompat.custom;
+import static ne.fnfal113.fnamplifications.utils.SfCompat.head;
+import static ne.fnfal113.fnamplifications.utils.SfCompat.item;
+
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -11,7 +15,6 @@ import java.util.concurrent.ThreadLocalRandom;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockPlaceHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
-import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
@@ -58,22 +61,22 @@ public class CustomMaterialGenerator extends SlimefunItem implements InventoryBl
 
     private final boolean dropBrokenVariantOnBreak = FNAmplifications.getInstance().getConfig().getBoolean("Enable-Mat-Gen-Broken-Drop", true);
 
-    private static final CustomItemStack NOT_GENERATING = new CustomItemStack(Material.RED_STAINED_GLASS_PANE,
+    private static final ItemStack NOT_GENERATING = custom(Material.RED_STAINED_GLASS_PANE,
             "&cNot Generating",
             "&ePlace a chest above first!"
     );
 
-    private static final CustomItemStack NOT_GENERATING_FULL = new CustomItemStack(Material.RED_STAINED_GLASS_PANE,
+    private static final ItemStack NOT_GENERATING_FULL = custom(Material.RED_STAINED_GLASS_PANE,
             "&cNot Generating",
             "&eChest inventory full!"
     );
 
-    private static final CustomItemStack CONDITION = new CustomItemStack(Material.RED_STAINED_GLASS_PANE,
+    private static final ItemStack CONDITION = custom(Material.RED_STAINED_GLASS_PANE,
             "&cCurrent Condition: ",
             "&ePlace a chest above first!"
     );
 
-    private static final CustomItemStack CONDITION_BROKEN = new CustomItemStack(Material.RED_STAINED_GLASS_PANE,
+    private static final ItemStack CONDITION_BROKEN = custom(Material.RED_STAINED_GLASS_PANE,
             "&cCurrent Condition: ",
             "&eGenerator is broken! please repair!",
             "&eDestroy the block and craft a new one or",
@@ -195,7 +198,7 @@ public class CustomMaterialGenerator extends SlimefunItem implements InventoryBl
                     int tickRate = (int) (FNAmplifications.getInstance().getConfigManager().getCustomConfig("material-gen-tickrate").getInt(this.getId() + "." + "tickrate", 1) / fastProduce);
 
                     if(invMenu.toInventory() != null && invMenu.hasViewer()) {
-                        invMenu.replaceExistingItem(4, new CustomItemStack(Material.GREEN_STAINED_GLASS_PANE, "&aGenerating Material",
+                        invMenu.replaceExistingItem(4, custom(Material.GREEN_STAINED_GLASS_PANE, "&aGenerating Material",
                                 "", "&bMaterial: " + this.materialName,
                                 "&bDefault Rate: " + "" + ChatColor.GREEN + FNAmplifications.getInstance().getConfigManager().getCustomConfig("material-gen-tickrate").getInt(this.getId() + "." + "tickrate") + " &aticks", "",
                                 "&2Progress: " + progress + "/" + tickRate, "",
@@ -263,20 +266,20 @@ public class CustomMaterialGenerator extends SlimefunItem implements InventoryBl
     public void handleConditionBlockInterface(BlockMenu invMenu, int generatorCondition) {
         if(generatorCondition > 0) {
             if(generatorCondition > 75 && generatorCondition <= 100) {
-                invMenu.replaceExistingItem(0, new CustomItemStack(Material.GREEN_STAINED_GLASS_PANE, "&aCurrent Condition:",
+                invMenu.replaceExistingItem(0, custom(Material.GREEN_STAINED_GLASS_PANE, "&aCurrent Condition:",
                     "", "&eIn best condition" + " (" + generatorCondition + "%)"));
             } else if(generatorCondition > 50 && generatorCondition < 75){
-                invMenu.replaceExistingItem(0, new CustomItemStack(Material.YELLOW_STAINED_GLASS_PANE, "&aCurrent Condition:",
+                invMenu.replaceExistingItem(0, custom(Material.YELLOW_STAINED_GLASS_PANE, "&aCurrent Condition:",
                         "", "&eIn good condition" + " (" + generatorCondition + "%)"));
             } else if(generatorCondition > 25 && generatorCondition < 50){
-                invMenu.replaceExistingItem(0, new CustomItemStack(Material.ORANGE_STAINED_GLASS_PANE, "&aCurrent Condition:",
+                invMenu.replaceExistingItem(0, custom(Material.ORANGE_STAINED_GLASS_PANE, "&aCurrent Condition:",
                         "", "&eIn bad condition" + " (" + generatorCondition + "%)"));
             } else if(generatorCondition < 25){
-                invMenu.replaceExistingItem(0, new CustomItemStack(Material.RED_STAINED_GLASS_PANE, "&aCurrent Condition:",
+                invMenu.replaceExistingItem(0, custom(Material.RED_STAINED_GLASS_PANE, "&aCurrent Condition:",
                         "", "&eIn worst condition" + " (" + generatorCondition + "%)"));
             }
         } else {
-            invMenu.replaceExistingItem(0, new CustomItemStack(Material.RED_STAINED_GLASS_PANE, "&aCurrent Condition:",
+            invMenu.replaceExistingItem(0, custom(Material.RED_STAINED_GLASS_PANE, "&aCurrent Condition:",
                     "", "&eBroken generator (0%)"));
         }
     }
@@ -377,3 +380,6 @@ public class CustomMaterialGenerator extends SlimefunItem implements InventoryBl
         return dropBrokenVariantOnBreak;
     }
 }
+
+
+

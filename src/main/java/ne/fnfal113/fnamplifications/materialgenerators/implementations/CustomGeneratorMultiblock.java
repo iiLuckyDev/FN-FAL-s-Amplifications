@@ -1,5 +1,9 @@
 package ne.fnfal113.fnamplifications.materialgenerators.implementations;
 
+import static ne.fnfal113.fnamplifications.utils.SfCompat.custom;
+import static ne.fnfal113.fnamplifications.utils.SfCompat.head;
+import static ne.fnfal113.fnamplifications.utils.SfCompat.item;
+
 import javax.annotation.Nonnull;
 
 import org.bukkit.Material;
@@ -19,7 +23,7 @@ public class CustomGeneratorMultiblock extends SimpleSlimefunItem<ItemUseHandler
         super(itemGroup, item, RecipeType.MULTIBLOCK, new ItemStack[] {
                 null, null, null,
                 null, new ItemStack(Material.CHEST), null,
-                null, new CustomItemStack(Material.DIAMOND_BLOCK, "Any FN Material generator"), null
+                null, custom(Material.DIAMOND_BLOCK, "Any FN Material generator"), null
         });
     }
 
@@ -32,3 +36,4 @@ public class CustomGeneratorMultiblock extends SimpleSlimefunItem<ItemUseHandler
         };
     }
 }
+

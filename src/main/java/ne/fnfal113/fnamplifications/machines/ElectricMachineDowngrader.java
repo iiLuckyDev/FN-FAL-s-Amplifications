@@ -1,5 +1,9 @@
 package ne.fnfal113.fnamplifications.machines;
 
+import static ne.fnfal113.fnamplifications.utils.SfCompat.custom;
+import static ne.fnfal113.fnamplifications.utils.SfCompat.head;
+import static ne.fnfal113.fnamplifications.utils.SfCompat.item;
+
 import javax.annotation.Nonnull;
 
 import java.util.ArrayList;
@@ -67,12 +71,12 @@ public class ElectricMachineDowngrader extends CMachine implements RecipeDisplay
                     processor.updateProgressBar(inv, 22, currentOperation);
                     currentOperation.addProgress(1);
                 } else {
-                    inv.replaceExistingItem(22, new CustomItemStack(Material.BLACK_STAINED_GLASS_PANE, " "));
+                    inv.replaceExistingItem(22, custom(Material.BLACK_STAINED_GLASS_PANE, " "));
 
                     for (ItemStack output : currentOperation.getResults()) {
                         if (ThreadLocalRandom.current().nextInt(100) < 25 && inv.hasViewer()) {
                             inv.pushItem(output.clone(), getOutputSlots());
-                            inv.pushItem(new CustomItemStack(FNAmpItems.FN_METAL_SCRAPS.clone(), 1), getOutputSlots());
+                            inv.pushItem(custom(FNAmpItems.FN_METAL_SCRAPS.clone(), 1), getOutputSlots());
                         }
                         else{
                             inv.pushItem(output.clone(), getOutputSlots());
@@ -150,3 +154,4 @@ public class ElectricMachineDowngrader extends CMachine implements RecipeDisplay
         return new SlimefunItemStack(FNAmpItems.DOWNGRADER_PART, 1);
     }
 }
+
