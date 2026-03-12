@@ -102,135 +102,135 @@ public class RegisterGems {
                 .register(instance);
 
         new ThornAwayGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_THORN_AWAY, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                null, FNAmpItems.INTELLECT_RUNE, null,
+                null, item(FNAmpItems.INTELLECT_RUNE), null,
                 new ItemStack(Material.BLAZE_POWDER, 2), new ItemStack(Material.EMERALD),  new ItemStack(Material.BLAZE_POWDER, 2),
-                null, FNAmpItems.POWER_RUNE, null})
+                null, item(FNAmpItems.POWER_RUNE), null})
                 .register(instance);
 
         new ThunderBoltGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_THUNDER, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                FNAmpItems.SPARKLING_RUNE, new ItemStack(Material.FIRE_CHARGE), FNAmpItems.SPARKLING_RUNE,
+                item(FNAmpItems.SPARKLING_RUNE), new ItemStack(Material.FIRE_CHARGE), item(FNAmpItems.SPARKLING_RUNE),
                 null, new ItemStack(Material.EMERALD), null,
-                FNAmpItems.SPARKLING_RUNE, new ItemStack(Material.BLAZE_POWDER), FNAmpItems.SPARKLING_RUNE})
+                item(FNAmpItems.SPARKLING_RUNE), new ItemStack(Material.BLAZE_POWDER), item(FNAmpItems.SPARKLING_RUNE)})
                 .register(instance);
 
         new TriSwordGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_TRI_SWORD, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                null, FNAmpItems.INTELLECT_RUNE,  null,
-                FNAmpItems.POWER_RUNE, new ItemStack(Material.EMERALD), FNAmpItems.POWER_RUNE,
-                null, FNAmpItems.INTELLECT_RUNE,  null})
+                null, item(FNAmpItems.INTELLECT_RUNE),  null,
+                item(FNAmpItems.POWER_RUNE), new ItemStack(Material.EMERALD), item(FNAmpItems.POWER_RUNE),
+                null, item(FNAmpItems.INTELLECT_RUNE),  null})
                 .register(instance);
 
         new GuardianGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_GUARDIAN, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                new ItemStack(Material.ROTTEN_FLESH), new SlimefunItemStack(SlimefunItems.BLANK_RUNE, 1), new ItemStack(Material.ROTTEN_FLESH),
-                FNAmpItems.SPIRIT_RUNE, new ItemStack(Material.EMERALD),  FNAmpItems.SPIRIT_RUNE,
-                SlimefunItems.MAGIC_SUGAR, new ItemStack(Material.ROTTEN_FLESH),  SlimefunItems.MAGIC_SUGAR})
+                new ItemStack(Material.ROTTEN_FLESH), item(SlimefunItems.BLANK_RUNE, 1), new ItemStack(Material.ROTTEN_FLESH),
+                item(FNAmpItems.SPIRIT_RUNE), new ItemStack(Material.EMERALD),  item(FNAmpItems.SPIRIT_RUNE),
+                item(SlimefunItems.MAGIC_SUGAR), new ItemStack(Material.ROTTEN_FLESH),  item(SlimefunItems.MAGIC_SUGAR)})
                 .register(instance);
 
         new DisruptedGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_DISRUPTED, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                null, FNAmpItems.SPIRIT_RUNE, null,
-                FNAmpItems.POWER_RUNE, new ItemStack(Material.EMERALD), FNAmpItems.POWER_RUNE,
-                null, FNAmpItems.SPIRIT_RUNE, null})
+                null, item(FNAmpItems.SPIRIT_RUNE), null,
+                item(FNAmpItems.POWER_RUNE), new ItemStack(Material.EMERALD), item(FNAmpItems.POWER_RUNE),
+                null, item(FNAmpItems.SPIRIT_RUNE), null})
                 .register(instance);
 
         new ArrowAvertGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_ARROW_AVERT, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                FNAmpItems.CLOUD_RUNE, new ItemStack(Material.BLAZE_POWDER, 1),  FNAmpItems.CLOUD_RUNE,
+                item(FNAmpItems.CLOUD_RUNE), new ItemStack(Material.BLAZE_POWDER, 1),  item(FNAmpItems.CLOUD_RUNE),
                 null, new ItemStack(Material.EMERALD), null,
-                FNAmpItems.CLOUD_RUNE, new ItemStack(Material.BLAZE_POWDER, 1), FNAmpItems.CLOUD_RUNE})
+                item(FNAmpItems.CLOUD_RUNE), new ItemStack(Material.BLAZE_POWDER, 1), item(FNAmpItems.CLOUD_RUNE)})
                 .register(instance);
 
         new DeberserkGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_DEBERSERK, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                FNAmpItems.AGILITY_RUNE, new SlimefunItemStack(SlimefunItems.EARTH_RUNE, 1), FNAmpItems.AGILITY_RUNE,
-                SlimefunItems.STEEL_INGOT, new ItemStack(Material.EMERALD), SlimefunItems.STEEL_INGOT,
-                new SlimefunItemStack(SlimefunItems.BLANK_RUNE, 1), null, new SlimefunItemStack(SlimefunItems.BLANK_RUNE, 1)})
+                item(FNAmpItems.AGILITY_RUNE), item(SlimefunItems.EARTH_RUNE, 1), item(FNAmpItems.AGILITY_RUNE),
+                item(SlimefunItems.STEEL_INGOT), new ItemStack(Material.EMERALD), item(SlimefunItems.STEEL_INGOT),
+                item(SlimefunItems.BLANK_RUNE, 1), null, item(SlimefunItems.BLANK_RUNE, 1)})
                 .register(instance);
 
         new ParryGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_PARRY, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                new SlimefunItemStack(SlimefunItems.BLANK_RUNE, 1), new SlimefunItemStack(SlimefunItems.EARTH_RUNE, 1), new SlimefunItemStack(SlimefunItems.BLANK_RUNE, 1),
-                SlimefunItems.DURALUMIN_INGOT, new ItemStack(Material.EMERALD), SlimefunItems.DURALUMIN_INGOT,
-                FNAmpItems.AGILITY_RUNE, new SlimefunItemStack(SlimefunItems.AIR_RUNE, 2), FNAmpItems.AGILITY_RUNE})
+                item(SlimefunItems.BLANK_RUNE, 1), item(SlimefunItems.EARTH_RUNE, 1), item(SlimefunItems.BLANK_RUNE, 1),
+                item(SlimefunItems.DURALUMIN_INGOT), new ItemStack(Material.EMERALD), item(SlimefunItems.DURALUMIN_INGOT),
+                item(FNAmpItems.AGILITY_RUNE), item(SlimefunItems.AIR_RUNE, 2), item(FNAmpItems.AGILITY_RUNE)})
                 .register(instance);
 
         new StoutGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_STOUT, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                FNAmpItems.POWER_RUNE, null, FNAmpItems.HEART_RUNE,
+                item(FNAmpItems.POWER_RUNE), null, item(FNAmpItems.HEART_RUNE),
                 null, new ItemStack(Material.EMERALD), null,
-                FNAmpItems.INTELLECT_RUNE, SlimefunItems.MAGIC_SUGAR, FNAmpItems.HEART_RUNE})
+                item(FNAmpItems.INTELLECT_RUNE), item(SlimefunItems.MAGIC_SUGAR), item(FNAmpItems.HEART_RUNE)})
                 .register(instance);
 
         new AdamantineGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_ADAMANTINE, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                FNAmpItems.POWER_RUNE, new ItemStack(Material.BLAZE_POWDER, 2), FNAmpItems.POWER_RUNE,
+                item(FNAmpItems.POWER_RUNE), new ItemStack(Material.BLAZE_POWDER, 2), item(FNAmpItems.POWER_RUNE),
                 null, new ItemStack(Material.EMERALD), null,
-                FNAmpItems.AGILITY_RUNE, new ItemStack(Material.BLAZE_POWDER, 2), FNAmpItems.AGILITY_RUNE})
+                item(FNAmpItems.AGILITY_RUNE), new ItemStack(Material.BLAZE_POWDER, 2), item(FNAmpItems.AGILITY_RUNE)})
                 .register(instance);
 
         new AwakenGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_AWAKEN, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                FNAmpItems.HEART_RUNE, new ItemStack(Material.BLAZE_POWDER), FNAmpItems.HEART_RUNE,
+                item(FNAmpItems.HEART_RUNE), new ItemStack(Material.BLAZE_POWDER), item(FNAmpItems.HEART_RUNE),
                 null, new ItemStack(Material.EMERALD), null,
-                FNAmpItems.HEART_RUNE, SlimefunItems.MAGIC_SUGAR, FNAmpItems.HEART_RUNE})
+                item(FNAmpItems.HEART_RUNE), item(SlimefunItems.MAGIC_SUGAR), item(FNAmpItems.HEART_RUNE)})
                 .register(instance);
 
         new AvengeGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_AVENGE, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                FNAmpItems.PESTILENCE_RUNE, new ItemStack(Material.ROTTEN_FLESH), FNAmpItems.PESTILENCE_RUNE,
+                item(FNAmpItems.PESTILENCE_RUNE), new ItemStack(Material.ROTTEN_FLESH), item(FNAmpItems.PESTILENCE_RUNE),
                 null, new ItemStack(Material.EMERALD), null,
-                FNAmpItems.LINGER_RUNE, new ItemStack(Material.ROTTEN_FLESH), FNAmpItems.LINGER_RUNE})
+                item(FNAmpItems.LINGER_RUNE), new ItemStack(Material.ROTTEN_FLESH), item(FNAmpItems.LINGER_RUNE)})
                 .register(instance);
 
         new AchillesHeelGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_ACHILLES_HEEL, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                FNAmpItems.AGILITY_RUNE, new ItemStack(Material.FEATHER), FNAmpItems.AGILITY_RUNE,
+                item(FNAmpItems.AGILITY_RUNE), new ItemStack(Material.FEATHER), item(FNAmpItems.AGILITY_RUNE),
                 new ItemStack(Material.ARROW), new ItemStack(Material.EMERALD), new ItemStack(Material.ARROW),
-                FNAmpItems.PESTILENCE_RUNE, null, FNAmpItems.INTELLECT_RUNE})
+                item(FNAmpItems.PESTILENCE_RUNE), null, item(FNAmpItems.INTELLECT_RUNE)})
                 .register(instance);
 
         new DisarmorGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_DISARMOR, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                FNAmpItems.INTELLECT_RUNE, null, FNAmpItems.LINGER_RUNE,
+                item(FNAmpItems.INTELLECT_RUNE), null, item(FNAmpItems.LINGER_RUNE),
                 new ItemStack(Material.BLAZE_POWDER), new ItemStack(Material.EMERALD), new ItemStack(Material.BLAZE_POWDER),
-                FNAmpItems.LINGER_RUNE, null, FNAmpItems.INTELLECT_RUNE})
+                item(FNAmpItems.LINGER_RUNE), null, item(FNAmpItems.INTELLECT_RUNE)})
                 .register(instance);
 
         new DisarmGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_DISARM, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                FNAmpItems.INTELLECT_RUNE, SlimefunItems.MAGIC_SUGAR, FNAmpItems.PESTILENCE_RUNE,
+                item(FNAmpItems.INTELLECT_RUNE), item(SlimefunItems.MAGIC_SUGAR), item(FNAmpItems.PESTILENCE_RUNE),
                 new ItemStack(Material.BLAZE_POWDER, 2), new ItemStack(Material.EMERALD), new ItemStack(Material.BLAZE_POWDER, 2),
-                FNAmpItems.PESTILENCE_RUNE, new ItemStack(Material.BLAZE_POWDER), FNAmpItems.INTELLECT_RUNE})
+                item(FNAmpItems.PESTILENCE_RUNE), new ItemStack(Material.BLAZE_POWDER), item(FNAmpItems.INTELLECT_RUNE)})
                 .register(instance);
 
         new SmokeCriminalGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_SMOKE_CRIMINAL, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                FNAmpItems.SPIRIT_RUNE, null, FNAmpItems.CLOUD_RUNE,
+                item(FNAmpItems.SPIRIT_RUNE), null, item(FNAmpItems.CLOUD_RUNE),
                 new ItemStack(Material.ROTTEN_FLESH, 1), new ItemStack(Material.EMERALD), new ItemStack(Material.BLAZE_POWDER, 1),
-                FNAmpItems.CLOUD_RUNE, null, FNAmpItems.POWER_RUNE})
+                item(FNAmpItems.CLOUD_RUNE), null, item(FNAmpItems.POWER_RUNE)})
                 .register(instance);
 
         new LifestealGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_LIFESTEAL, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                FNAmpItems.HEART_RUNE, SlimefunItems.MAGIC_SUGAR, new ItemStack(Material.BLAZE_POWDER),
+                item(FNAmpItems.HEART_RUNE), item(SlimefunItems.MAGIC_SUGAR), new ItemStack(Material.BLAZE_POWDER),
                 new ItemStack(Material.BLAZE_POWDER, 1), new ItemStack(Material.EMERALD), new ItemStack(Material.BLAZE_POWDER, 1),
-                new ItemStack(Material.BLAZE_POWDER), null, FNAmpItems.HEART_RUNE})
+                new ItemStack(Material.BLAZE_POWDER), null, item(FNAmpItems.HEART_RUNE)})
                 .register(instance);
 
         new AtrohpyGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_ATROPHY, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                FNAmpItems.LINGER_RUNE, FNAmpItems.PESTILENCE_RUNE, FNAmpItems.LINGER_RUNE,
+                item(FNAmpItems.LINGER_RUNE), item(FNAmpItems.PESTILENCE_RUNE), item(FNAmpItems.LINGER_RUNE),
                 new PotionBuilder(PotionType.WEAKNESS).createPotion(), new ItemStack(Material.EMERALD), new PotionBuilder(PotionType.POISON).createPotion(),
-                new ItemStack(Material.BLAZE_POWDER), FNAmpItems.HEART_RUNE, new ItemStack(Material.BLAZE_POWDER)})
+                new ItemStack(Material.BLAZE_POWDER), item(FNAmpItems.HEART_RUNE), new ItemStack(Material.BLAZE_POWDER)})
                 .register(instance);
 
         new BaneGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_BANE, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                FNAmpItems.LINGER_RUNE, new ItemStack(Material.BLAZE_POWDER), FNAmpItems.LINGER_RUNE,
+                item(FNAmpItems.LINGER_RUNE), new ItemStack(Material.BLAZE_POWDER), item(FNAmpItems.LINGER_RUNE),
                 new PotionBuilder(PotionType.POISON).createPotion(), new ItemStack(Material.EMERALD), new PotionBuilder(PotionType.POISON).createPotion(),
-                FNAmpItems.PESTILENCE_RUNE, new ItemStack(Material.BLAZE_POWDER), FNAmpItems.PESTILENCE_RUNE})
+                item(FNAmpItems.PESTILENCE_RUNE), new ItemStack(Material.BLAZE_POWDER), item(FNAmpItems.PESTILENCE_RUNE)})
                 .register(instance);
 
         new SedateGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_SEDATE, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                FNAmpItems.LINGER_RUNE, new ItemStack(Material.BLAZE_POWDER), FNAmpItems.LINGER_RUNE,
+                item(FNAmpItems.LINGER_RUNE), new ItemStack(Material.BLAZE_POWDER), item(FNAmpItems.LINGER_RUNE),
                 new PotionBuilder(PotionType.SLOWNESS).createPotion(), new ItemStack(Material.EMERALD), new PotionBuilder(PotionType.SLOWNESS).createPotion(),
-                new ItemStack(Material.BLAZE_POWDER), FNAmpItems.AGILITY_RUNE, new ItemStack(Material.BLAZE_POWDER)})
+                new ItemStack(Material.BLAZE_POWDER), item(FNAmpItems.AGILITY_RUNE), new ItemStack(Material.BLAZE_POWDER)})
                 .register(instance);
 
         new DecrepitGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_DECREPIT, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                FNAmpItems.LINGER_RUNE, new ItemStack(Material.BLAZE_POWDER), FNAmpItems.LINGER_RUNE,
+                item(FNAmpItems.LINGER_RUNE), new ItemStack(Material.BLAZE_POWDER), item(FNAmpItems.LINGER_RUNE),
                 new PotionBuilder(PotionType.WEAKNESS).createPotion(), new ItemStack(Material.EMERALD), new PotionBuilder(PotionType.WEAKNESS).createPotion(),
                 new ItemStack(Material.BLAZE_POWDER), null, new ItemStack(Material.BLAZE_POWDER)})
                 .register(instance);
 
         new DeceptionGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_DECEPTION, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                new ItemStack(Material.BLAZE_POWDER), FNAmpItems.SPIRIT_RUNE, new ItemStack(Material.BLAZE_POWDER),
+                new ItemStack(Material.BLAZE_POWDER), item(FNAmpItems.SPIRIT_RUNE), new ItemStack(Material.BLAZE_POWDER),
                 new PotionBuilder(PotionType.AWKWARD).createPotion(), new ItemStack(Material.EMERALD), new PotionBuilder(PotionType.AWKWARD).createPotion(),
-                FNAmpItems.PESTILENCE_RUNE, new ItemStack(Material.BLAZE_POWDER), FNAmpItems.PESTILENCE_RUNE})
+                item(FNAmpItems.PESTILENCE_RUNE), new ItemStack(Material.BLAZE_POWDER), item(FNAmpItems.PESTILENCE_RUNE)})
                 .register(instance);
 
         new CelerityGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_CELERITY, FnGemAltar.RECIPE_TYPE, new ItemStack[]{

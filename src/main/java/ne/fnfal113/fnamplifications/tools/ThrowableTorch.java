@@ -1,5 +1,7 @@
 package ne.fnfal113.fnamplifications.tools;
 
+import static ne.fnfal113.fnamplifications.utils.SfCompat.item;
+
 import io.github.thebusybiscuit.slimefun4.api.MinecraftVersion;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
@@ -163,7 +165,7 @@ public class ThrowableTorch extends SlimefunItem {
             blockHitRelative.setType(Material.TORCH);
         }
 
-        Bukkit.getScheduler().runTaskLater(FNAmplifications.getInstance(), () -> BlockStorage.store(blockHitRelative, FNAmpItems.FN_THROWABLE_TORCH), 2L);
+        Bukkit.getScheduler().runTaskLater(FNAmplifications.getInstance(), () -> BlockStorage.store(blockHitRelative, item(FNAmpItems.FN_THROWABLE_TORCH)), 2L);
     }
 
     public boolean blockNameContains(Block blockHit, String name){

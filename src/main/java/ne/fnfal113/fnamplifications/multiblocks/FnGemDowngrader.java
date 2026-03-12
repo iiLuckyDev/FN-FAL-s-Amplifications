@@ -1,5 +1,7 @@
 package ne.fnfal113.fnamplifications.multiblocks;
 
+import static ne.fnfal113.fnamplifications.utils.SfCompat.item;
+
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.multiblocks.MultiBlockMachine;
@@ -95,7 +97,7 @@ public class FnGemDowngrader extends MultiBlockMachine {
         for(int i : slot) {
             if(i == 4) continue;
 
-            if(!SlimefunUtils.isItemSimilar(inv.getContents()[i], FNAmpItems.FN_GEM_FINE_JASPER_CRAFTING, true, false)) {
+            if(!SlimefunUtils.isItemSimilar(inv.getContents()[i], item(FNAmpItems.FN_GEM_FINE_JASPER_CRAFTING), true, false)) {
                 return false;
             }
         }
