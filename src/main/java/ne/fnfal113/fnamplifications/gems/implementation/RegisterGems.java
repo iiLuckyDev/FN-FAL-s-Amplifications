@@ -234,66 +234,66 @@ public class RegisterGems {
                 .register(instance);
 
         new CelerityGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_CELERITY, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                FNAmpItems.AGILITY_RUNE, null, FNAmpItems.AGILITY_RUNE,
+                item(FNAmpItems.AGILITY_RUNE), null, item(FNAmpItems.AGILITY_RUNE),
                 new PotionBuilder(VersionedPotionType.SWIFTNESS).createPotion(), new ItemStack(Material.EMERALD), new PotionBuilder(VersionedPotionType.SWIFTNESS).createPotion(),
-                null, FNAmpItems.POWER_RUNE, null})
+                null, item(FNAmpItems.POWER_RUNE), null})
                 .register(instance);
 
                 
         if(FNAmplifications.getVaultIntegration().isVaultInstalled()){
             new LootGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_LOOT, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                    FNAmpItems.PESTILENCE_RUNE, FNAmpItems.AGILITY_RUNE, FNAmpItems.LINGER_RUNE,
+                    item(FNAmpItems.PESTILENCE_RUNE), item(FNAmpItems.AGILITY_RUNE), item(FNAmpItems.LINGER_RUNE),
                     null, new ItemStack(Material.EMERALD), null,
-                    FNAmpItems.LINGER_RUNE, FNAmpItems.CLOUD_RUNE, FNAmpItems.PESTILENCE_RUNE})
+                    item(FNAmpItems.LINGER_RUNE), item(FNAmpItems.CLOUD_RUNE), item(FNAmpItems.PESTILENCE_RUNE)})
                     .register(instance);
         }
 
         new ShockwaveGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_SHOCKWAVE, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                FNAmpItems.POWER_RUNE, new ItemStack(Material.NETHER_WART), FNAmpItems.POWER_RUNE,
+                item(FNAmpItems.POWER_RUNE), new ItemStack(Material.NETHER_WART), item(FNAmpItems.POWER_RUNE),
                 null, new ItemStack(Material.EMERALD), null,
-                FNAmpItems.POWER_RUNE, new ItemStack(Material.NETHER_WART), FNAmpItems.POWER_RUNE})
+                item(FNAmpItems.POWER_RUNE), new ItemStack(Material.NETHER_WART), item(FNAmpItems.POWER_RUNE)})
                 .register(instance);
 
         new BerserkGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_BERSERK, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                FNAmpItems.POWER_RUNE, SlimefunItems.REINFORCED_ALLOY_INGOT, FNAmpItems.POWER_RUNE,
+                item(FNAmpItems.POWER_RUNE), item(SlimefunItems.REINFORCED_ALLOY_INGOT), item(FNAmpItems.POWER_RUNE),
                 null, new ItemStack(Material.EMERALD), null,
-                new SlimefunItemStack(SlimefunItems.BLANK_RUNE, 2), SlimefunItems.REINFORCED_ALLOY_INGOT, new SlimefunItemStack(SlimefunItems.BLANK_RUNE, 2)})
+                item(SlimefunItems.BLANK_RUNE, 2), item(SlimefunItems.REINFORCED_ALLOY_INGOT), item(SlimefunItems.BLANK_RUNE, 2)})
                 .register(instance);
 
         new FlawlessUnbindGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_FLAWLESS_UNBIND, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                new SlimefunItemStack(SlimefunItems.MAGIC_LUMP_3, 5), FNAmpItems.UNBIND_RUNE, new SlimefunItemStack(SlimefunItems.ENDER_LUMP_3, 5),
-                FNAmpItems.UNBIND_RUNE, new ItemStack(Material.DIAMOND), FNAmpItems.UNBIND_RUNE,
-                new SlimefunItemStack(SlimefunItems.MAGIC_LUMP_3, 5), FNAmpItems.UNBIND_RUNE, new SlimefunItemStack(SlimefunItems.ENDER_LUMP_3, 5)})
+                item(SlimefunItems.MAGIC_LUMP_3, 5), item(FNAmpItems.UNBIND_RUNE), item(SlimefunItems.ENDER_LUMP_3, 5),
+                item(FNAmpItems.UNBIND_RUNE), new ItemStack(Material.DIAMOND), item(FNAmpItems.UNBIND_RUNE),
+                item(SlimefunItems.MAGIC_LUMP_3, 5), item(FNAmpItems.UNBIND_RUNE), item(SlimefunItems.ENDER_LUMP_3, 5)})
                 .register(instance);
 
         new PreciousUnbindGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_PRECIOUS_UNBIND, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                new SlimefunItemStack(SlimefunItems.MAGIC_LUMP_2, 4), FNAmpItems.UNBIND_RUNE, new SlimefunItemStack(SlimefunItems.ENDER_LUMP_2, 4),
+                item(SlimefunItems.MAGIC_LUMP_2, 4), item(FNAmpItems.UNBIND_RUNE), item(SlimefunItems.ENDER_LUMP_2, 4),
                 new ItemStack(Material.SUGAR, 4), new ItemStack(Material.DIAMOND), new ItemStack(Material.SUGAR, 4),
-                new SlimefunItemStack(SlimefunItems.MAGIC_LUMP_3, 4), FNAmpItems.UNBIND_RUNE, new SlimefunItemStack(SlimefunItems.ENDER_LUMP_3, 4)})
+                item(SlimefunItems.MAGIC_LUMP_3, 4), item(FNAmpItems.UNBIND_RUNE), item(SlimefunItems.ENDER_LUMP_3, 4)})
                 .register(instance);
 
         new BlemishedUnbindGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_BLEMISHED_UNBIND, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                new SlimefunItemStack(SlimefunItems.MAGIC_LUMP_1, 3), FNAmpItems.UNBIND_RUNE, new SlimefunItemStack(SlimefunItems.ENDER_LUMP_1, 3),
+                item(SlimefunItems.MAGIC_LUMP_1, 3), item(FNAmpItems.UNBIND_RUNE), item(SlimefunItems.ENDER_LUMP_1, 3),
                 null, new ItemStack(Material.DIAMOND), null,
-                new SlimefunItemStack(SlimefunItems.MAGIC_LUMP_2, 3), FNAmpItems.UNBIND_RUNE, new SlimefunItemStack(SlimefunItems.ENDER_LUMP_2, 3)})
+                item(SlimefunItems.MAGIC_LUMP_2, 3), item(FNAmpItems.UNBIND_RUNE), item(SlimefunItems.ENDER_LUMP_2, 3)})
                 .register(instance);
 
         new DamagedUnbindGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_DAMAGED_UNBIND, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                new SlimefunItemStack(SlimefunItems.MAGIC_LUMP_1, 2), null, new SlimefunItemStack(SlimefunItems.ENDER_LUMP_1, 2),
+                item(SlimefunItems.MAGIC_LUMP_1, 2), null, item(SlimefunItems.ENDER_LUMP_1, 2),
                 null, new ItemStack(Material.DIAMOND), null,
-                new SlimefunItemStack(SlimefunItems.MAGIC_LUMP_1, 2), FNAmpItems.UNBIND_RUNE, new SlimefunItemStack(SlimefunItems.ENDER_LUMP_1, 2)})
+                item(SlimefunItems.MAGIC_LUMP_1, 2), item(FNAmpItems.UNBIND_RUNE), item(SlimefunItems.ENDER_LUMP_1, 2)})
                 .register(instance);
 
         new SlimefunItem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_UPGRADES_DISPLAY_ITEM, FnGemUpgrader.RECIPE_TYPE, new ItemStack[]{
                     anyUpgradeableGem.clone(), null, anyUpgradeableGem.clone(),
-                    null, FNAmpItems.FN_GEM_FINE_JASPER_CRAFTING, null,
+                    null, item(FNAmpItems.FN_GEM_FINE_JASPER_CRAFTING), null,
                     anyUpgradeableGem.clone(), null, anyUpgradeableGem.clone()})
                 .register(instance);
 
         new SlimefunItem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_DOWNGRADES_DISPLAY_ITEM, FnGemDowngrader.RECIPE_TYPE, new ItemStack[]{
-                FNAmpItems.FN_GEM_FINE_JASPER_CRAFTING, null, FNAmpItems.FN_GEM_FINE_JASPER_CRAFTING,
+                item(FNAmpItems.FN_GEM_FINE_JASPER_CRAFTING), null, item(FNAmpItems.FN_GEM_FINE_JASPER_CRAFTING),
                 null, anyUpgradedGem.clone(), null,
-                FNAmpItems.FN_GEM_FINE_JASPER_CRAFTING, null, FNAmpItems.FN_GEM_FINE_JASPER_CRAFTING})
+                item(FNAmpItems.FN_GEM_FINE_JASPER_CRAFTING), null, item(FNAmpItems.FN_GEM_FINE_JASPER_CRAFTING)})
                 .register(instance);
 
     }
