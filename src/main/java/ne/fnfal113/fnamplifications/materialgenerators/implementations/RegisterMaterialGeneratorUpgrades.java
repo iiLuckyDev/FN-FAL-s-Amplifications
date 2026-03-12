@@ -1,3 +1,4 @@
+package ne.fnfal113.fnamplifications.materialgenerators.implementations;
 
 import static ne.fnfal113.fnamplifications.utils.SfCompat.custom;
 import static ne.fnfal113.fnamplifications.utils.SfCompat.head;

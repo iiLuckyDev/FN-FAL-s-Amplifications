@@ -6,9 +6,7 @@ import static ne.fnfal113.fnamplifications.utils.SfCompat.item;
 
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
-import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.utils.compatibility.VersionedPotionType;
 import ne.fnfal113.fnamplifications.FNAmplifications;
 import ne.fnfal113.fnamplifications.gems.*;
@@ -27,7 +25,7 @@ import org.bukkit.potion.PotionType;
 
 public class RegisterGems {
 
-    private static final CustomItemStack anyUpgradeableGem = custom(
+    private static final ItemStack anyUpgradeableGem = custom(
             Material.EMERALD,
             "&dAny Upgradeable Gem",
             "",
@@ -35,7 +33,7 @@ public class RegisterGems {
             "&ebe same level or tier"
     );
 
-    private static final CustomItemStack anyUpgradedGem = custom(
+    private static final ItemStack anyUpgradedGem = custom(
             Material.EMERALD,
             "&dAny Upgraded Gem",
             "",
@@ -45,62 +43,62 @@ public class RegisterGems {
     public static void setup(SlimefunAddon instance){
         new ArmorImpairGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_ARMOR_IMPAIR, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
                 new ItemStack(Material.BLAZE_POWDER), new ItemStack(Material.BLAZE_POWDER), new ItemStack(Material.BLAZE_POWDER),
-                FNAmpItems.UNBIND_RUNE, new ItemStack(Material.EMERALD), FNAmpItems.UNBIND_RUNE,
+                item(FNAmpItems.UNBIND_RUNE), new ItemStack(Material.EMERALD), item(FNAmpItems.UNBIND_RUNE),
                 new ItemStack(Material.BLAZE_POWDER), new ItemStack(Material.BLAZE_POWDER), new ItemStack(Material.BLAZE_POWDER)})
                 .register(instance);
 
         new AxeThrowieGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_AXETHROWIE, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                null, new SlimefunItemStack(SlimefunItems.AIR_RUNE, 1),  null,
-                FNAmpItems.POWER_RUNE, new ItemStack(Material.EMERALD), FNAmpItems.POWER_RUNE,
-                null, new SlimefunItemStack(SlimefunItems.AIR_RUNE, 1),  null})
+                null, item(SlimefunItems.AIR_RUNE, 1),  null,
+                item(FNAmpItems.POWER_RUNE), new ItemStack(Material.EMERALD), item(FNAmpItems.POWER_RUNE),
+                null, item(SlimefunItems.AIR_RUNE, 1),  null})
                 .register(instance);
 
         new BlindBindGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_BLINDBIND, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                null, FNAmpItems.PESTILENCE_RUNE, null,
-                FNAmpItems.LINGER_RUNE, new ItemStack(Material.EMERALD), FNAmpItems.LINGER_RUNE,
-                null, FNAmpItems.PESTILENCE_RUNE, null})
+                null, item(FNAmpItems.PESTILENCE_RUNE), null,
+                item(FNAmpItems.LINGER_RUNE), new ItemStack(Material.EMERALD), item(FNAmpItems.LINGER_RUNE),
+                null, item(FNAmpItems.PESTILENCE_RUNE), null})
                 .register(instance);
 
         new DamnationGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_DAMNATION, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                SlimefunItems.MAGIC_SUGAR, FNAmpItems.INTELLECT_RUNE,  SlimefunItems.MAGIC_SUGAR,
-                FNAmpItems.SPIRIT_RUNE, new ItemStack(Material.EMERALD), FNAmpItems.SPIRIT_RUNE,
-                SlimefunItems.MAGIC_SUGAR, FNAmpItems.INTELLECT_RUNE,  SlimefunItems.MAGIC_SUGAR})
+                item(SlimefunItems.MAGIC_SUGAR), item(FNAmpItems.INTELLECT_RUNE),  item(SlimefunItems.MAGIC_SUGAR),
+                item(FNAmpItems.SPIRIT_RUNE), new ItemStack(Material.EMERALD), item(FNAmpItems.SPIRIT_RUNE),
+                item(SlimefunItems.MAGIC_SUGAR), item(FNAmpItems.INTELLECT_RUNE),  item(SlimefunItems.MAGIC_SUGAR)})
                 .register(instance);
 
         new HastyGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_HASTY, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                FNAmpItems.AGILITY_RUNE, new ItemStack(Material.DIAMOND_PICKAXE), FNAmpItems.AGILITY_RUNE,
+                item(FNAmpItems.AGILITY_RUNE), new ItemStack(Material.DIAMOND_PICKAXE), item(FNAmpItems.AGILITY_RUNE),
                 null, new ItemStack(Material.EMERALD), null,
-                FNAmpItems.AGILITY_RUNE, new ItemStack(Material.DIAMOND_PICKAXE), FNAmpItems.AGILITY_RUNE})
+                item(FNAmpItems.AGILITY_RUNE), new ItemStack(Material.DIAMOND_PICKAXE), item(FNAmpItems.AGILITY_RUNE)})
                 .register(instance);
 
         new ImpostorGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_IMPOSTOR, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                null, FNAmpItems.POWER_RUNE, null,
-                FNAmpItems.INTELLECT_RUNE, new ItemStack(Material.EMERALD), FNAmpItems.INTELLECT_RUNE,
-                null, FNAmpItems.POWER_RUNE, null})
+                null, item(FNAmpItems.POWER_RUNE), null,
+                item(FNAmpItems.INTELLECT_RUNE), new ItemStack(Material.EMERALD), item(FNAmpItems.INTELLECT_RUNE),
+                null, item(FNAmpItems.POWER_RUNE), null})
                 .register(instance);
 
         new InfernoGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_INFERNO, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                FNAmpItems.SPIRAL_FIRE_RUNE, new SlimefunItemStack(SlimefunItems.AIR_RUNE, 1), FNAmpItems.SPIRAL_FIRE_RUNE,
+                item(FNAmpItems.SPIRAL_FIRE_RUNE), item(SlimefunItems.AIR_RUNE, 1), item(FNAmpItems.SPIRAL_FIRE_RUNE),
                 null, new ItemStack(Material.EMERALD), null,
-                FNAmpItems.SPIRAL_FIRE_RUNE, null, FNAmpItems.SPIRAL_FIRE_RUNE})
+                item(FNAmpItems.SPIRAL_FIRE_RUNE), null, item(FNAmpItems.SPIRAL_FIRE_RUNE)})
                 .register(instance);
 
         new PsychokinesisGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_PSYCHOKINESIS, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                FNAmpItems.INTELLECT_RUNE, new SlimefunItemStack(SlimefunItems.ENDER_RUNE, 1), FNAmpItems.INTELLECT_RUNE,
+                item(FNAmpItems.INTELLECT_RUNE), item(SlimefunItems.ENDER_RUNE, 1), item(FNAmpItems.INTELLECT_RUNE),
                 new ItemStack(Material.BLAZE_POWDER), new ItemStack(Material.EMERALD), new ItemStack(Material.BLAZE_POWDER),
-                FNAmpItems.INTELLECT_RUNE, new ItemStack(Material.ROTTEN_FLESH), FNAmpItems.INTELLECT_RUNE})
+                item(FNAmpItems.INTELLECT_RUNE), new ItemStack(Material.ROTTEN_FLESH), item(FNAmpItems.INTELLECT_RUNE)})
                 .register(instance);
 
         new RetaliateGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_RETALIATE, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                null, new SlimefunItemStack(SlimefunItems.AIR_RUNE, 1), null,
-                FNAmpItems.INTELLECT_RUNE, new ItemStack(Material.EMERALD), FNAmpItems.INTELLECT_RUNE,
-                null, new SlimefunItemStack(SlimefunItems.AIR_RUNE, 1),  null})
+                null, item(SlimefunItems.AIR_RUNE, 1), null,
+                item(FNAmpItems.INTELLECT_RUNE), new ItemStack(Material.EMERALD), item(FNAmpItems.INTELLECT_RUNE),
+                null, item(SlimefunItems.AIR_RUNE, 1),  null})
                 .register(instance);
 
         new TelepathyGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_TELEPATHY, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
-                FNAmpItems.INTELLECT_RUNE, new ItemStack(Material.DIAMOND_PICKAXE), FNAmpItems.INTELLECT_RUNE,
+                item(FNAmpItems.INTELLECT_RUNE), new ItemStack(Material.DIAMOND_PICKAXE), item(FNAmpItems.INTELLECT_RUNE),
                 null, new ItemStack(Material.EMERALD), null,
-                FNAmpItems.INTELLECT_RUNE, new ItemStack(Material.IRON_PICKAXE), FNAmpItems.INTELLECT_RUNE})
+                item(FNAmpItems.INTELLECT_RUNE), new ItemStack(Material.IRON_PICKAXE), item(FNAmpItems.INTELLECT_RUNE)})
                 .register(instance);
 
         new ThornAwayGem(FNAmpItems.FN_GEMS, FNAmpItems.FN_GEM_THORN_AWAY, FnGemAltar.RECIPE_TYPE, new ItemStack[]{

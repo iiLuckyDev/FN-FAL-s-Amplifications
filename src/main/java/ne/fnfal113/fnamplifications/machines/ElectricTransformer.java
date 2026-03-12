@@ -48,30 +48,30 @@ public class ElectricTransformer extends AContainer implements RecipeDisplayItem
 
     @Override
     protected void registerDefaultRecipes() {
-        registerRecipe(8, new SlimefunItemStack[]{item(SlimefunItems.AUTO_ENCHANTER, 1),
+        registerRecipe(8, new ItemStack[]{item(SlimefunItems.AUTO_ENCHANTER, 1),
                         item(SlimefunItems.CARBONADO, 6)},
-                new SlimefunItemStack[]{item(SlimefunItems.AUTO_ENCHANTER_2, 1)});
-        registerRecipe(8, new SlimefunItemStack[]{item(SlimefunItems.AUTO_DISENCHANTER, 1),
+                new ItemStack[]{item(SlimefunItems.AUTO_ENCHANTER_2, 1)});
+        registerRecipe(8, new ItemStack[]{item(SlimefunItems.AUTO_DISENCHANTER, 1),
                         item(SlimefunItems.CARBONADO, 8)},
-                new SlimefunItemStack[]{item(SlimefunItems.AUTO_DISENCHANTER_2, 1)});
-        registerRecipe(8, new SlimefunItemStack[]{item(SlimefunItems.AUTO_ANVIL, 1),
+                new ItemStack[]{item(SlimefunItems.AUTO_DISENCHANTER_2, 1)});
+        registerRecipe(8, new ItemStack[]{item(SlimefunItems.AUTO_ANVIL, 1),
                         item(SlimefunItems.ELECTRIC_MOTOR, 12)},
-                new SlimefunItemStack[]{item(SlimefunItems.AUTO_ANVIL_2, 1)});
-        registerRecipe(8, new SlimefunItemStack[]{item(SlimefunItems.ELECTRO_MAGNET, 3),
+                new ItemStack[]{item(SlimefunItems.AUTO_ANVIL_2, 1)});
+        registerRecipe(8, new ItemStack[]{item(SlimefunItems.ELECTRO_MAGNET, 3),
                         item(SlimefunItems.BRONZE_INGOT, 4)},
-                new SlimefunItemStack[]{item(SlimefunItems.CARGO_CONNECTOR_NODE, 4)});
+                new ItemStack[]{item(SlimefunItems.CARGO_CONNECTOR_NODE, 4)});
         registerRecipe(8, new ItemStack[]{item(SlimefunItems.CARGO_CONNECTOR_NODE, 1),
                         new ItemStack(Material.HOPPER, 2)},
-                new SlimefunItemStack[]{item(SlimefunItems.CARGO_INPUT_NODE, 2)});
-        registerRecipe(8, new SlimefunItemStack[]{item(SlimefunItems.CARGO_OUTPUT_NODE, 1),
+                new ItemStack[]{item(SlimefunItems.CARGO_INPUT_NODE, 2)});
+        registerRecipe(8, new ItemStack[]{item(SlimefunItems.CARGO_OUTPUT_NODE, 1),
                         item(SlimefunItems.CARGO_MOTOR, 2)},
-                new SlimefunItemStack[]{item(SlimefunItems.CARGO_OUTPUT_NODE_2, 1)});
-        registerRecipe(8, new SlimefunItemStack[]{item(SlimefunItems.PROGRAMMABLE_ANDROID, 1),
+                new ItemStack[]{item(SlimefunItems.CARGO_OUTPUT_NODE_2, 1)});
+        registerRecipe(8, new ItemStack[]{item(SlimefunItems.PROGRAMMABLE_ANDROID, 1),
                         item(SlimefunItems.ANDROID_MEMORY_CORE, 2)},
-                new SlimefunItemStack[]{item(SlimefunItems.PROGRAMMABLE_ANDROID_2, 1)});
-        registerRecipe(8, new SlimefunItemStack[]{item(SlimefunItems.PROGRAMMABLE_ANDROID_2, 1),
+                new ItemStack[]{item(SlimefunItems.PROGRAMMABLE_ANDROID_2, 1)});
+        registerRecipe(8, new ItemStack[]{item(SlimefunItems.PROGRAMMABLE_ANDROID_2, 1),
                         item(SlimefunItems.ANDROID_MEMORY_CORE, 4)},
-                new SlimefunItemStack[]{item(SlimefunItems.PROGRAMMABLE_ANDROID_3, 1)});
+                new ItemStack[]{item(SlimefunItems.PROGRAMMABLE_ANDROID_3, 1)});
     }
 
     @Nonnull

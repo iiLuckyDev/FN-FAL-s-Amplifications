@@ -1,4 +1,6 @@
 
+package ne.fnfal113.fnamplifications.machines;
+
 import static ne.fnfal113.fnamplifications.utils.SfCompat.custom;
 import static ne.fnfal113.fnamplifications.utils.SfCompat.head;
 import static ne.fnfal113.fnamplifications.utils.SfCompat.item;
@@ -42,46 +44,46 @@ public class ElectricRecycler extends AContainer implements RecipeDisplayItem {
 
     @Override
     protected void registerDefaultRecipes() {
-        registerRecipe(12, new SlimefunItemStack[]{item(SlimefunItems.URANIUM, 1)},
-                new SlimefunItemStack[]{item(SlimefunItems.SMALL_URANIUM, 4)});
-        registerRecipe(12, new SlimefunItemStack[]{item(SlimefunItems.NEPTUNIUM, 1)},
-                new SlimefunItemStack[]{item(SlimefunItems.URANIUM, 48)});
-        registerRecipe(12, new SlimefunItemStack[]{item(SlimefunItems.BOOSTED_URANIUM, 1)},
-                new SlimefunItemStack[]{item(SlimefunItems.NEPTUNIUM, 2)});
-        registerRecipe(12, new SlimefunItemStack[]{item(SlimefunItems.GOLD_24K, 1)},
-                new SlimefunItemStack[]{item(SlimefunItems.GOLD_22K, 1)});
-        registerRecipe(12, new SlimefunItemStack[]{item(SlimefunItems.GOLD_22K, 1)},
-                new SlimefunItemStack[]{item(SlimefunItems.GOLD_20K, 1)});
-        registerRecipe(12, new SlimefunItemStack[]{item(SlimefunItems.GOLD_20K, 1)},
-                new SlimefunItemStack[]{item(SlimefunItems.GOLD_18K, 1)});
-        registerRecipe(12, new SlimefunItemStack[]{item(SlimefunItems.GOLD_18K, 1)},
-                new SlimefunItemStack[]{item(SlimefunItems.GOLD_16K, 1)});
-        registerRecipe(12, new SlimefunItemStack[]{item(SlimefunItems.GOLD_16K, 1)},
-                new SlimefunItemStack[]{item(SlimefunItems.GOLD_14K, 1)});
-        registerRecipe(12, new SlimefunItemStack[]{item(SlimefunItems.GOLD_14K, 1)},
-                new SlimefunItemStack[]{item(SlimefunItems.GOLD_12K, 1)});
-        registerRecipe(12, new SlimefunItemStack[]{item(SlimefunItems.GOLD_12K, 1)},
-                new SlimefunItemStack[]{item(SlimefunItems.GOLD_10K, 1)});
-        registerRecipe(12, new SlimefunItemStack[]{item(SlimefunItems.GOLD_10K, 1)},
-                new SlimefunItemStack[]{item(SlimefunItems.GOLD_8K, 1)});
-        registerRecipe(12, new SlimefunItemStack[]{item(SlimefunItems.GOLD_8K, 1)},
-                new SlimefunItemStack[]{item(SlimefunItems.GOLD_6K, 1)});
-        registerRecipe(12, new SlimefunItemStack[]{item(SlimefunItems.GOLD_6K, 1)},
-                new SlimefunItemStack[]{item(SlimefunItems.GOLD_4K, 1)});
-        registerRecipe(12, new SlimefunItemStack[]{item(SlimefunItems.GOLD_4K, 1)},
-                new SlimefunItemStack[]{item(SlimefunItems.GOLD_DUST, 1)});
-        registerRecipe(12, new SlimefunItemStack[]{item(SlimefunItems.BLISTERING_INGOT_3, 1)},
-                new SlimefunItemStack[]{item(SlimefunItems.BLISTERING_INGOT_2, 1)});
-        registerRecipe(12, new SlimefunItemStack[]{item(SlimefunItems.BLISTERING_INGOT_2, 1)},
-                new SlimefunItemStack[]{item(SlimefunItems.BLISTERING_INGOT, 1)});
-        registerRecipe(12, new SlimefunItemStack[]{item(SlimefunItems.MAGIC_LUMP_3, 1)},
-                new SlimefunItemStack[]{item(SlimefunItems.MAGIC_LUMP_2, 1)});
-        registerRecipe(12, new SlimefunItemStack[]{item(SlimefunItems.MAGIC_LUMP_2, 1)},
-                new SlimefunItemStack[]{item(SlimefunItems.MAGIC_LUMP_1, 1)});
-        registerRecipe(12, new SlimefunItemStack[]{item(SlimefunItems.ENDER_LUMP_3, 1)},
-                new SlimefunItemStack[]{item(SlimefunItems.ENDER_LUMP_2, 1)});
-        registerRecipe(12, new SlimefunItemStack[]{item(SlimefunItems.ENDER_LUMP_2, 1)},
-                new SlimefunItemStack[]{item(SlimefunItems.ENDER_LUMP_1, 1)});
+        registerRecipe(12, new ItemStack[]{item(SlimefunItems.URANIUM, 1)},
+                new ItemStack[]{item(SlimefunItems.SMALL_URANIUM, 4)});
+        registerRecipe(12, new ItemStack[]{item(SlimefunItems.NEPTUNIUM, 1)},
+                new ItemStack[]{item(SlimefunItems.URANIUM, 48)});
+        registerRecipe(12, new ItemStack[]{item(SlimefunItems.BOOSTED_URANIUM, 1)},
+                new ItemStack[]{item(SlimefunItems.NEPTUNIUM, 2)});
+        registerRecipe(12, new ItemStack[]{item(SlimefunItems.GOLD_24K, 1)},
+                new ItemStack[]{item(SlimefunItems.GOLD_22K, 1)});
+        registerRecipe(12, new ItemStack[]{item(SlimefunItems.GOLD_22K, 1)},
+                new ItemStack[]{item(SlimefunItems.GOLD_20K, 1)});
+        registerRecipe(12, new ItemStack[]{item(SlimefunItems.GOLD_20K, 1)},
+                new ItemStack[]{item(SlimefunItems.GOLD_18K, 1)});
+        registerRecipe(12, new ItemStack[]{item(SlimefunItems.GOLD_18K, 1)},
+                new ItemStack[]{item(SlimefunItems.GOLD_16K, 1)});
+        registerRecipe(12, new ItemStack[]{item(SlimefunItems.GOLD_16K, 1)},
+                new ItemStack[]{item(SlimefunItems.GOLD_14K, 1)});
+        registerRecipe(12, new ItemStack[]{item(SlimefunItems.GOLD_14K, 1)},
+                new ItemStack[]{item(SlimefunItems.GOLD_12K, 1)});
+        registerRecipe(12, new ItemStack[]{item(SlimefunItems.GOLD_12K, 1)},
+                new ItemStack[]{item(SlimefunItems.GOLD_10K, 1)});
+        registerRecipe(12, new ItemStack[]{item(SlimefunItems.GOLD_10K, 1)},
+                new ItemStack[]{item(SlimefunItems.GOLD_8K, 1)});
+        registerRecipe(12, new ItemStack[]{item(SlimefunItems.GOLD_8K, 1)},
+                new ItemStack[]{item(SlimefunItems.GOLD_6K, 1)});
+        registerRecipe(12, new ItemStack[]{item(SlimefunItems.GOLD_6K, 1)},
+                new ItemStack[]{item(SlimefunItems.GOLD_4K, 1)});
+        registerRecipe(12, new ItemStack[]{item(SlimefunItems.GOLD_4K, 1)},
+                new ItemStack[]{item(SlimefunItems.GOLD_DUST, 1)});
+        registerRecipe(12, new ItemStack[]{item(SlimefunItems.BLISTERING_INGOT_3, 1)},
+                new ItemStack[]{item(SlimefunItems.BLISTERING_INGOT_2, 1)});
+        registerRecipe(12, new ItemStack[]{item(SlimefunItems.BLISTERING_INGOT_2, 1)},
+                new ItemStack[]{item(SlimefunItems.BLISTERING_INGOT, 1)});
+        registerRecipe(12, new ItemStack[]{item(SlimefunItems.MAGIC_LUMP_3, 1)},
+                new ItemStack[]{item(SlimefunItems.MAGIC_LUMP_2, 1)});
+        registerRecipe(12, new ItemStack[]{item(SlimefunItems.MAGIC_LUMP_2, 1)},
+                new ItemStack[]{item(SlimefunItems.MAGIC_LUMP_1, 1)});
+        registerRecipe(12, new ItemStack[]{item(SlimefunItems.ENDER_LUMP_3, 1)},
+                new ItemStack[]{item(SlimefunItems.ENDER_LUMP_2, 1)});
+        registerRecipe(12, new ItemStack[]{item(SlimefunItems.ENDER_LUMP_2, 1)},
+                new ItemStack[]{item(SlimefunItems.ENDER_LUMP_1, 1)});
     }
 
     @Nonnull

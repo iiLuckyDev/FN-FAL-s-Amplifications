@@ -1,3 +1,4 @@
+package ne.fnfal113.fnamplifications.multiblocks;
 
 import static ne.fnfal113.fnamplifications.utils.SfCompat.custom;
 import static ne.fnfal113.fnamplifications.utils.SfCompat.head;
@@ -94,7 +95,7 @@ public class FnGemUpgrader extends MultiBlockMachine {
             }
         }
 
-        if(!SlimefunUtils.isItemSimilar(inv.getContents()[4], FNAmpItems.FN_GEM_FINE_JASPER_CRAFTING, true, false)) return true;
+        if(!SlimefunUtils.isItemSimilar(inv.getContents()[4], item(FNAmpItems.FN_GEM_FINE_JASPER_CRAFTING), true, false)) return true;
 
         for(int i : slot) {
             if(i == 4) continue;

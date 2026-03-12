@@ -14,7 +14,6 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockPlaceHandler;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
-import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.protection.Interaction;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import io.github.thebusybiscuit.slimefun4.utils.compatibility.VersionedParticle;
@@ -65,40 +64,40 @@ public class ElectricBlockBreaker extends SlimefunItem implements InventoryBlock
     public static final int ON_OFF = 8;
     private static final ItemStack VERSIONED_AMETHYST;
 
-    private static final CustomItemStack NOT_OPERATING = custom(Material.ORANGE_STAINED_GLASS_PANE,
+    private static final ItemStack NOT_OPERATING = custom(Material.ORANGE_STAINED_GLASS_PANE,
         "&cNot Operating...",
         "&ePlace a block facing the dispenser!"
     );
 
-    private static final CustomItemStack NO_POWER = custom(Material.RED_STAINED_GLASS_PANE,
+    private static final ItemStack NO_POWER = custom(Material.RED_STAINED_GLASS_PANE,
         "&cNo Power!",
         "&ePower it up first!"
     );
 
-    private static final CustomItemStack NOT_RUNNING = custom(Material.YELLOW_STAINED_GLASS_PANE,
+    private static final ItemStack NOT_RUNNING = custom(Material.YELLOW_STAINED_GLASS_PANE,
         "&cNot Running",
         "&eToggle it on first"
     );
 
-    private static final CustomItemStack BREAK_BLOCK_NATURALLY = custom(Material.PINK_STAINED_GLASS_PANE,
+    private static final ItemStack BREAK_BLOCK_NATURALLY = custom(Material.PINK_STAINED_GLASS_PANE,
         "&d&lMode:",
         "&eBreak block naturally (No Silk Touch)",
         "Click to change"
     );
 
-    private static final CustomItemStack DROP_BLOCK_NATURALLY = custom(Material.CYAN_STAINED_GLASS_PANE,
+    private static final ItemStack DROP_BLOCK_NATURALLY = custom(Material.CYAN_STAINED_GLASS_PANE,
         "&d&lMode:",
         "&eDrop block naturally (Silk Touch)",
         "Click to change"
     );
 
-    private static final CustomItemStack TOGGLED_ON = custom(Material.BLUE_STAINED_GLASS_PANE,
+    private static final ItemStack TOGGLED_ON = custom(Material.BLUE_STAINED_GLASS_PANE,
         "&d&lToggle:",
         "&eEnabled (Running)",
         "Click to change"
     );
 
-    private static final CustomItemStack TOGGLED_OFF = custom(Material.WHITE_STAINED_GLASS_PANE,
+    private static final ItemStack TOGGLED_OFF = custom(Material.WHITE_STAINED_GLASS_PANE,
         "&d&lToggle:",
         "&eDisabled (Not Running)",
         "Click to change"

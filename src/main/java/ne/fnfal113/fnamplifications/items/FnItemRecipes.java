@@ -86,31 +86,31 @@ public class FnItemRecipes {
 
         new UnplaceableBlock(FNAmpItems.ITEMS, FNAmpItems.COMPRESSOR_PART, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
                 new ItemStack(Material.PISTON), new ItemStack(Material.NETHER_BRICKS), new ItemStack(Material.PISTON),
-                FNAmpItems.THREAD_PART, FNAmpItems.GEAR_PART, FNAmpItems.THREAD_PART,
+                item(FNAmpItems.THREAD_PART), item(FNAmpItems.GEAR_PART), item(FNAmpItems.THREAD_PART),
                 item(SlimefunItems.COPPER_WIRE), new ItemStack(Material.NETHER_BRICKS), item(SlimefunItems.COPPER_WIRE)})
                 .register(instance);
 
         new UnplaceableBlock(FNAmpItems.ITEMS, FNAmpItems.CONDENSER_PART, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
-                new ItemStack(Material.PISTON), FNAmpItems.COMPONENT_PART, new ItemStack(Material.PISTON),
-                FNAmpItems.COMPRESSOR_PART, FNAmpItems.GEAR_PART, FNAmpItems.COMPRESSOR_PART,
-                item(SlimefunItems.COPPER_WIRE), FNAmpItems.COMPONENT_PART, item(SlimefunItems.COPPER_WIRE)})
+                new ItemStack(Material.PISTON), item(FNAmpItems.COMPONENT_PART), new ItemStack(Material.PISTON),
+                item(FNAmpItems.COMPRESSOR_PART), item(FNAmpItems.GEAR_PART), item(FNAmpItems.COMPRESSOR_PART),
+                item(SlimefunItems.COPPER_WIRE), item(FNAmpItems.COMPONENT_PART), item(SlimefunItems.COPPER_WIRE)})
                 .register(instance);
 
         new UnplaceableBlock(FNAmpItems.ITEMS, FNAmpItems.RECYCLER_PART, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
-                new ItemStack(Material.PISTON), FNAmpItems.COMPONENT_PART, new ItemStack(Material.PISTON),
-                null, FNAmpItems.GEAR_PART, null,
-                FNAmpItems.CONDENSER_PART, FNAmpItems.COMPRESSOR_PART, FNAmpItems.CONDENSER_PART})
+                new ItemStack(Material.PISTON), item(FNAmpItems.COMPONENT_PART), new ItemStack(Material.PISTON),
+                null, item(FNAmpItems.GEAR_PART), null,
+                item(FNAmpItems.CONDENSER_PART), item(FNAmpItems.COMPRESSOR_PART), item(FNAmpItems.CONDENSER_PART)})
                 .register(instance);
 
         new UnplaceableBlock(FNAmpItems.ITEMS, FNAmpItems.DOWNGRADER_PART, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
-                new ItemStack(Material.PISTON), FNAmpItems.THREAD_PART, new ItemStack(Material.PISTON),
-                FNAmpItems.RECYCLER_PART, FNAmpItems.GEAR_PART, FNAmpItems.RECYCLER_PART,
-                null, FNAmpItems.COMPRESSOR_PART, null})
+                new ItemStack(Material.PISTON), item(FNAmpItems.THREAD_PART), new ItemStack(Material.PISTON),
+                item(FNAmpItems.RECYCLER_PART), item(FNAmpItems.GEAR_PART), item(FNAmpItems.RECYCLER_PART),
+                null, item(FNAmpItems.COMPRESSOR_PART), null})
                 .register(instance);
 
         new UnplaceableBlock(FNAmpItems.ITEMS, FNAmpItems.FUNNEL_PART, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
                 item(SlimefunItems.LEAD_INGOT), VERSIONED_ITEMSTACK_CALCITE_IRONINGOT, item(SlimefunItems.LEAD_INGOT),
-                FNAmpItems.THREAD_PART, new ItemStack(Material.BARREL), FNAmpItems.THREAD_PART,
+                item(FNAmpItems.THREAD_PART), new ItemStack(Material.BARREL), item(FNAmpItems.THREAD_PART),
                 item(SlimefunItems.COPPER_WIRE), VERSIONED_ITEMSTACK_CALCITE_IRONINGOT, item(SlimefunItems.COPPER_WIRE)})
                 .register(instance);
 
@@ -151,15 +151,15 @@ public class FnItemRecipes {
                 .register(instance);
 
         new UnplaceableBlock(FNAmpItems.ITEMS, FNAmpItems.BASIC_MACHINE_BLOCK, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
-                FNAmpItems.GEAR_PART, VERSIONED_ITEMSTACK_AMETHYSTSHARD_IRONBLOCK, FNAmpItems.GEAR_PART,
-                FNAmpItems.BRASS_PLATING, FNAmpItems.MACHINE_PART, FNAmpItems.BRASS_PLATING,
-                FNAmpItems.COMPONENT_PART, VERSIONED_ITEMSTACK_AMETHYSTSHARD_IRONBLOCK, FNAmpItems.COMPONENT_PART})
+                item(FNAmpItems.GEAR_PART), VERSIONED_ITEMSTACK_AMETHYSTSHARD_IRONBLOCK, item(FNAmpItems.GEAR_PART),
+                item(FNAmpItems.BRASS_PLATING), item(FNAmpItems.MACHINE_PART), item(FNAmpItems.BRASS_PLATING),
+                item(FNAmpItems.COMPONENT_PART), VERSIONED_ITEMSTACK_AMETHYSTSHARD_IRONBLOCK, item(FNAmpItems.COMPONENT_PART)})
                 .register(instance);
 
         new UnplaceableBlock(FNAmpItems.ITEMS, FNAmpItems.HIGHTECH_MACHINE_BLOCK, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
-                FNAmpItems.GEAR_PART, FNAmpItems.BASIC_MACHINE_BLOCK, FNAmpItems.GEAR_PART,
-                FNAmpItems.REINFORCED_CASING, FNAmpItems.MACHINE_PART, FNAmpItems.BRASS_PLATING,
-                FNAmpItems.COMPONENT_PART, FNAmpItems.BASIC_MACHINE_BLOCK, FNAmpItems.COMPONENT_PART})
+                item(FNAmpItems.GEAR_PART), item(FNAmpItems.BASIC_MACHINE_BLOCK), item(FNAmpItems.GEAR_PART),
+                item(FNAmpItems.REINFORCED_CASING), item(FNAmpItems.MACHINE_PART), item(FNAmpItems.BRASS_PLATING),
+                item(FNAmpItems.COMPONENT_PART), item(FNAmpItems.BASIC_MACHINE_BLOCK), item(FNAmpItems.COMPONENT_PART)})
                 .register(instance);
 
         new UnplaceableBlock(FNAmpItems.ITEMS, FNAmpItems.FN_METAL_SCRAPS, ElectricMachineDowngrader.RECIPE_TYPE, new ItemStack[]{
@@ -242,7 +242,7 @@ public class FnItemRecipes {
 
         new UnplaceableBlock(FNAmpItems.MAGICAL_ITEMS, FNAmpItems.FN_GEM_FINE_JASPER_CRAFTING, FnGemAltar.RECIPE_TYPE, new ItemStack[]{
                 new ItemStack(Material.IRON_ORE, 2), new ItemStack(Material.DIAMOND_ORE, 2),  new ItemStack(Material.IRON_ORE),
-                null, FNAmpItems.POWER_RUNE, null,
+                null, item(FNAmpItems.POWER_RUNE), null,
                 new ItemStack(Material.GOLD_ORE, 2), new ItemStack(Material.EMERALD_ORE, 2), new ItemStack(Material.GOLD_ORE, 2)})
                 .register(instance);
 

@@ -9,7 +9,6 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -61,26 +60,26 @@ public class ElectricIngotCondenser extends AContainer implements RecipeDisplayI
 
     @Override
     protected void registerDefaultRecipes() {
-        registerRecipe(12, new SlimefunItemStack[]{item(SlimefunItems.GOLD_10K, 1), item(SlimefunItems.GOLD_14K, 1)},
-                new SlimefunItemStack[]{item(SlimefunItems.GOLD_24K, 1)});
-        registerRecipe(12, new SlimefunItemStack[]{item(SlimefunItems.BLISTERING_INGOT, 1), item(SlimefunItems.URANIUM, 9)},
-                new SlimefunItemStack[]{item(SlimefunItems.BLISTERING_INGOT_3, 1)});
-        registerRecipe(12, new SlimefunItemStack[]{item(SlimefunItems.DAMASCUS_STEEL_INGOT, 2), item(SlimefunItems.COMPRESSED_CARBON, 1)},
-                new SlimefunItemStack[]{item(SlimefunItems.HARDENED_METAL_INGOT, 1)});
-        registerRecipe(12, new SlimefunItemStack[]{item(SlimefunItems.STEEL_INGOT, 2), item(SlimefunItems.CARBON, 1)},
-                new SlimefunItemStack[]{item(SlimefunItems.DAMASCUS_STEEL_INGOT, 2)});
+        registerRecipe(12, new ItemStack[]{item(SlimefunItems.GOLD_10K, 1), item(SlimefunItems.GOLD_14K, 1)},
+                new ItemStack[]{item(SlimefunItems.GOLD_24K, 1)});
+        registerRecipe(12, new ItemStack[]{item(SlimefunItems.BLISTERING_INGOT, 1), item(SlimefunItems.URANIUM, 9)},
+                new ItemStack[]{item(SlimefunItems.BLISTERING_INGOT_3, 1)});
+        registerRecipe(12, new ItemStack[]{item(SlimefunItems.DAMASCUS_STEEL_INGOT, 2), item(SlimefunItems.COMPRESSED_CARBON, 1)},
+                new ItemStack[]{item(SlimefunItems.HARDENED_METAL_INGOT, 1)});
+        registerRecipe(12, new ItemStack[]{item(SlimefunItems.STEEL_INGOT, 2), item(SlimefunItems.CARBON, 1)},
+                new ItemStack[]{item(SlimefunItems.DAMASCUS_STEEL_INGOT, 2)});
         registerRecipe(12, new ItemStack[]{item(SlimefunItems.BRONZE_INGOT, 1), VERSIONED_ITEMSTACK_COPPER},
-                new SlimefunItemStack[]{item(SlimefunItems.CORINTHIAN_BRONZE_INGOT, 1)});
+                new ItemStack[]{item(SlimefunItems.CORINTHIAN_BRONZE_INGOT, 1)});
         registerRecipe(12, new ItemStack[]{new ItemStack(Material.IRON_INGOT, 1), VERSIONED_ITEMSTACK_COPPER},
-                new SlimefunItemStack[]{item(SlimefunItems.NICKEL_INGOT, 1)});
+                new ItemStack[]{item(SlimefunItems.NICKEL_INGOT, 1)});
         registerRecipe(12, new ItemStack[]{item(SlimefunItems.NICKEL_INGOT, 1), VERSIONED_ITEMSTACK_COPPER},
-                new SlimefunItemStack[]{item(SlimefunItems.COBALT_INGOT, 1)});
+                new ItemStack[]{item(SlimefunItems.COBALT_INGOT, 1)});
         registerRecipe(12, new ItemStack[]{item(SlimefunItems.ALUMINUM_INGOT, 1), VERSIONED_ITEMSTACK_COPPER},
-                new SlimefunItemStack[]{item(SlimefunItems.DURALUMIN_INGOT, 1)});
-        registerRecipe(12, new SlimefunItemStack[]{item(SlimefunItems.ALUMINUM_INGOT, 1), item(SlimefunItems.BRONZE_INGOT, 1)},
-                new SlimefunItemStack[]{item(SlimefunItems.ALUMINUM_BRONZE_INGOT, 1)});
-        registerRecipe(12, new SlimefunItemStack[]{item(SlimefunItems.ALUMINUM_INGOT, 1), item(SlimefunItems.BRASS_INGOT, 1)},
-                new SlimefunItemStack[]{item(SlimefunItems.ALUMINUM_BRASS_INGOT, 1)});
+                new ItemStack[]{item(SlimefunItems.DURALUMIN_INGOT, 1)});
+        registerRecipe(12, new ItemStack[]{item(SlimefunItems.ALUMINUM_INGOT, 1), item(SlimefunItems.BRONZE_INGOT, 1)},
+                new ItemStack[]{item(SlimefunItems.ALUMINUM_BRONZE_INGOT, 1)});
+        registerRecipe(12, new ItemStack[]{item(SlimefunItems.ALUMINUM_INGOT, 1), item(SlimefunItems.BRASS_INGOT, 1)},
+                new ItemStack[]{item(SlimefunItems.ALUMINUM_BRASS_INGOT, 1)});
     }
 
     @Nonnull
